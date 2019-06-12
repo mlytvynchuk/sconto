@@ -10,7 +10,8 @@ class Home extends Component {
         details: "Приходьте в наш заклад на вул. Січових Стрільців,11. Покажіть дійсний студентський квиток на барі. Смакуй чудову піцу",
         overlay: "dark",
         image: 'src/assets/img/pivas.jpg',
-        
+        category: "",
+        time: ""
         
       },
       {
