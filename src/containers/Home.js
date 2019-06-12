@@ -5,21 +5,14 @@ import Discount from "../components/Discount";
 class Home extends Component {
   state={
     discounts: [
-      {
-        title: "Дешева піца для СТУДЕНТІВ",
-        details: "Приходьте в наш заклад на вул. Січових Стрільців,11. Покажіть дійсний студентський квиток на барі. Смакуй чудову піцу",
-        overlay: "dark",
-        image: 'src/assets/img/pivas.jpg',
-        category: "",
-        time: ""
-        
-      },
-      {
-        title: "Дешева піца для СТУДЕНТІВ",
-        details: "Приходьте в наш заклад на вул. Січових Стрільців,11. Покажіть дійсний студентський квиток на барі. Смакуй чудову піцу",
-        image: 'src/assets/img/pivas.jpg'
-      }
     ]
+  }
+  componentDidMount(){
+    return fetch("http://localhost:8000/discounts/")
+            .then(response => response.json())
+            .then(result => {
+              this.setState({discounts: result})
+            });
   }
   render() {
     return (
@@ -28,7 +21,7 @@ class Home extends Component {
         <div className="main-container">
           <div className="grid">
            {this.state.discounts.map((item, index) => (
-             <Discount key={index} title={item.title} details={item.details} overlay={item.overlay} cafe={item.cafe} image={item.image}/>
+             <Discount key={index} title={item.title} details={item.details} overlay={item.overlay} cafe={item.cafe} image={item.image} height={item.height}/>
            ))}
           </div>
         </div>

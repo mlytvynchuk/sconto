@@ -11,10 +11,11 @@ export default class Discount extends Component {
     overlay: this.props.overlay
   };
   render() {
-    const {title, details, image, cafe, overlay} = this.state;
+    const {title, details, image, cafe, overlay,height} = this.state;
     return (
       <div>
-        <div className="grid-item white-color height320" style={{background: `url(${image})`}}>
+        {console.log(height)}
+        <div className={`grid-item white-color height${height}`} style={{background: `url(${image}) repeat-none`}}>
           <div className={`overlay-${overlay}`}>
             <div className="discountCard">
               <h3 className="discountTitle">{title}</h3>
