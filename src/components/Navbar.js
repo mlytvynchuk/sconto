@@ -20,24 +20,24 @@ export default class Navbar extends Component {
             <ul className="navbar-nav">
               <li className="filter-item">
                 <h4>Їжа</h4>
-                <select name id>
+                <select name id onChange={this.props.handleFoodChange}>
                   <option value={1} disabled selected>
                     Обери смаколики
                   </option>
-                  <option value={1}>Фастфуд</option>
-                  <option value={1}>Українська кухня</option>
-                  <option value={1}>Кава</option>
+                  <option value={"Фастфуд"}>Фастфуд</option>
+                  <option value={"Українська кухня"}>Українська кухня</option>
+                  <option value={"Кава"}>Кава</option>
                 </select>
               </li>
               <li className="filter-item">
                 <h5>Час доби</h5>
-                <select name id>
-                  <option value={1} disabled selected>
+                <select name id onChange={this.props.handleTimeChange}>
+                  <option value={1} disabled selected >
                     Обери час
                   </option>
-                  <option value={1}>Фастфуд</option>
-                  <option value={1}>Українська кухня</option>
-                  <option value={1}>Кава</option>
+                  <option value={"Сніданок"}>Сніданок</option>
+                  <option value={"Обід"}>Обід</option>
+                  <option value={"Вечеря"}>Вечеря</option>
                 </select>
               </li>
             </ul>
@@ -59,7 +59,7 @@ export default class Navbar extends Component {
             <div className="d-flex">
             <LightBox 
               button={(
-                  <div className="navbar-toggler" onclick="displayModal()">
+                  <div className="navbar-toggler" >
                     <span className="navbar-toggler-text">Фільтри</span>
                     <span className="navbar-toggler-icon" />
                   </div>
@@ -67,7 +67,6 @@ export default class Navbar extends Component {
                     <FilterMenu/>
               </LightBox>
               
-
               {/* user profile */}
               <div className="profile">
                 <ul id="menu">
@@ -80,14 +79,14 @@ export default class Navbar extends Component {
                       </li>
                       <li>
                         <div className="blur-box">
-                          <LightBox
+                        <LightBox
                             button={(<div className="navbar-brand" onclick="displayLikes()">
                               <span className="navbar-toggler-text">Вподобання</span>
                               </div>
                             )}>
                             <LikesList />
                           </LightBox>                           
-              
+
                         </div>
                       </li>
                       <li>
@@ -99,6 +98,7 @@ export default class Navbar extends Component {
                             )}>
                             <AddDisc />
                           </LightBox>   
+
                         </div>
                       </li>
                     </ul>
