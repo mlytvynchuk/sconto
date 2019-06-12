@@ -1,5 +1,9 @@
 import React, { Component } from "react";
-
+import manPhoto from '../assets/img/man.png';
+import userPhoto from '../assets/img/user.png';
+import LightBox from './LightBox';
+import FilterMenu from './FilterMenu';
+import '../assets/css/modal.css';
 export default class Navbar extends Component {
   render() {
     return (
@@ -51,19 +55,25 @@ export default class Navbar extends Component {
           </div>
           <div>
             <div className="d-flex">
-              <div className="navbar-toggler" onclick="displayModal()">
-                <span className="navbar-toggler-text">Фільтри</span>
-                <span className="navbar-toggler-icon" />
-              </div>
+            <LightBox 
+              button={(
+                  <div className="navbar-toggler" onclick="displayModal()">
+                    <span className="navbar-toggler-text">Фільтри</span>
+                    <span className="navbar-toggler-icon" />
+                  </div>
+              )}>
+                    <FilterMenu/>
+              </LightBox>
+              
               {/* user profile */}
               <div className="profile">
                 <ul id="menu">
                   <li>
                     <input type="checkbox" id="user-photo" />
-                    <img src="assets/img/user.png" id="profile-img" />
+                    <img src={userPhoto} id="profile-img" />
                     <ul className="but-style">
                       <li>
-                        <img src="assets/img/man.png" className="profile-img" />
+                        <img src={manPhoto} className="profile-img" />
                       </li>
                       <li>
                         <div className="blur-box">
@@ -92,6 +102,7 @@ export default class Navbar extends Component {
             </div>
           </div>
         </nav>
+        
       </header>
     );
   }

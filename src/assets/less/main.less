@@ -5,23 +5,25 @@
   -moz-appearance: none;
   appearance: none;
 }
-body.modal-open {
-  overflow: hidden;
-  position: fixed;
-}
+
 .main-container {
   margin-top: 100px;
   margin-left: 5%;
   margin-right: 5%;
 }
-.grid:after {
-  content: "";
-  display: block;
-  clear: both;
+
+.grid {
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
 }
+
 .blur-box {
   background: #000;
   font-weight: 300;
+
   cursor: pointer;
 }
 .navbar-brand {
@@ -35,9 +37,9 @@ body.modal-open {
   height: 220px;
   border-radius: 8px;
   margin-bottom: 20px;
-  -webkit-box-shadow: 4px 4px 18px -6px #524f52;
-  -moz-box-shadow: 4px 4px 18px -6px #524f52;
-  box-shadow: 4px 4px 18px -6px #524f52;
+  -webkit-box-shadow: 4px 4px 18px -6px rgba(82, 79, 82, 1);
+  -moz-box-shadow: 4px 4px 18px -6px rgba(82, 79, 82, 1);
+  box-shadow: 4px 4px 18px -6px rgba(82, 79, 82, 1);
   background: url(../img/pizza.jpeg) center center no-repeat;
   background-size: cover;
   margin: 10px;
@@ -85,6 +87,8 @@ body.modal-open {
 .bg-white {
   background: #fff;
 }
+.bg-gradient {
+}
 .navbar-toggler {
   border: none !important;
 }
@@ -97,29 +101,31 @@ header {
 }
 .navbar {
   box-shadow: 0px 6px 10px -10px rgba(0, 0, 0, 0.3);
-}
-.navbar input[type="text"] {
-  padding: 6px;
-  font-size: 17px;
-  border: none;
-  background: #f2f2f2;
+  input[type="text"] {
+    padding: 6px;
+    font-size: 17px;
+    border: none;
+    background: #f2f2f2;
+  }
 }
 #navbarNav {
   justify-content: flex-end;
 }
-.search-container button {
-  float: right;
-  padding: 6px 10px;
-  margin-right: 16px;
-  background: #ddd;
-  font-size: 17px;
-  border: none;
-  cursor: pointer;
+.search-container {
+  button {
+    float: right;
+    padding: 5.5px 10px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+  }
 }
 @media (max-width: 730px) {
   .grid-item {
     float: none;
-    width: 350px;
+    max-width: 350px;
     height: 300px;
   }
   .grid {
@@ -131,6 +137,7 @@ header {
     text-align: center;
   }
 }
+
 .beer {
   background-image: url(../img/pivas.jpg);
 }
