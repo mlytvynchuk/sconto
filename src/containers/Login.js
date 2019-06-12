@@ -3,7 +3,8 @@ import '../assets/css/login.css';
 class Login extends Component {
     render() {
         return (
-            <div class="login-container">
+            <div className="login-body">
+                    <div class="login-container">
         <div class="login-wrapper">
             <form action="" class="login-form">
 
@@ -35,6 +36,8 @@ class Login extends Component {
         </div>
 
     </div>
+            </div>
+            
         )
     }
 }

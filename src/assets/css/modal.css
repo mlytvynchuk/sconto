@@ -24,11 +24,12 @@
   border-radius: 5px;
   background: #f2f2f2;
 }
-.btn-primary {
+.modal-body .btn-primary {
   background: black;
   border: none;
   width: 100%;
+  padding: 10px;
 }
-.btn-primary:hover {
+.modal-body .btn-primary:hover {
   background: rgba(0, 0, 0, 0.9);
 }
