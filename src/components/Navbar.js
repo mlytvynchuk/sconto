@@ -3,6 +3,8 @@ import manPhoto from '../assets/img/man.png';
 import userPhoto from '../assets/img/user.png';
 import LightBox from './LightBox';
 import FilterMenu from './FilterMenu';
+import AddDisc from './AddDisc';
+import LikesList from './LikesList';
 import '../assets/css/modal.css';
 export default class Navbar extends Component {
   render() {
@@ -65,6 +67,7 @@ export default class Navbar extends Component {
                     <FilterMenu/>
               </LightBox>
               
+
               {/* user profile */}
               <div className="profile">
                 <ul id="menu">
@@ -77,22 +80,25 @@ export default class Navbar extends Component {
                       </li>
                       <li>
                         <div className="blur-box">
-                          <button
-                            className="navbar-brand"
-                            onclick="displayLikes()"
-                          >
-                            Вподобання
-                          </button>
+                          <LightBox
+                            button={(<div className="navbar-brand" onclick="displayLikes()">
+                              <span className="navbar-toggler-text">Вподобання</span>
+                              </div>
+                            )}>
+                            <LikesList />
+                          </LightBox>                           
+              
                         </div>
                       </li>
                       <li>
                         <div className="blur-box">
-                          <button
-                            className="navbar-brand"
-                            onclick="displayAddDiscount()"
-                          >
-                            Додати
-                          </button>
+                        <LightBox
+                            button={(<div className="navbar-brand" onclick="displayLikes()">
+                              <span className="navbar-toggler-text">Додати</span>
+                              </div>
+                            )}>
+                            <AddDisc />
+                          </LightBox>   
                         </div>
                       </li>
                     </ul>
