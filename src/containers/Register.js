@@ -9,10 +9,18 @@ class Login extends Component {
 
                 <div class="title-container">
                     <h2 class="title-text">
-                                Вхід у кабінет
+                                Створення користувача
                             </h2>
                 </div>
-
+                <div class="input-container">
+                    <input type="text" class="input focus hover" placeholder="Ваш username" name="username" />
+                </div>
+                <div class="input-container">
+                    <input type="text" class="input focus hover" placeholder="Ваше ім'я" name="name" />
+                </div>
+                <div class="input-container">
+                    <input type="text" class="input focus hover" placeholder="Ваше Прізвище" name="lastname" />
+                </div>
                 <div class="input-container">
                     <input type="text" class="input focus hover" placeholder="Ваш email" name="email" />
                 </div>
