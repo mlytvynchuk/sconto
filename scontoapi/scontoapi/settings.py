@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'discounts',
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'scontoapi.urls'
@@ -125,3 +127,5 @@ STATICFILES_DIRS = (
 )
 MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media")
 MEDIA_URL = '/media/'
+
+CORS_ORIGIN_ALLOW_ALL = True

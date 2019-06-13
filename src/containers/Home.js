@@ -90,6 +90,13 @@ class Home extends Component {
     timeSlot: null,
 
   }
+    componentDidMount(){
+    return fetch("http://localhost:8000/discounts/")
+            .then(response => response.json())
+            .then(result => {
+              this.setState({discounts: result})
+            });
+  }
   handleFoodChange = event => this.setState({foodCategory: event.target.value });
   
 
@@ -114,6 +121,7 @@ class Home extends Component {
       .map(discount => <Discount key={discount.id} title={discount.title} details={discount.details} overlay={discount.overlay} cafe={discount.cafe} image={discount.image}/>);
 
   }
+
 
 
 
