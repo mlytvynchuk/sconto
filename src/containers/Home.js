@@ -7,12 +7,10 @@ class Home extends Component {
   state={
     foodCategory: null,
     timeSlot: null,
-
   }
     componentDidMount(){
     this.props.dispatch(fetchDiscounts());
-    
-    
+
   }
   handleFoodChange = event => this.setState({foodCategory: event.target.value });
   
@@ -25,10 +23,9 @@ class Home extends Component {
     
 
   filterDiscounts = () => {
-    const { discounts, foodCategory, timeSlot } = this.props;
-    let discountCopy = [...discounts];
-    console.log()
-       
+    const { discounts } = this.props;
+    const {foodCategory, timeSlot} = this.state;
+    let discountCopy = [...discounts]; 
     if(foodCategory)
       discountCopy = discountCopy.filter((discount) =>  discount.category === foodCategory);
     if(timeSlot)
@@ -43,7 +40,7 @@ class Home extends Component {
 
 
   render() {
-    const { foodCategory, timeSlot } = this.props;
+    const { foodCategory, timeSlot } = this.state;
     return (
       <div>
         <Navbar handleFoodChange={this.handleFoodChange} handleTimeChange={this.handleTimeChange} />
