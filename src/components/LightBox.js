@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { isJSXSpreadChild } from '@babel/types';
 import {Modal} from 'react-bootstrap';
 class LightBox extends Component {
     state={
         isOpen: false
     }
     handleToggle = () => {
-        const {isOpen} = this.state;
         this.setState({
             isOpen: !this.state.isOpen
         })

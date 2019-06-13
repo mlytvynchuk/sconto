@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { directive } from "@babel/types";
+
 
 export default class Discount extends Component {
   state = {
@@ -11,11 +11,11 @@ export default class Discount extends Component {
     overlay: this.props.overlay
   };
   render() {
-    const {title, details, image, cafe, overlay,height} = this.state;
+    const {title, image, cafe, overlay,height} = this.state;
     return (
       <div>
-        {console.log(height)}
-        <div className={`grid-item white-color height${height}`} style={{background: `url(${image}) repeat-none`}}>
+       {console.log(image)}
+        <div style={{background: `url(${image}) center center no-repeat`,backgroundSize: 'cover', }} className={`grid-item white-color height${height}`}>
           <div className={`overlay-${overlay}`}>
             <div className="discountCard">
               <h3 className="discountTitle">{title}</h3>

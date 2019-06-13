@@ -4,7 +4,7 @@ const FilterMenu = () => {
     return (
         <div>
             <h4>Пошук</h4>
-            <div class="search-container">
+            <div className="search-container">
                 <form action="/action_page.php">
                     <input type="text" placeholder="Нажми й шукай" name="search" />
                     <button type="submit"><i class="fa fa-search"></i></button>

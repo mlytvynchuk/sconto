@@ -80,7 +80,7 @@ export default class Navbar extends Component {
                       <li>
                         <div className="blur-box">
                         <LightBox
-                            button={(<div className="navbar-brand" onclick="displayLikes()">
+                            button={(<div className="navbar-brand">
                               <span className="navbar-toggler-text">Вподобання</span>
                               </div>
                             )}>
@@ -92,7 +92,7 @@ export default class Navbar extends Component {
                       <li>
                         <div className="blur-box">
                         <LightBox
-                            button={(<div className="navbar-brand" onclick="displayLikes()">
+                            button={(<div className="navbar-brand">
                               <span className="navbar-toggler-text">Додати</span>
                               </div>
                             )}>

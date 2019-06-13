@@ -1,101 +1,18 @@
 import React, { Component } from "react";
 import Navbar from "../components/Navbar";
 import Discount from "../components/Discount";
-
+import { connect } from "react-redux";
+import { fetchDiscounts } from "../actions/discountActions";
 class Home extends Component {
   state={
-    discounts: [
-      {
-        id: 1,
-        title: "Дешева піца для СТУДЕНТІВ",
-        details: "Приходьте в наш заклад на вул. Січових Стрільців,11. Покажіть дійсний студентський квиток на барі. Смакуй чудову піцу",
-        overlay: "dark",
-        image: 'src/assets/img/pivas.jpg',
-        category: "Фастфуд",
-        time: "Сніданок",
-        
-      },
-      {
-        id: 2,
-        title: "Знижка на каву",
-        details: "Приходьте в наш заклад на вул. Січових Стрільців,11. Покажіть дійсний студентський квиток на барі. Смакуй чудову піцу",
-        image: 'src/assets/img/pivas.jpg',
-        category: "Кава",
-        overlay: "dark",
-        time: "Сніданок",
-      
-      },
-      {
-        id: 3,
-        title: "Знижка на укр кухню",
-        details: "Приходьте в наш заклад на вул. Січових Стрільців,11. Покажіть дійсний студентський квиток на барі. Смакуй чудову піцу",
-        image: 'src/assets/img/pivas.jpg',
-        category: "Українська кухня",
-        overlay: "dark",
-        time: "Вечеря",
-
-      },
-      {
-        id: 4,
-        title: "Дешева піца для СТУДЕНТІВ",
-        details: "Приходьте в наш заклад на вул. Січових Стрільців,11. Покажіть дійсний студентський квиток на барі. Смакуй чудову піцу",
-        image: 'src/assets/img/pivas.jpg',
-        category: "Фастфуд",
-        overlay: "dark",
-        time: "Обід",
-
-      },
-      {
-        id: 5,
-        title: "Дешева піца для СТУДЕНТІВ",
-        details: "Приходьте в наш заклад на вул. Січових Стрільців,11. Покажіть дійсний студентський квиток на барі. Смакуй чудову піцу",
-        overlay: "dark",
-        image: 'src/assets/img/pivas.jpg',
-        category: "Фастфуд",
-        time: "Сніданок",
-        
-      },
-      {
-        id: 6,
-        title: "Знижка на каву",
-        details: "Приходьте в наш заклад на вул. Січових Стрільців,11. Покажіть дійсний студентський квиток на барі. Смакуй чудову піцу",
-        image: 'src/assets/img/pivas.jpg',
-        category: "Кава",
-        overlay: "dark",
-        time: "Обід",
-      
-      },
-      {
-        id: 7,
-        title: "Знижка на укр кухню",
-        details: "Приходьте в наш заклад на вул. Січових Стрільців,11. Покажіть дійсний студентський квиток на барі. Смакуй чудову піцу",
-        image: 'src/assets/img/pivas.jpg',
-        category: "Українська кухня",
-        overlay: "dark",
-        time: "Сніданок",
-
-      },
-      {
-        id: 8,
-        title: "Дешева піца для СТУДЕНТІВ",
-        details: "Приходьте в наш заклад на вул. Січових Стрільців,11. Покажіть дійсний студентський квиток на барі. Смакуй чудову піцу",
-        image: 'src/assets/img/pivas.jpg',
-        category: "Фастфуд",
-        overlay: "dark",
-        time: "Вечеря",
-
-      }
-    ],
     foodCategory: null,
     timeSlot: null,
 
   }
     componentDidMount(){
-    return fetch("http://localhost:8000/discounts/")
-            .then(response => response.json())
-            .then(result => {
-              this.setState({discounts: result})
-            });
+    this.props.dispatch(fetchDiscounts());
+    
+    
   }
   handleFoodChange = event => this.setState({foodCategory: event.target.value });
   
@@ -103,12 +20,12 @@ class Home extends Component {
   handleTimeChange = event => this.setState({timeSlot: event.target.value});
   
   displayAllDiscounts = () =>  
-    this.state.discounts.map(discount => 
-    <Discount key={discount.id} title={discount.title} details={discount.details} overlay={discount.overlay} cafe={discount.cafe} image={discount.image}/>)
-  
+    this.props.discounts.map(discount => 
+    <Discount key={discount.id} title={discount.title} details={discount.details} overlay={discount.overlay} cafe={discount.cafe} image={discount.image} height={discount.height}/>)
+    
 
   filterDiscounts = () => {
-    const { discounts, foodCategory, timeSlot } = this.state;
+    const { discounts, foodCategory, timeSlot } = this.props;
     let discountCopy = [...discounts];
     console.log()
        
@@ -118,7 +35,7 @@ class Home extends Component {
       discountCopy = discountCopy.filter((discount) =>  discount.time === timeSlot);
     
     return discountCopy
-      .map(discount => <Discount key={discount.id} title={discount.title} details={discount.details} overlay={discount.overlay} cafe={discount.cafe} image={discount.image}/>);
+      .map(discount => <Discount key={discount.id} title={discount.title} details={discount.details} overlay={discount.overlay} cafe={discount.cafe} image={discount.image} height={discount.height}/>);
 
   }
 
@@ -126,7 +43,7 @@ class Home extends Component {
 
 
   render() {
-    const { foodCategory, timeSlot } = this.state;
+    const { foodCategory, timeSlot } = this.props;
     return (
       <div>
         <Navbar handleFoodChange={this.handleFoodChange} handleTimeChange={this.handleTimeChange} />
@@ -139,4 +56,11 @@ class Home extends Component {
     );
   }
 }
-export default Home;
+const mapStateToProps = state => ({
+  discounts: state.discounts.discounts,
+  loading: state.discounts.loading,
+  error: state.discounts.error,
+  foodCategory: state.discounts.foodCategory,
+  timeSlot: state.discounts.timeSlot
+})
+export default connect(mapStateToProps)(Home);

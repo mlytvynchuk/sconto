@@ -7,7 +7,7 @@ class DiscountSerializer(serializers.ModelSerializer):
     time = serializers.StringRelatedField(many=False)
     height = serializers.StringRelatedField(many=False)
     overlay = serializers.StringRelatedField(many=False)
-
+    
     class Meta:
         model = Discount
         fields = '__all__'
