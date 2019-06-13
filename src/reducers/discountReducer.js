@@ -3,7 +3,8 @@ import {
     FETCH_DISCOUNTS_BEGIN,
     FETCH_DISCOUNTS_SUCCESS,
     ADD_FOOD_CATEGORY,
-    ADD_TIME_SLOT 
+    ADD_TIME_SLOT,
+    HANDLE_SEARCH_BUTTON_CLICK
 }
     from '../actions/index';
 
@@ -61,6 +62,16 @@ export default function discountReducer(state=initialState, action){
                     timeSlot: action.payload
                 }
             }
+        case HANDLE_SEARCH_BUTTON_CLICK: 
+        {   const {foodCategory, timeSlot} = action.payload;
+        
+        console.log(`${foodCategory}- ${timeSlot}`);
+            return {
+                ...state,
+                foodCategory,
+                timeSlot
+            }
+        }
             
         default: {
             return state;

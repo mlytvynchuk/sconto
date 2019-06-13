@@ -1,4 +1,11 @@
-import {FETCH_DISCOUNTS_FAIL, FETCH_DISCOUNTS_BEGIN, FETCH_DISCOUNTS_SUCCESS, ADD_FOOD_CATEGORY, ADD_TIME_SLOT} from './index'
+import {
+    FETCH_DISCOUNTS_FAIL, 
+    FETCH_DISCOUNTS_BEGIN, 
+    FETCH_DISCOUNTS_SUCCESS, 
+    ADD_FOOD_CATEGORY, 
+    ADD_TIME_SLOT,
+    HANDLE_SEARCH_BUTTON_CLICK,
+} from './index'
 
 export function fetchDiscountsBegin(){
     return {
@@ -49,9 +56,18 @@ export function addFoodCategory(event) {
   }
 
 export function addTimeSlot(event) {
-    const value = event.target.value;
     return {
         type: ADD_TIME_SLOT,
-        payload: value
+        payload: event.target.value,
+    }
+}
+
+export function handleSearchButtonClick(foodCategory, timeSlot) {
+    return {
+        type: HANDLE_SEARCH_BUTTON_CLICK,
+        payload: {
+            timeSlot,
+            foodCategory
+        }
     }
 }
