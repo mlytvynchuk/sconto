@@ -12,7 +12,7 @@ export default class Navbar extends Component {
       <header>
         <nav className="navbar navbar-expand-lg navbar-light bg-white">
           <div className="blur-box">
-            <a className="navbar-brand" href="#">
+            <a className="navbar-brand" href="/">
               Sconto
             </a>
           </div>
@@ -20,7 +20,7 @@ export default class Navbar extends Component {
             <ul className="navbar-nav">
               <li className="filter-item">
                 <h4>Їжа</h4>
-                <select name id onChange={this.props.handleFoodChange}>
+                <select onChange={this.props.handleFoodChange}>
                   <option value={1} disabled selected>
                     Обери смаколики
                   </option>
@@ -31,7 +31,7 @@ export default class Navbar extends Component {
               </li>
               <li className="filter-item">
                 <h5>Час доби</h5>
-                <select name id onChange={this.props.handleTimeChange}>
+                <select onChange={this.props.handleTimeChange}>
                   <option value={1} disabled selected >
                     Обери час
                   </option>
