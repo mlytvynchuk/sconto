@@ -1,12 +1,8 @@
 
 import React from 'react';
-const FilterMenu = ({handleTimeChange, handleFoodChange, handleSearchButtonClick, timeSlot}) => {
+const FilterMenu = ({ handleSearchButtonClick, timeSlot, handleModalToggle }) => {
     const foodRef = React.createRef();
     const timeRef = React.createRef();
-
-// const handleSearchButtonClick = () => {
-//         console.log(foodRef.current.value);
-//     }
 
     return (
         <div>
@@ -20,7 +16,7 @@ const FilterMenu = ({handleTimeChange, handleFoodChange, handleSearchButtonClick
             <br/>
             <div>
                 <h4>Їжа</h4>
-                <select /*onChange={handleFoodChange}*/ ref={foodRef}>
+                <select ref={foodRef}>
                     <option value="null" >Обери смаколики</option>  
                     <option value="Фастфуд">Фастфуд</option>  
                     <option value="Українська кухня">Українська кухня</option>
@@ -30,7 +26,7 @@ const FilterMenu = ({handleTimeChange, handleFoodChange, handleSearchButtonClick
             <br/>
             <div>
                 <h4>Час доби</h4>
-                <select /*onChange={handleTimeChange}*/ ref={timeRef} value={timeSlot}>
+                <select ref={timeRef} defaultValue={timeSlot} readOnly>
                     <option value="null">Обери час</option>  
                     <option value="Сніданок">Сніданок</option>  
                     <option value="Обід">Обід</option>
@@ -39,7 +35,7 @@ const FilterMenu = ({handleTimeChange, handleFoodChange, handleSearchButtonClick
             </div>
             <br/>
             <div>
-                <button className="btn btn-primary" onClick={() => handleSearchButtonClick(foodRef.current.value, timeRef.current.value)}>Шукати</button>
+                <button className="btn btn-primary" onClick={() => { handleSearchButtonClick(foodRef.current.value, timeRef.current.value); handleModalToggle()} }>Шукати</button>
             </div>
         </div>
     )

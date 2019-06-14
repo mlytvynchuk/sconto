@@ -1,25 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
 import { Modal } from "react-bootstrap";
-class LightBox extends Component {
-  state = {
-    isOpen: false
-  };
-  handleToggle = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  };
-  render() {
+const LightBox = props => {
+  
     return (
       <div>
-        <div onClick={() => this.handleToggle()}>{this.props.button}</div>
-        <Modal show={this.state.isOpen} onHide={() => this.handleToggle()}>
+        <div onClick={ props.handleModalToggle }>{ props.button }</div>
+        <Modal show={ props.isOpen } onHide={ props.handleModalToggle }>
           <Modal.Header closeButton />
-          <Modal.Body>{this.props.children}</Modal.Body>
+          <Modal.Body>{ props.children }</Modal.Body>
         </Modal>
       </div>
     );
-  }
 }
 
 export default LightBox;

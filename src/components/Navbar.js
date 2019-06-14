@@ -7,6 +7,14 @@ import AddDisc from './AddDisc';
 import LikesList from './LikesList';
 import '../assets/css/modal.css';
 export default class Navbar extends Component {
+  state = {
+    isOpenModal: false,
+  };
+  
+  handleModalToggle = () => {
+    this.setState( prevState => ({isOpenModal: !prevState.isOpenModal}));
+  };
+
   render() {
     return (
       <header>
@@ -58,14 +66,17 @@ export default class Navbar extends Component {
           </div>
           <div>
             <div className="d-flex">
-            <LightBox 
+            <LightBox isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle}
               button={(
                   <div className="navbar-toggler" >
                     <span className="navbar-toggler-text">Фільтри</span>
                     <span className="navbar-toggler-icon" />
                   </div>
               )}>
-                    <FilterMenu timeSlot={this.props.timeSlot} handleTimeChange={this.props.handleTimeChange} handleFoodChange={this.props.handleFoodChange} handleSearchButtonClick={this.props.handleSearchButtonClick}/>
+                    <FilterMenu 
+                      timeSlot={this.props.timeSlot} 
+                      handleSearchButtonClick={this.props.handleSearchButtonClick} 
+                      handleModalToggle={this.handleModalToggle} />
               </LightBox>
               
               {/* user profile */}
@@ -73,10 +84,10 @@ export default class Navbar extends Component {
                 <ul id="menu">
                   <li>
                     <input type="checkbox" id="user-photo" />
-                    <img src={userPhoto} id="profile-img" />
+                    <img src={userPhoto} id="profile-img" alt=""/>
                     <ul className="but-style">
                       <li>
-                        <img src={manPhoto} className="profile-img" />
+                        <img src={manPhoto} className="profile-img" alt=""/>
                       </li>
                       <li>
                         <div className="blur-box">

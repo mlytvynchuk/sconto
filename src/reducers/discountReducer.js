@@ -11,7 +11,7 @@ import {
 const initialState = {
     discounts: [],
     foodCategory: null,
-    timeSlot: null,
+    timeSlot: "",
     loading: false,
     error: null
 }
@@ -64,7 +64,7 @@ export default function discountReducer(state=initialState, action){
             }
         case HANDLE_SEARCH_BUTTON_CLICK: 
         {   const {foodCategory, timeSlot} = action.payload;
-        
+
             return {
                 ...state,
                 foodCategory,
