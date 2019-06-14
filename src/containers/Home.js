@@ -27,15 +27,13 @@ class Home extends Component {
 }
   
   filterDiscounts = () => {
-    
-    console.log(this.props.timeSlot);
     const { discounts } = this.props;
     const {foodCategory, timeSlot} = this.props;
     let discountCopy = [...discounts]; 
     
-      if(foodCategory)
+      if(foodCategory && foodCategory !== "null")
       discountCopy = discountCopy.filter((discount) =>  discount.category === foodCategory);
-      if(timeSlot)
+      if(timeSlot && timeSlot !== "null")
       discountCopy = discountCopy.filter((discount) =>  discount.time === timeSlot);
       
     return discountCopy

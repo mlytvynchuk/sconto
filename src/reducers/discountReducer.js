@@ -65,7 +65,6 @@ export default function discountReducer(state=initialState, action){
         case HANDLE_SEARCH_BUTTON_CLICK: 
         {   const {foodCategory, timeSlot} = action.payload;
         
-        console.log(`${foodCategory}- ${timeSlot}`);
             return {
                 ...state,
                 foodCategory,
