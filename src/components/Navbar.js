@@ -32,7 +32,8 @@ export default class Navbar extends Component {
               <li className="filter-item">
                 <h5>Час доби</h5>
                 <select value={this.props.timeSlot} onChange={this.props.handleTimeChange}>
-                  <option value={null} >
+                  <option value={"null"}>
+                    
                     Обери час
                   </option>
                   <option value={"Сніданок"}>Сніданок</option>
@@ -64,7 +65,7 @@ export default class Navbar extends Component {
                     <span className="navbar-toggler-icon" />
                   </div>
               )}>
-                    <FilterMenu handleTimeChange={this.props.handleTimeChange} handleFoodChange={this.props.handleFoodChange} handleSearchButtonClick={this.props.handleSearchButtonClick}/>
+                    <FilterMenu timeSlot={this.props.timeSlot} handleTimeChange={this.props.handleTimeChange} handleFoodChange={this.props.handleFoodChange} handleSearchButtonClick={this.props.handleSearchButtonClick}/>
               </LightBox>
               
               {/* user profile */}

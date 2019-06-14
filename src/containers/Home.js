@@ -6,9 +6,8 @@ import { fetchDiscounts, addFoodCategory, addTimeSlot, handleSearchButtonClick, 
 class Home extends Component {
  
     componentDidMount(){
-    
-    this.props.fetchDiscounts();
-    this.getTime();
+      this.props.fetchDiscounts();
+      this.getTime();
   }
   getTime = () =>{
     var today = new Date();
@@ -24,8 +23,7 @@ class Home extends Component {
     else{
       this.props.fetchTimeSlot("Вечеря");
       
-    }
-    
+    }  
 }
   
   filterDiscounts = () => {
@@ -35,11 +33,11 @@ class Home extends Component {
     const {foodCategory, timeSlot} = this.props;
     let discountCopy = [...discounts]; 
     
-    if(foodCategory)
+      if(foodCategory)
       discountCopy = discountCopy.filter((discount) =>  discount.category === foodCategory);
-    if(timeSlot)
+      if(timeSlot)
       discountCopy = discountCopy.filter((discount) =>  discount.time === timeSlot);
-    
+      
     return discountCopy
       .map(discount => <Discount key={discount.id} title={discount.title} details={discount.details} overlay={discount.overlay} cafe={discount.cafe} image={discount.image} height={discount.height}/>);
 

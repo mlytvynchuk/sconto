@@ -1,6 +1,6 @@
 
 import React from 'react';
-const FilterMenu = ({handleTimeChange, handleFoodChange, handleSearchButtonClick}) => {
+const FilterMenu = ({handleTimeChange, handleFoodChange, handleSearchButtonClick, timeSlot}) => {
     const foodRef = React.createRef();
     const timeRef = React.createRef();
 
@@ -21,7 +21,7 @@ const FilterMenu = ({handleTimeChange, handleFoodChange, handleSearchButtonClick
             <div>
                 <h4>Їжа</h4>
                 <select /*onChange={handleFoodChange}*/ ref={foodRef}>
-                    <option value={null} >Обери смаколики</option>  
+                    <option value="null" >Обери смаколики</option>  
                     <option value="Фастфуд">Фастфуд</option>  
                     <option value="Українська кухня">Українська кухня</option>
                     <option value="Кава">Кава</option>  
@@ -30,8 +30,8 @@ const FilterMenu = ({handleTimeChange, handleFoodChange, handleSearchButtonClick
             <br/>
             <div>
                 <h4>Час доби</h4>
-                <select /*onChange={handleTimeChange}*/ ref={timeRef}>
-                    <option value={null}>Обери час</option>  
+                <select /*onChange={handleTimeChange}*/ ref={timeRef} value={timeSlot}>
+                    <option value="null">Обери час</option>  
                     <option value="Сніданок">Сніданок</option>  
                     <option value="Обід">Обід</option>
                     <option value="Вечеря">Вечеря</option>  
