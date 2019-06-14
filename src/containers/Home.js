@@ -9,6 +9,7 @@ class Home extends Component {
       this.props.fetchDiscounts();
       this.getTime();
   }
+  
   getTime = () =>{
     var today = new Date();
     var hours = today.getHours();

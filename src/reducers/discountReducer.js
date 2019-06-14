@@ -2,8 +2,8 @@ import {
     FETCH_DISCOUNTS_FAIL,
     FETCH_DISCOUNTS_BEGIN,
     FETCH_DISCOUNTS_SUCCESS,
-    ADD_FOOD_CATEGORY,
-    ADD_TIME_SLOT,
+    SELECT_FOOD_CATEGORY,
+    SELECT_TIME_SLOT,
     HANDLE_SEARCH_BUTTON_CLICK
 }
     from '../actions/index';
@@ -47,7 +47,7 @@ export default function discountReducer(state=initialState, action){
                 };
             } 
         
-        case ADD_FOOD_CATEGORY:
+        case SELECT_FOOD_CATEGORY:
             {
                 return {
                     ...state,
@@ -55,7 +55,7 @@ export default function discountReducer(state=initialState, action){
                 };
             }
 
-        case ADD_TIME_SLOT:
+        case SELECT_TIME_SLOT:
             {
                 return {
                     ...state,

@@ -2,8 +2,8 @@ import {
     FETCH_DISCOUNTS_FAIL, 
     FETCH_DISCOUNTS_BEGIN, 
     FETCH_DISCOUNTS_SUCCESS, 
-    ADD_FOOD_CATEGORY, 
-    ADD_TIME_SLOT,
+    SELECT_FOOD_CATEGORY, 
+    SELECT_TIME_SLOT,
     HANDLE_SEARCH_BUTTON_CLICK,
 } from './index'
 
@@ -50,20 +50,20 @@ function handleErrors(response) {
 
 export function addFoodCategory(event) {
     return {
-        type: ADD_FOOD_CATEGORY,
+        type: SELECT_FOOD_CATEGORY,
         payload: event.target.value
     }    
   }
 
 export function addTimeSlot(event) {
     return {
-        type: ADD_TIME_SLOT,
+        type: SELECT_TIME_SLOT,
         payload: event.target.value,
     }
 }
 export function fetchTimeSlot(time) {
     return {
-        type: ADD_TIME_SLOT,
+        type: SELECT_TIME_SLOT,
         payload: time,
     }
 }

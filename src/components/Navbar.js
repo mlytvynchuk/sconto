@@ -29,7 +29,7 @@ export default class Navbar extends Component {
               <li className="filter-item">
                 <h4>Їжа</h4>
                 <select onChange={this.props.handleFoodChange}>
-                  <option value="null" >
+                  <option defaultValue="null" >
                     Обери смаколики
                   </option>
                   <option value={"Фастфуд"}>Фастфуд</option>
@@ -39,7 +39,7 @@ export default class Navbar extends Component {
               </li>
               <li className="filter-item">
                 <h5>Час доби</h5>
-                <select value={this.props.timeSlot} onChange={this.props.handleTimeChange}>
+                <select defaultValue={this.props.timeSlot} onChange={this.props.handleTimeChange}>
                   <option value="null">
                     
                     Обери час
@@ -51,7 +51,7 @@ export default class Navbar extends Component {
               </li>
             </ul>
             <div className="search-container">
-              <form action="/action_page.php">
+              <form >
                 <input
                   className="search-input"
                   type="text"
