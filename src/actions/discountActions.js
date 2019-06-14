@@ -61,7 +61,12 @@ export function addTimeSlot(event) {
         payload: event.target.value,
     }
 }
-
+export function fetchTimeSlot(time) {
+    return {
+        type: ADD_TIME_SLOT,
+        payload: time,
+    }
+}
 export function handleSearchButtonClick(foodCategory, timeSlot) {
     return {
         type: HANDLE_SEARCH_BUTTON_CLICK,

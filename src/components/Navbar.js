@@ -31,7 +31,7 @@ export default class Navbar extends Component {
               </li>
               <li className="filter-item">
                 <h5>Час доби</h5>
-                <select onChange={this.props.handleTimeChange}>
+                <select value={this.props.timeSlot} onChange={this.props.handleTimeChange}>
                   <option value={null} >
                     Обери час
                   </option>

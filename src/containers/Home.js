@@ -2,21 +2,39 @@ import React, { Component } from "react";
 import Navbar from "../components/Navbar";
 import Discount from "../components/Discount";
 import { connect } from "react-redux";
-import { fetchDiscounts, addFoodCategory, addTimeSlot, handleSearchButtonClick} from "../actions/discountActions";
+import { fetchDiscounts, addFoodCategory, addTimeSlot, handleSearchButtonClick, fetchTimeSlot} from "../actions/discountActions";
 class Home extends Component {
+ 
     componentDidMount(){
+    
     this.props.fetchDiscounts();
+    this.getTime();
   }
-
-  displayAllDiscounts = () =>  
-    this.props.discounts.map(discount => 
-    <Discount key={discount.id} title={discount.title} details={discount.details} overlay={discount.overlay} cafe={discount.cafe} image={discount.image} height={discount.height}/>);
+  getTime = () =>{
+    var today = new Date();
+    var hours = today.getHours();
+    if (hours < 12){
+      this.props.fetchTimeSlot("Сніданок");
+      
+    }
+    else if (hours < 18){
+      this.props.fetchTimeSlot("Обід");
+      
+    }
+    else{
+      this.props.fetchTimeSlot("Вечеря");
+      
+    }
+    
+}
   
   filterDiscounts = () => {
+    
+    console.log(this.props.timeSlot);
     const { discounts } = this.props;
     const {foodCategory, timeSlot} = this.props;
     let discountCopy = [...discounts]; 
-
+    
     if(foodCategory)
       discountCopy = discountCopy.filter((discount) =>  discount.category === foodCategory);
     if(timeSlot)
@@ -30,7 +48,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Navbar handleFoodChange={this.props.handleFoodChange} handleTimeChange={this.props.handleTimeChange} handleSearchButtonClick={this.props.handleSearchButtonClick} />
+        <Navbar timeSlot={this.props.timeSlot} handleFoodChange={this.props.handleFoodChange} handleTimeChange={this.props.handleTimeChange} handleSearchButtonClick={this.props.handleSearchButtonClick} />
         <div className="main-container">
           <div className="grid">
            {this.filterDiscounts()}
@@ -55,6 +73,7 @@ const mapDispatchToProps = dispatch => ({
   handleTimeChange: (event) => dispatch(addTimeSlot(event)),
   fetchDiscounts: () => dispatch(fetchDiscounts()),
   handleSearchButtonClick: (food, time) => dispatch(handleSearchButtonClick(food, time)),
+  fetchTimeSlot: (time) => dispatch(fetchTimeSlot(time))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
