@@ -2,55 +2,69 @@ import React, { Component } from "react";
 import Navbar from "../components/Navbar";
 import Discount from "../components/Discount";
 import { connect } from "react-redux";
-import { fetchDiscounts, addFoodCategory, addTimeSlot, handleSearchButtonClick, fetchTimeSlot} from "../actions/discountActions";
+import {
+  fetchDiscounts,
+  addFoodCategory,
+  addTimeSlot,
+  handleSearchButtonClick,
+  fetchTimeSlot
+} from "../actions/discountActions";
 class Home extends Component {
- 
-    componentDidMount(){
-      this.props.fetchDiscounts();
-      this.getTime();
+  componentDidMount() {
+    this.props.fetchDiscounts();
+    this.getTime();
   }
-  
-  getTime = () =>{
+
+  getTime = () => {
     var today = new Date();
     var hours = today.getHours();
-    if (hours < 12){
+    if (hours < 12) {
       this.props.fetchTimeSlot("Сніданок");
-      
-    }
-    else if (hours < 18){
+    } else if (hours < 18) {
       this.props.fetchTimeSlot("Обід");
-      
-    }
-    else{
+    } else {
       this.props.fetchTimeSlot("Вечеря");
-      
-    }  
-}
-  
+    }
+  };
+
   filterDiscounts = () => {
     const { discounts } = this.props;
-    const {foodCategory, timeSlot} = this.props;
-    let discountCopy = [...discounts]; 
-    
-      if(foodCategory && foodCategory !== "null")
-      discountCopy = discountCopy.filter((discount) =>  discount.category === foodCategory);
-      if(timeSlot && timeSlot !== "null")
-      discountCopy = discountCopy.filter((discount) =>  discount.time === timeSlot);
-      
-    return discountCopy
-      .map(discount => <Discount key={discount.id} title={discount.title} details={discount.details} overlay={discount.overlay} cafe={discount.cafe} image={discount.image} height={discount.height}/>);
+    const { foodCategory, timeSlot } = this.props;
+    let discountCopy = [...discounts];
 
-  }
+    if (foodCategory && foodCategory !== "null")
+      discountCopy = discountCopy.filter(
+        discount => discount.category === foodCategory
+      );
+    if (timeSlot && timeSlot !== "null")
+      discountCopy = discountCopy.filter(
+        discount => discount.time === timeSlot
+      );
+
+    return discountCopy.map(discount => (
+      <Discount
+        key={discount.id}
+        title={discount.title}
+        details={discount.details}
+        overlay={discount.overlay}
+        cafe={discount.cafe}
+        image={discount.image}
+        height={discount.height}
+      />
+    ));
+  };
 
   render() {
     return (
       <div>
-        <Navbar timeSlot={this.props.timeSlot} handleFoodChange={this.props.handleFoodChange} handleTimeChange={this.props.handleTimeChange} handleSearchButtonClick={this.props.handleSearchButtonClick} />
+        <Navbar
+          timeSlot={this.props.timeSlot}
+          handleFoodChange={this.props.handleFoodChange}
+          handleTimeChange={this.props.handleTimeChange}
+          handleSearchButtonClick={this.props.handleSearchButtonClick}
+        />
         <div className="main-container">
-          <div className="grid">
-           {this.filterDiscounts()}
-           
-          </div>
+          <div className="grid">{this.filterDiscounts()}</div>
         </div>
       </div>
     );
@@ -63,14 +77,18 @@ const mapStateToProps = state => ({
   error: state.discounts.error,
   foodCategory: state.discounts.foodCategory,
   timeSlot: state.discounts.timeSlot
-})
+});
 
 const mapDispatchToProps = dispatch => ({
-  handleFoodChange: (event) => dispatch(addFoodCategory(event)),
-  handleTimeChange: (event) => dispatch(addTimeSlot(event)),
+  handleFoodChange: event => dispatch(addFoodCategory(event)),
+  handleTimeChange: event => dispatch(addTimeSlot(event)),
   fetchDiscounts: () => dispatch(fetchDiscounts()),
-  handleSearchButtonClick: (food, time) => dispatch(handleSearchButtonClick(food, time)),
-  fetchTimeSlot: (time) => dispatch(fetchTimeSlot(time))
-})
+  handleSearchButtonClick: (food, time) =>
+    dispatch(handleSearchButtonClick(food, time)),
+  fetchTimeSlot: time => dispatch(fetchTimeSlot(time))
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

@@ -2,7 +2,7 @@ import React from "react";
 
 const Discount = props => {
   const { title, image, cafe, overlay, height } = props;
-  
+
   return (
     <div>
       <div
