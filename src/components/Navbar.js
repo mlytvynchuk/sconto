@@ -12,7 +12,7 @@ export default class Navbar extends Component {
       <header>
         <nav className="navbar navbar-expand-lg navbar-light bg-white">
           <div className="blur-box">
-            <a className="navbar-brand" href="#">
+            <a className="navbar-brand" href="/">
               Sconto
             </a>
           </div>
@@ -20,8 +20,8 @@ export default class Navbar extends Component {
             <ul className="navbar-nav">
               <li className="filter-item">
                 <h4>Їжа</h4>
-                <select name id onChange={this.props.handleFoodChange}>
-                  <option value={1} disabled selected>
+                <select onChange={this.props.handleFoodChange}>
+                  <option value={"null"} >
                     Обери смаколики
                   </option>
                   <option value={"Фастфуд"}>Фастфуд</option>
@@ -31,8 +31,8 @@ export default class Navbar extends Component {
               </li>
               <li className="filter-item">
                 <h5>Час доби</h5>
-                <select name id onChange={this.props.handleTimeChange}>
-                  <option value={1} disabled selected >
+                <select onChange={this.props.handleTimeChange}>
+                  <option value={null} >
                     Обери час
                   </option>
                   <option value={"Сніданок"}>Сніданок</option>
@@ -64,7 +64,7 @@ export default class Navbar extends Component {
                     <span className="navbar-toggler-icon" />
                   </div>
               )}>
-                    <FilterMenu/>
+                    <FilterMenu handleTimeChange={this.props.handleTimeChange} handleFoodChange={this.props.handleFoodChange} handleSearchButtonClick={this.props.handleSearchButtonClick}/>
               </LightBox>
               
               {/* user profile */}

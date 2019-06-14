@@ -1,8 +1,13 @@
 import {
     FETCH_DISCOUNTS_FAIL,
     FETCH_DISCOUNTS_BEGIN,
-    FETCH_DISCOUNTS_SUCCESS}
+    FETCH_DISCOUNTS_SUCCESS,
+    ADD_FOOD_CATEGORY,
+    ADD_TIME_SLOT,
+    HANDLE_SEARCH_BUTTON_CLICK
+}
     from '../actions/index';
+
 const initialState = {
     discounts: [],
     foodCategory: null,
@@ -12,7 +17,6 @@ const initialState = {
 }
 
 export default function discountReducer(state=initialState, action){
-    
     switch (action.type) {
         
         case FETCH_DISCOUNTS_BEGIN:{
@@ -22,7 +26,6 @@ export default function discountReducer(state=initialState, action){
                 loading: true,
                 error: null
             };
-            break;
         }
             
         case FETCH_DISCOUNTS_SUCCESS: {
@@ -36,7 +39,6 @@ export default function discountReducer(state=initialState, action){
             
         case FETCH_DISCOUNTS_FAIL:
             {
-                
                 return{
                     ...state,
                     loading: false,
@@ -44,6 +46,33 @@ export default function discountReducer(state=initialState, action){
                     discounts: []
                 };
             } 
+        
+        case ADD_FOOD_CATEGORY:
+            {
+                return {
+                    ...state,
+                    foodCategory: action.payload
+                };
+            }
+
+        case ADD_TIME_SLOT:
+            {
+                return {
+                    ...state,
+                    timeSlot: action.payload
+                }
+            }
+        case HANDLE_SEARCH_BUTTON_CLICK: 
+        {   const {foodCategory, timeSlot} = action.payload;
+        
+        console.log(`${foodCategory}- ${timeSlot}`);
+            return {
+                ...state,
+                foodCategory,
+                timeSlot
+            }
+        }
+            
         default: {
             return state;
         }
