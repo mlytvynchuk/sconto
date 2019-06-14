@@ -14,7 +14,7 @@ class Home extends Component {
   }
   handleFoodChange = event => this.setState({foodCategory: event.target.value });
   
-
+  
   handleTimeChange = event => this.setState({timeSlot: event.target.value});
   
   displayAllDiscounts = () =>  
