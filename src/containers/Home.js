@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Discount from "../components/Discount";
 import DiscountDetails from '../components/DiscountDetails';
 import LightBox from '../components/LightBox';
+import '../assets/css/modal-details.css';
 import { connect } from "react-redux";
 import {
   fetchDiscounts,
@@ -55,7 +56,7 @@ handleModalToggle = () => {
 
       
     return discountCopy.map(discount => (
-      <LightBox  isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle}
+      <LightBox id="modalForDetails" isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle}
         button={
           <Discount
             key={discount.id}

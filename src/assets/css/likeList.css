@@ -1,0 +1,38 @@
+.list-edit {
+    list-style-type: none;
+}
+.like-list h2 {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.list-edit li {
+    padding:20px;
+    border: 5px dotted #bbb; /* Dotted border */
+    width: 93%; 
+    border-radius: 15px; /* Rounded border */
+    margin: 0 auto; /* Center the coupon */
+    margin-bottom: 20px;
+}
+
+.list-edit img {
+    width: 110px;
+    height: 100px;
+}
+
+.display-left {
+    display: flex;
+    flex-direction: column;
+}
+.display-left p {
+    padding-top: 15px;
+}
+
+.display-right {
+
+}
+
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+}

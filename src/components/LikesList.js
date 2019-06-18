@@ -1,16 +1,24 @@
 import React from 'react';
 import { deleteFromLikes } from '../actions/discountActions'
 import { connect } from "react-redux";
+import '../assets/css/likeList.css'
 
 class LikesList extends React.Component{
 
     render(){
         return(
-            <div>
-                <h2>List of favourites cafes</h2>
-                <div>
-                {this.props.likes.map((item) => <li key={item.id}>{item.cafe} 
-                <button onClick={()=>this.props.deleteFromLikes(item.id)}> Delete </button> </li>)}
+            <div className="like-list">
+                <h2>Вподобання</h2>
+                <div className="list-edit">
+                {this.props.likes.map((item) => 
+                <li key={item.id}>
+                    <div className="d-flex">
+                        <div className="display-left"><h4>{item.cafe}</h4> 
+                        <p>{item.location}</p> </div>
+                        <div className="display-right"><img src={item.image} alt=""/>
+                        <button onClick={()=>this.props.deleteFromLikes(item.id)}> Delete </button> </div>
+                    </div>
+                </li>)}
                 </div>
             </div>
         )
