@@ -71,19 +71,25 @@ export default function discountReducer(state = initialState, action) {
     }
 
     case ADDED_TO_LIKES: {
-      const cafeId = action.payload;
-      const likedElem = state.discounts.find(discount =>  discount.id === cafeId);
-      /*const checkId = state.favorites.find(discount => discount.id === likedElem.id);
-      if (!checkId){}*/
-      return {...state, favorites: [state.favorites, likedElem]};
+      const discountId = action.payload;
+      const likedElem = state.discounts.find(discount =>  discount.id === discountId);
+      const copyFavorites = [...state.favorites, likedElem];
+      const checkId = state.favorites.find(discount => discount.id === likedElem.id);
+      if (!checkId){
+        return {
+          ...state,
+          favorites: copyFavorites
+        }
+      }
+      return state;
     }
-
-    // case DELETE_FROM_LIKES: {
-    //   const cafeId = action.payload;
-    //   const idx = favorites.findIndex((like) => like.id === cafeId);
-    //   const newFavs = [...favorites.slice(0, idx), ...favorites.slice(idx+1)];
-    //   return { favorites: newFavs };
-    // }
+    
+      // case DELETE_FROM_LIKES: {
+      //   const discountId = action.payload;
+      //   const idx = state.favorites.findIndex((like) => like.id === discountId);
+      //   const newFavs = [...state.favorites.slice(0, idx), ...state.favorites.slice(idx+1)];
+      //   return { ...state, favorites: newFavs };
+      // }
 
     default: {
       return state;
