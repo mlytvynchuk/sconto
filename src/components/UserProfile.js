@@ -35,7 +35,7 @@ export default class Navbar extends Component {
                                     <span className="navbar-toggler-text">Вподобання</span>
                                 </div>
                             )}>
-                                    <LikesList addedToLikeList={this.addedToLikeList}/>
+                                    <LikesList />
                             </LightBox> </div>
                       </li>
                       <li>

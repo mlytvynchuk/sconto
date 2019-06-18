@@ -63,20 +63,20 @@ export default class Navbar extends Component {
           </div>
           <div>
             <div className="d-flex">
-            <LightBox isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle}
-              button={(
-                  <div className="navbar-toggler" >
-                    <span className="navbar-toggler-text">Фільтри</span>
-                    <span className="navbar-toggler-icon" />
-                  </div>
-              )}>
-                    <FilterMenu 
-                      timeSlot={this.props.timeSlot} 
-                      handleSearchButtonClick={this.props.handleSearchButtonClick} 
-                      handleModalToggle={this.handleModalToggle} />
-              </LightBox> </div>
-              
-                <UserProfile isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle} addedToLikeList={this.addedToFavorites}/>
+              <LightBox isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle}
+                button={(
+                    <div className="navbar-toggler" >
+                      <span className="navbar-toggler-text">Фільтри</span>
+                      <span className="navbar-toggler-icon" />
+                    </div>
+                )}>
+                      <FilterMenu 
+                        timeSlot={this.props.timeSlot} 
+                        handleSearchButtonClick={this.props.handleSearchButtonClick} 
+                        handleModalToggle={this.handleModalToggle} />
+                </LightBox>
+                  <UserProfile isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle} />
+              </div>
           </div>
         </nav>
         

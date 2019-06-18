@@ -5,17 +5,14 @@ const DiscountDetails = (props) => {
     return (
         <div>
             <div className="image-container">
-                <img src={props.image} alt=""/>
+                <img style = {{width:"100%"}} src={props.image} alt=""/>
             </div>
             <div className="cafe">
                 <h2>{props.cafe}</h2>
+                <button> Like </button>
             </div>
             <div className="title">
                 <h2>{props.title}</h2>
-            </div>
-            <div>
-                <button
-                onClick={props.onAddedToLikes}>Likes</button>
             </div>
             <div>
                 <h3>Детальна інформація</h3>

@@ -71,8 +71,7 @@ handleModalToggle = () => {
             title={discount.title} 
             details={discount.details} 
             cafe={discount.cafe} 
-            image={discount.image} 
-            onAddedToLikes={() => onAddedToLikes(discount.id)}/>
+            image={discount.image} />
       </LightBox>
     ));
   };
