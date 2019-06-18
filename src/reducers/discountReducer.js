@@ -84,12 +84,12 @@ export default function discountReducer(state = initialState, action) {
       return state;
     }
     
-      // case DELETE_FROM_LIKES: {
-      //   const discountId = action.payload;
-      //   const idx = state.favorites.findIndex((like) => like.id === discountId);
-      //   const newFavs = [...state.favorites.slice(0, idx), ...state.favorites.slice(idx+1)];
-      //   return { ...state, favorites: newFavs };
-      // }
+       case DELETE_FROM_LIKES: {
+         const discountId = action.payload;
+         const idx = state.favorites.findIndex((like) => like.id === discountId);
+         const newFavs = [...state.favorites.slice(0, idx), ...state.favorites.slice(idx+1)];
+         return { ...state, favorites: newFavs };
+       }
 
     default: {
       return state;
