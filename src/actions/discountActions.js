@@ -4,7 +4,9 @@ import {
   FETCH_DISCOUNTS_SUCCESS,
   SELECT_FOOD_CATEGORY,
   SELECT_TIME_SLOT,
-  HANDLE_SEARCH_BUTTON_CLICK
+  HANDLE_SEARCH_BUTTON_CLICK,
+  ADDED_TO_LIKES,
+  DELETE_FROM_LIKES
 } from "./index";
 
 export function fetchDiscountsBegin() {
@@ -78,5 +80,19 @@ export function handleSearchButtonClick(foodCategory, timeSlot) {
       timeSlot,
       foodCategory
     }
+  };
+}
+
+export function addedToFavorites(cafeId) {
+  return {
+    type: ADDED_TO_LIKES,
+    payload: cafeId
+  };
+}
+
+export function deleteFromLikes(cafeId) {
+  return {
+  type: DELETE_FROM_LIKES,
+  payload: cafeId 
   };
 }

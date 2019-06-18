@@ -4,7 +4,8 @@ import {
   FETCH_DISCOUNTS_SUCCESS,
   SELECT_FOOD_CATEGORY,
   SELECT_TIME_SLOT,
-  HANDLE_SEARCH_BUTTON_CLICK
+  HANDLE_SEARCH_BUTTON_CLICK,
+  ADDED_TO_LIKES
 } from "../actions/index";
 
 const initialState = {
@@ -12,10 +13,12 @@ const initialState = {
   foodCategory: null,
   timeSlot: "",
   loading: false,
-  error: null
+  error: null,
+  favorites: []
 };
 
 export default function discountReducer(state = initialState, action) {
+
   switch (action.type) {
     case FETCH_DISCOUNTS_BEGIN: {
       return {
@@ -64,6 +67,21 @@ export default function discountReducer(state = initialState, action) {
         foodCategory,
         timeSlot
       };
+    }
+
+    case ADDED_TO_LIKES: {
+      const cafeId = action.payload;
+      const likedElem = state.discounts.find(discount =>  discount.id === cafeId);
+      /*const checkId = state.favorites.find(discount => discount.id === likedElem.id);
+      if (!checkId){}*/
+      return {...state.favorites, likedElem};
+    }
+
+    case DELETE_FROM_LIKES: {
+      const cafeId = action.payload;
+      const idx = favorites.findIndex((like) => like.id === cafeId);
+      const newFavs = [...favorites.slice(0, idx), ...favorites.slice(idx+1)];
+      return { favorites: newFavs };
     }
 
     default: {

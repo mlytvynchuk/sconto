@@ -1,15 +1,27 @@
 import React, { Component } from "react";
 import Navbar from "../components/Navbar";
 import Discount from "../components/Discount";
+import DiscountDetails from '../components/DiscountDetails';
+import LightBox from '../components/LightBox';
 import { connect } from "react-redux";
 import {
   fetchDiscounts,
   addFoodCategory,
   addTimeSlot,
   handleSearchButtonClick,
-  fetchTimeSlot
+  fetchTimeSlot,
+  addedToFavorites
 } from "../actions/discountActions";
 class Home extends Component {
+
+  state = {
+    isOpenModal: false,
+  };
+  
+handleModalToggle = () => {
+    this.setState( prevState => ({isOpenModal: !prevState.isOpenModal}));
+  };
+
   componentDidMount() {
     this.props.fetchDiscounts();
     this.getTime();
@@ -41,16 +53,27 @@ class Home extends Component {
         discount => discount.time === timeSlot
       );
 
+      
     return discountCopy.map(discount => (
-      <Discount
-        key={discount.id}
-        title={discount.title}
-        details={discount.details}
-        overlay={discount.overlay}
-        cafe={discount.cafe}
-        image={discount.image}
-        height={discount.height}
-      />
+      <LightBox  isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle}
+        button={
+          <Discount
+            key={discount.id}
+            title={discount.title}
+            details={discount.details}
+            overlay={discount.overlay}
+            cafe={discount.cafe}
+            image={discount.image}
+            height={discount.height}
+          />}>
+        <DiscountDetails 
+            id={discount.id} 
+            title={discount.title} 
+            details={discount.details} 
+            cafe={discount.cafe} 
+            image={discount.image} 
+            onAddedToLikes={() => onAddedToLikes(discount.id)}/>
+      </LightBox>
     ));
   };
 
@@ -62,6 +85,7 @@ class Home extends Component {
           handleFoodChange={this.props.handleFoodChange}
           handleTimeChange={this.props.handleTimeChange}
           handleSearchButtonClick={this.props.handleSearchButtonClick}
+          addedToFavorites={this.props.onAddedToLikes}
         />
         <div className="main-container">
           <div className="grid">{this.filterDiscounts()}</div>
@@ -85,7 +109,9 @@ const mapDispatchToProps = dispatch => ({
   fetchDiscounts: () => dispatch(fetchDiscounts()),
   handleSearchButtonClick: (food, time) =>
     dispatch(handleSearchButtonClick(food, time)),
-  fetchTimeSlot: time => dispatch(fetchTimeSlot(time))
+  fetchTimeSlot: time => dispatch(fetchTimeSlot(time)),
+  onAddedToLikes: (id) => dispatch(addedToFavorites(id))
+
 });
 
 export default connect(

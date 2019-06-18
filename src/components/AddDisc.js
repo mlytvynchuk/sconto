@@ -1,33 +1,30 @@
-import React from 'react';
-const AddDisc = () => {
+import React, { Component } from 'react'
+import AddDiscForm from './AddDiscForm';
+import LightBox from './LightBox';
+import '../assets/css/modal.css';
+import '../assets/css/menu.css';
+ 
+export default class Navbar extends Component {
+    state = {
+      isOpenModal: false,
+    };
+    
+    handleModalToggle = () => {
+      this.setState( prevState => ({isOpenModal: !prevState.isOpenModal}));
+    };
+
+    render() {
     return (
-        <div>
-            <h2>Додайте свою пропозицію</h2>
-            <form action=''>
-                <div className='search-container'>
-                    <label for="add-name"><b>Назва закладу</b></label><br/>
-                    <input type="text" placeholder="Введіть назву закладу" name="add-name" required />
-                    <br/>
-                    <br/>
-                    <label for="add-offer"><b>Пропозиція</b></label><br/>
-                    <input type="text" placeholder="Введіть умови знижки" name="add-offer" required />
-                    <br/>
-                    <br/>
-                    <label for="add-location"><b>Розташування</b></label><br/>
-                    <input type="text" placeholder="Введіть назву вулиці" name="add-location" required />
-                    <br/>
-                    <br/>
-                    <label for="add-photo"><b>Додати зображення</b></label><br/>
-                    <input type="file" name="photo" multiple accept="image/*,image/jpeg" />
-                </div>
-                <br/>
-                <br/>
-                <button className="btn btn-primary" type='submit'>Додати</button>
-                           
-            </form>
-        </div>
-
-    );
+        
+        <div className="blur-box">
+            <LightBox isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle}
+                button={(
+                        <div className="navbar-brand" >
+                            <span className="navbar-toggler-text">Додати</span>
+                        </div>
+                        )}>
+                    <AddDiscForm />
+            </LightBox> </div>
+                      
+    )}
 }
-
-export default AddDisc;
