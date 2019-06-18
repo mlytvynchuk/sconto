@@ -8,7 +8,7 @@ from rest_framework.authtoken.models import Token
 
 
 class UserCreate(APIView):
-    def post(self, request, format='json'):
+     def post(self, request, format='json'):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
