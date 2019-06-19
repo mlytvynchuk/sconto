@@ -1,27 +1,44 @@
-
-
+/* top */
 .image-container img {
     width: 100%;
-    background: linear-gradient(to top, #E4AF9D 20%, #E4E4D8 50%, #A19887 80%);
+}
+.image-container .img1 {
+    position: relative;
+    width: 100%;
+}
+.image-container .img2 {
+    position: absolute;
+    width: 93.5%;
+    left: 1rem;
+    right: 1rem;
+}
+.cafe {
+    position: absolute;
+    top: 20px;
+    margin-left: 10px;
+}
+.cafe h2 {
+    color: white;
 }
 
+/* discount */
 .title {
     display: flex;
-
 }
 .title h3 {
-
     margin-top: 15px;
     margin-left: 25px;
 }
 
 
 /* description */
-
+.description{
+    margin: 20px 20px 10px 20px;
+}
 .details {
-    margin-top: 15px;
+    margin-top: 25px;
     border-top: 1px solid;
-    padding-top: 10px;
+    padding-top: 15px;
 
 }
 
@@ -37,7 +54,7 @@
 }
 
 .map-container  {
-    margin-top: 15px;
+    margin-top: 20px;
 }
 .map-container img {
     width:25px;

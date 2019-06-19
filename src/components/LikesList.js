@@ -8,7 +8,7 @@ class LikesList extends React.Component{
     render(){
         return(
             <div className="like-list">
-                <h2>Вподобання</h2>
+                <h1>Вподобання</h1>
                 <div className="list-edit">
                 {this.props.likes.map((item) => 
                 <li className="ticket" key={item.id}>

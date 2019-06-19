@@ -1,13 +1,13 @@
 .list-edit {
     list-style-type: none;
 }
-.like-list h2 {
+.like-list h1 {
     text-align: center;
     padding-bottom: 10px;
 }
 
 .list-edit li {
-    padding:20px;
+    padding:20px 20px 0 20px;
     border: 2px dashed black;
     width: 93%; 
     border-radius: 15px; 
@@ -15,9 +15,15 @@
     margin-bottom: 20px;
 }
 
+.list-edit h4 { 
+    font-size: 2rem;
+    letter-spacing: 1.3px;
+}
+
 .list-edit img {
     width: 130px;
     height: 100px;
+    margin-right: 7px;
 }
 
 .display-left {
@@ -37,7 +43,7 @@
     justify-content: space-between;
 }
 
-.btn {
+.like-list .btn {
     height: 37px;
     width: 37px;
     background-image: url('../img/sci.png');

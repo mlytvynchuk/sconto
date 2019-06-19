@@ -2,13 +2,15 @@ import React from 'react'
 import '../assets/css/discount-details.css'
 import loc from '../assets/img/loc.png'
 import coupon from '../assets/img/disc.png'
+import grad from '../assets/img/top.png'
 
 const DiscountDetails = (props) => {
     
     return (
         <div>
             <div className="image-container">
-                <img style={{background: "linear-gradient(to top, #E4AF9D 20%, #E4E4D8 50%, #A19887 80%)"}} src={props.image} alt=""/>
+                <img className="img1" src={props.image} alt=""/>
+                <img className="img2" src={grad} alt="gradient"/>
             </div>
 
             <div className="cafe">
