@@ -11,12 +11,12 @@ class LikesList extends React.Component{
                 <h2>Вподобання</h2>
                 <div className="list-edit">
                 {this.props.likes.map((item) => 
-                <li key={item.id}>
+                <li className="ticket" key={item.id}>
                     <div className="d-flex">
                         <div className="display-left"><h4>{item.cafe}</h4> 
                         <p>{item.location}</p> </div>
                         <div className="display-right"><img src={item.image} alt=""/>
-                        <button onClick={()=>this.props.deleteFromLikes(item.id)}> Delete </button> </div>
+                        <button className="btn" onClick={()=>this.props.deleteFromLikes(item.id)}> </button> </div>
                     </div>
                 </li>)}
                 </div>
@@ -31,5 +31,4 @@ const mapStateToProps = state => ({
  const mapDispatchToProps = {
      deleteFromLikes
  }
-
 export default connect(mapStateToProps, mapDispatchToProps)(LikesList);

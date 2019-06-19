@@ -1,0 +1,52 @@
+
+
+.image-container img {
+    width: 100%;
+    background: linear-gradient(to top, #E4AF9D 20%, #E4E4D8 50%, #A19887 80%);
+}
+
+.title {
+    display: flex;
+
+}
+.title h3 {
+
+    margin-top: 15px;
+    margin-left: 25px;
+}
+
+
+/* description */
+
+.details {
+    margin-top: 15px;
+    border-top: 1px solid;
+    padding-top: 10px;
+
+}
+
+/* location + like*/
+.btn-like {
+    width: 100%;
+    height: 50px;
+    background-color: black;
+    color: white;
+    font-weight: 900;
+    font-size: 18pt;
+    border: none; 
+}
+
+.map-container  {
+    margin-top: 15px;
+}
+.map-container img {
+    width:25px;
+    height: 25px;
+    float:left;
+}
+
+.map-container p {
+    float: left;
+    margin-top: 3px;
+    margin-left: 5px;
+}

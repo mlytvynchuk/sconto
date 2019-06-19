@@ -3,7 +3,6 @@ import Navbar from "../components/Navbar";
 import Discount from "../components/Discount";
 import DiscountDetails from '../components/DiscountDetails';
 import LightBox from '../components/LightBox';
-import '../assets/css/modal-details.css';
 import { connect } from "react-redux";
 import {
   fetchDiscounts,
@@ -72,7 +71,8 @@ handleModalToggle = () => {
             title={discount.title} 
             details={discount.details} 
             cafe={discount.cafe} 
-            image={discount.image} />
+            image={discount.image}
+            location={discount.location} />
       </LightBox>
     ));
   };
