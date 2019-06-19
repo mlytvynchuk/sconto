@@ -1,6 +1,6 @@
 import React from 'react'
 import '../assets/css/discount-details.css'
-import loc from '../assets/img/loc.png'
+//import loc from '../assets/img/loc.png'
 import coupon from '../assets/img/disc.png'
 import grad from '../assets/img/top.png'
 
@@ -28,7 +28,8 @@ const DiscountDetails = (props) => {
                 </div>
 
                 <div className="map-container">
-                    <img src={loc} alt="loc" />
+                    <button className="btn" > </button>
+                    {/*<img src={loc} alt="loc" />*/}
                     <p>{props.location}</p>
                 </div>
             </div>

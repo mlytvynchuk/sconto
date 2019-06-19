@@ -34,10 +34,6 @@
     padding-top: 20px;
 }
 
-.display-right {
-
-}
-
 .d-flex {
     display: flex;
     justify-content: space-between;
