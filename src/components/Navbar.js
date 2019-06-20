@@ -26,24 +26,24 @@ export default class Navbar extends Component {
               <li className="filter-item">
                 <h4>Їжа</h4>
                 <select onChange={this.props.handleFoodChange}>
-                  <option defaultValue="null" >
+                  <option value="null" >
                     Обери смаколики
                   </option>
-                  <option value={"Фастфуд"}>Фастфуд</option>
-                  <option value={"Українська кухня"}>Українська кухня</option>
-                  <option value={"Кава"}>Кава</option>
+                  <option value="Фастфуд">Фастфуд</option>
+                  <option value="Українська кухня">Українська кухня</option>
+                  <option value="Кава">Кава</option>
                 </select>
               </li>
               <li className="filter-item">
                 <h5>Час доби</h5>
-                <select defaultValue={this.props.timeSlot} onChange={this.props.handleTimeChange}>
+                <select value={this.props.timeSlot} onChange={this.props.handleTimeChange}>
                   <option value="null">
                     
                     Обери час
                   </option>
-                  <option value={"Сніданок"}>Сніданок</option>
-                  <option value={"Обід"}>Обід</option>
-                  <option value={"Вечеря"}>Вечеря</option>
+                  <option value="Сніданок">Сніданок</option>
+                  <option value="Обід">Обід</option>
+                  <option value="Вечеря">Вечеря</option>
                 </select>
               </li>
             </ul>

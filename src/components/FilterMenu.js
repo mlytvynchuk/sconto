@@ -31,7 +31,7 @@ const FilterMenu = ({
       <br />
       <div>
         <h4>Час доби</h4>
-        <select ref={timeRef} defaultValue={timeSlot} readOnly>
+        <select ref={timeRef} value={timeSlot} readOnly>
           <option value="null">Обери час</option>
           <option value="Сніданок">Сніданок</option>
           <option value="Обід">Обід</option>
