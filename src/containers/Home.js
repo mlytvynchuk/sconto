@@ -72,7 +72,8 @@ handleModalToggle = () => {
             details={discount.details} 
             cafe={discount.cafe} 
             image={discount.image}
-            location={discount.location} />
+            location={discount.location}
+            overlay={discount.overlay} />
       </LightBox>
     ));
   };

@@ -1,21 +1,15 @@
 /* top */
 .image-container img {
-    width: 100%;
-}
-.image-container .img1 {
     position: relative;
     width: 100%;
+    filter: brightness(30%);
 }
-.image-container .img2 {
-    position: absolute;
-    width: 93.5%;
-    left: 1rem;
-    right: 1rem;
-}
+
 .cafe {
     position: absolute;
-    top: 20px;
-    margin-left: 10px;
+    top: 40px;
+    margin-left: 30px;
+    letter-spacing: 1.5px;
 }
 .cafe h2 {
     color: white;
@@ -26,20 +20,24 @@
     display: flex;
 }
 .title h3 {
-    margin-top: 15px;
-    margin-left: 25px;
+    margin-top: 8px;
+    margin-left: 15px;
 }
-
+.title img {
+    width: 11%;
+    height: 13%;
+}
 
 /* description */
 .description{
-    margin: 20px 20px 10px 20px;
+    margin: 10px 20px;
 }
 .details {
-    margin-top: 25px;
-    border-top: 1px solid;
-    padding-top: 15px;
-
+    padding-top: 5px;
+}
+.details p {
+    margin-left: 63px;
+    text-align: justify;
 }
 
 /* location + like*/

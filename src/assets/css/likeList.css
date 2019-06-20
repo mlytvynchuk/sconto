@@ -1,11 +1,13 @@
-.list-edit {
-    list-style-type: none;
+.like-list {
+    padding: 32px;
 }
 .like-list h1 {
     text-align: center;
     padding-bottom: 10px;
 }
-
+.list-edit {
+    list-style-type: none;
+}
 .list-edit li {
     padding:20px 20px 0 20px;
     border: 2px dashed black;

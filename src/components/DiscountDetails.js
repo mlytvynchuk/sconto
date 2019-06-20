@@ -1,7 +1,6 @@
 import React from 'react'
 import '../assets/css/discount-details.css'
-import coupon from '../assets/img/disc.png'
-import grad from '../assets/img/top.png'
+import coupon from '../assets/img/voucher.png'
 
 class DiscountDetails extends React.Component {
 
@@ -12,10 +11,9 @@ class DiscountDetails extends React.Component {
 
     render(){
         return (
-            <div>
+            <div className="discount">
                 <div className="image-container">
                     <img className="img1" src={this.props.image} alt=""/>
-                    <img className="img2" src={grad} alt="gradient"/>
                 </div>
 
                 <div className="cafe">
@@ -28,8 +26,8 @@ class DiscountDetails extends React.Component {
                     </div>
 
                     <div className="details">
-                        <h3>Детальна інформація</h3>
-                        <p>{this.props.details}</p>
+                        <p>Lorem ipsum bibendum porta donec metus sit risus nulla nec orci sagittis nibh adipiscing nam. Lectus non, rutrum ut leo urna enim proin sem nibh, urna.
+                        </p>
                     </div>
 
                     <div className="map-container">

@@ -1,7 +1,8 @@
 import React from 'react';
 import { deleteFromLikes } from '../actions/discountActions'
 import { connect } from "react-redux";
-import '../assets/css/likeList.css'
+import '../assets/css/likeList.css';
+import '../assets/css/indent.css';
 
 class LikesList extends React.Component{
 

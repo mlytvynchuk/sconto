@@ -1,4 +1,6 @@
 import React from "react";
+import '../assets/css/indent.css';
+
 const FilterMenu = ({
   handleSearchButtonClick,
   timeSlot,
@@ -8,7 +10,7 @@ const FilterMenu = ({
   const timeRef = React.createRef();
 
   return (
-    <div>
+    <div className="indent">
       <h4>Пошук</h4>
       <div className="search-container">
         <form action="/action_page.php">
