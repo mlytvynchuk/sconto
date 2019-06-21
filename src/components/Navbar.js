@@ -75,7 +75,9 @@ export default class Navbar extends Component {
                         handleSearchButtonClick={this.props.handleSearchButtonClick} 
                         handleModalToggle={this.handleModalToggle} />
                 </LightBox>
+                {this.props.isAuthenticated ? (
                   <UserProfile isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle} />
+                ): null}
               </div>
           </div>
         </nav>

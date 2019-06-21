@@ -1,42 +1,65 @@
 import React, { Component } from 'react'
 import '../assets/css/login.css';
+import { authLogin } from '../actions/authActions';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom'
+import * as actions from "../actions/authActions"
 class Login extends Component {
+    state = {
+        email: "",
+        password: ""
+    }
+    handleInput(e){
+        this.setState({
+            [e.target.name]: String([e.target.value])
+        })
+    }
+    handleSubmit(e){
+        e.preventDefault();
+        const {email, password} = this.state;
+        console.log(email,password);
+        this.props.onAuth(email, password);
+        if(!this.props.error){
+            //this.props.history.push('/');
+        }
+    
+    
+    }
     render() {
+        let errorMessage = null;
+        if(this.props.error){
+            errorMessage = (
+                <p>{this.props.error.message}</p>
+            )
+        }
         return (
-           <div className="login-body">
-                <div class="login-container">
-        <div class="login-wrapper">
-            <form action="" class="login-form">
+            <div className="login-body">
+               
+                    <div className="login-container">
+        <div className="login-wrapper">
+            <form className="login-form" onSubmit={(e) => this.handleSubmit(e)}>
 
-                <div class="title-container">
-                    <h2 class="title-text">
-                                Створення користувача
+                <div className="title-container">
+                    <h2 className="title-text">
+                                Вхід у кабінет
                             </h2>
                 </div>
-                <div class="input-container">
-                    <input type="text" class="input focus hover" placeholder="Ваш username" name="username" />
+
+                <div className="input-container">
+                    <input type="text" className="input focus hover" placeholder="Ваш email" name="email" onChange={(e) => this.handleInput(e)} />
                 </div>
-                <div class="input-container">
-                    <input type="text" class="input focus hover" placeholder="Ваше ім'я" name="name" />
-                </div>
-                <div class="input-container">
-                    <input type="text" class="input focus hover" placeholder="Ваше Прізвище" name="lastname" />
-                </div>
-                <div class="input-container">
-                    <input type="text" class="input focus hover" placeholder="Ваш email" name="email" />
-                </div>
-                <div class="input-container">
-                    <input type="password" class="input focus hover" placeholder="Ваш пароль" name="password" />
+                <div className="input-container">
+                    <input type="password" className="input focus hover" placeholder="Ваш пароль" name="password" onChange={(e) => this.handleInput(e)} />
                 </div>
 
-                <div class="button-container">
-                    <input type="submit" class="button-submit " value="Увійти" />
+                <div className="button-container">
+                    <input type="submit" className="button-submit " value="Увійти" onClick={(e) => this.handleSubmit(e)} />
                 </div>
 
-                <div class="text-container">
-                    <span class="text-before-sign-up">
+                <div className="text-container">
+                    <span className="text-before-sign-up">
                                     Немає акаунту? 
-                                    <a href="./signUpForm/signUpForm.html"> Зареєструватись</a>
+                                    <Link to="/register/"> Зареєструватись</Link>
                                 </span>
                 </div>
 
@@ -44,8 +67,18 @@ class Login extends Component {
         </div>
 
     </div>
-           </div>
+            </div>
+            
         )
     }
 }
-export default Login;
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.token !==null,
+    error: state.auth.error,
+    loading: state.auth.loading,
+})
+ const mapDispatchToProps = (dispatch) => ({
+     onAuth: (email, password) => dispatch(actions.authSignup(email,password))
+ })   
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

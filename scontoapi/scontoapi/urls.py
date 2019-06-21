@@ -23,7 +23,8 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('usercreate/', UserCreate.as_view(), name='account-create'),
     path('', include('discounts.urls')),
-    
+    path('rest-auth/', include('rest_auth.urls'))
+
 ]\
     +static(settings.STATIC_URL, document_root = settings.STATIC_URL)\
     +static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
