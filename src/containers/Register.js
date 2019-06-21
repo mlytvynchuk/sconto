@@ -41,7 +41,7 @@ class Login extends Component {
 
                 <div className="title-container">
                     <h2 className="title-text">
-                                Вхід у кабінет
+                                Реєстрація
                             </h2>
                 </div>
 
@@ -53,13 +53,13 @@ class Login extends Component {
                 </div>
 
                 <div className="button-container">
-                    <input type="submit" className="button-submit " value="Увійти" onClick={(e) => this.handleSubmit(e)} />
+                    <input type="submit" className="button-submit " value="Зареєструватись" onClick={(e) => this.handleSubmit(e)} />
                 </div>
 
                 <div className="text-container">
                     <span className="text-before-sign-up">
-                                    Немає акаунту? 
-                                    <Link to="/register/"> Зареєструватись</Link>
+                                    Маєш аккаунт? 
+                                    <Link to="/login/"> Увійти</Link>
                                 </span>
                 </div>
 
