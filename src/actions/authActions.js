@@ -94,7 +94,7 @@ export const authCheckState = () =>{
                 
                 dispatch(authSuccess(token));
                 dispatch(checkAuthTimeout(3600));
-                alert(expirationDate);
+                
             }
         }
     }

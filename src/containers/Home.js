@@ -116,7 +116,7 @@ const mapDispatchToProps = dispatch => ({
   fetchTimeSlot: time => dispatch(fetchTimeSlot(time)),
   onAddedToLikes: (id) => dispatch(addedToFavorites(id)),
   onTryAutoSignup: () => dispatch(authActions.authCheckState()),
-  
+  logout: () => dispatch(authActions.logout())
 });
 
 export default connect(

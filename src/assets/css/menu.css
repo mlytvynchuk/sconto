@@ -218,3 +218,9 @@ header .search-button {
 ul {
   margin-bottom: 0;
 }
+.c-pointer{
+  cursor: pointer;
+}
+a{
+  color: black;
+}

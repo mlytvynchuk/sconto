@@ -3,6 +3,7 @@ import LightBox from './LightBox';
 import FilterMenu from './FilterMenu';
 import UserProfile from './UserProfile';
 import '../assets/css/modal.css';
+import {Link} from 'react-router-dom'
 export default class Navbar extends Component {
   state = {
     isOpenModal: false,
@@ -11,7 +12,20 @@ export default class Navbar extends Component {
   handleModalToggle = () => {
     this.setState( prevState => ({isOpenModal: !prevState.isOpenModal}));
   };
-
+  loginHandlers = () => {
+    if (!this.props.isAuthenticated){
+      return(
+        <Link to='/login/'>Увійти</Link>
+      )
+    }else{
+      return(
+        <React.Fragment>
+        <UserProfile {...this.props} isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle} />
+        
+      </React.Fragment>
+      )
+    }
+  }
   render() {
     return (
       <header>
@@ -62,7 +76,7 @@ export default class Navbar extends Component {
             </div>
           </div>
           <div>
-            <div className="d-flex">
+            <div className="d-flex align-items-center">
               <LightBox isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle}
                 button={(
                     <div className="navbar-toggler" >
@@ -75,9 +89,8 @@ export default class Navbar extends Component {
                         handleSearchButtonClick={this.props.handleSearchButtonClick} 
                         handleModalToggle={this.handleModalToggle} />
                 </LightBox>
-                {this.props.isAuthenticated ? (
-                  <UserProfile isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle} />
-                ): null}
+                {this.loginHandlers()}
+                
               </div>
           </div>
         </nav>
