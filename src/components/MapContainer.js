@@ -9,13 +9,12 @@ const mapStyles = {
   };
   
   export class MapContainer extends Component {
-
+/* main block */
     state = {
       showingInfoWindow: false,  
       activeMarker: {},          
-      selectedPlace: {}          
+      selectedPlace: {},         
     };
-  
 
     onMarkerClick = (props, marker, e) =>
     this.setState({
@@ -32,7 +31,6 @@ const mapStyles = {
         });
       }
     };
-
 
     render() {
       return (
@@ -62,5 +60,5 @@ const mapStyles = {
   }
   
   export default GoogleApiWrapper({
-    apiKey: 'AIzaSyDtBigezuNJFGiAIh-gPgyvISSgeuBjqeo'
+    apiKey: 'AIzaSyBQFvSM_nZ5O6uD59Sa1rDZURuWgUSa2D0'
   })(MapContainer);

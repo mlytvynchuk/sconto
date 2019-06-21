@@ -73,12 +73,11 @@ export default function discountReducer(state = initialState, action) {
     case ADDED_TO_LIKES: {
       const discountId = action.payload;
       const likedElem = state.discounts.find(discount =>  discount.id === discountId);
-      const copyFavorites = [...state.favorites, likedElem];
       const checkId = state.favorites.find(discount => discount.id === likedElem.id);
       if (!checkId){
         return {
           ...state,
-          favorites: copyFavorites
+          favorites: [...state.favorites, likedElem]
         }
       }
       return state;

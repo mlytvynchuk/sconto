@@ -55,7 +55,7 @@ handleModalToggle = () => {
 
       
     return discountCopy.map(discount => (
-      <LightBox id="modalForDetails" isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle}
+      <LightBox isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle}
         button={
           <Discount
             key={discount.id}
