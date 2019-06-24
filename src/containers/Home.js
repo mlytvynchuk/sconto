@@ -65,8 +65,7 @@ class Home extends Component {
             details={discount.details} 
             cafe={discount.cafe} 
             image={discount.image}
-            location={discount.location}
-            overlay={discount.overlay} />
+            location={discount.location} />
       </LightBox1>
     ));
   };
@@ -105,7 +104,7 @@ const mapDispatchToProps = dispatch => ({
   handleTimeChange: event => dispatch(addTimeSlot(event)),
   fetchDiscounts: () => dispatch(fetchDiscounts()),
   handleSearchButtonClick: (food, time) =>
-    dispatch(handleSearchButtonClick(food, time)),
+  dispatch(handleSearchButtonClick(food, time)),
   fetchTimeSlot: time => dispatch(fetchTimeSlot(time)),
   onAddedToLikes: (id) => dispatch(addedToFavorites(id)),
   onTryAutoSignup: () => dispatch(authActions.authCheckState()),

@@ -45,8 +45,6 @@ export default class Navbar extends Component {
                       <div onClick={() => this.props.logout()} className="navbar-brand" >
                             <span className="navbar-toggler-text c-pointer">Вийти</span>
                         </div>
-     
-
                       </li>
                     </ul>
                   </li>

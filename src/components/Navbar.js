@@ -5,13 +5,7 @@ import UserProfile from './UserProfile';
 import '../assets/css/modal.css';
 import {Link} from 'react-router-dom'
 export default class Navbar extends Component {
-  state = {
-    isOpenModal: false,
-  };
   
-  handleModalToggle = () => {
-    this.setState( prevState => ({isOpenModal: !prevState.isOpenModal}));
-  };
   loginHandlers = () => {
     if (!this.props.isAuthenticated){
       return(
