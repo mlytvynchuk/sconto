@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Navbar from "../components/Navbar";
 import Discount from "../components/Discount";
 import DiscountDetails from '../components/DiscountDetails';
-import LightBox from '../components/LightBox';
+import LightBox1 from '../components/LightBox1';
 import { connect } from "react-redux";
 import * as authActions from '../actions/authActions'
 
@@ -15,17 +15,6 @@ import {
   addedToFavorites
 } from "../actions/discountActions";
 class Home extends Component {
-  componentDidMount(){
-    this.props.onTryAutoSignup();
-  }
-  state = {
-    isOpenModal: false,
-  };
-  
-handleModalToggle = () => {
-    this.setState( prevState => ({isOpenModal: !prevState.isOpenModal}));
-  };
-
   componentDidMount() {
     this.props.fetchDiscounts();
     this.getTime();
@@ -59,7 +48,7 @@ handleModalToggle = () => {
 
       
     return discountCopy.map(discount => (
-      <LightBox  isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle}
+      <LightBox1 
         button={
           <Discount
             key={discount.id}
@@ -75,8 +64,10 @@ handleModalToggle = () => {
             title={discount.title} 
             details={discount.details} 
             cafe={discount.cafe} 
-            image={discount.image} />
-      </LightBox>
+            image={discount.image}
+            location={discount.location}
+            overlay={discount.overlay} />
+      </LightBox1>
     ));
   };
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import LightBox from './LightBox';
+import LightBox1 from './LightBox1';
 import FilterMenu from './FilterMenu';
 import UserProfile from './UserProfile';
 import '../assets/css/modal.css';
@@ -76,8 +76,8 @@ export default class Navbar extends Component {
             </div>
           </div>
           <div>
-            <div className="d-flex align-items-center">
-              <LightBox isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle}
+            <div className="d-flex">
+              <LightBox1 
                 button={(
                     <div className="navbar-toggler" >
                       <span className="navbar-toggler-text">Фільтри</span>
@@ -86,11 +86,9 @@ export default class Navbar extends Component {
                 )}>
                       <FilterMenu 
                         timeSlot={this.props.timeSlot} 
-                        handleSearchButtonClick={this.props.handleSearchButtonClick} 
-                        handleModalToggle={this.handleModalToggle} />
-                </LightBox>
-                {this.loginHandlers()}
-                
+                        handleSearchButtonClick={this.props.handleSearchButtonClick} />
+                </LightBox1>
+                  <UserProfile />
               </div>
           </div>
         </nav>

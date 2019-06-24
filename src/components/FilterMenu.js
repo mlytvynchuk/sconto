@@ -1,14 +1,15 @@
 import React from "react";
+import '../assets/css/indent.css';
+
 const FilterMenu = ({
   handleSearchButtonClick,
   timeSlot,
-  handleModalToggle
 }) => {
   const foodRef = React.createRef();
   const timeRef = React.createRef();
 
   return (
-    <div>
+    <div className="indent">
       <h4>Пошук</h4>
       <div className="search-container">
         <form action="/action_page.php">
@@ -47,7 +48,6 @@ const FilterMenu = ({
               foodRef.current.value,
               timeRef.current.value
             );
-            handleModalToggle();
           }}
         >
           Шукати
