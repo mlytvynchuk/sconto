@@ -105,7 +105,7 @@ const mapStateToProps = state => ({
   error: state.discounts.error,
   foodCategory: state.discounts.foodCategory,
   timeSlot: state.discounts.timeSlot,
-  isAuthenticated: state.auth.token !==null
+  isAuthenticated: state.auth.token !==null,
   likes: state.discounts.favorites,
 });
 
