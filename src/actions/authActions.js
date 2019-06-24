@@ -58,7 +58,7 @@ export const authLogin = (email, password) => {
 export const authSignup = (email, password) => {
     return dispatch => {
         dispatch(authStart());
-        return axios.post('http://localhost:8000/usercreate/',{
+        return axios.post('http://localhost:8000/users/',{
             email: email,
             password: password,
         })

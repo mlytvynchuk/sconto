@@ -21,8 +21,9 @@ from accounts.views import UserCreate
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('usercreate/', UserCreate.as_view(), name='account-create'),
+    
     path('', include('discounts.urls')),
+    path('users/', include('accounts.urls')),
     path('rest-auth/', include('rest_auth.urls'))
 
 ]\
