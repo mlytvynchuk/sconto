@@ -3,8 +3,16 @@ import LightBox1 from './LightBox1';
 import FilterMenu from './FilterMenu';
 import UserProfile from './UserProfile';
 import '../assets/css/modal.css';
-import {Link} from 'react-router-dom'
-export default class Navbar extends Component {
+import {Link} from 'react-router-dom';
+class Navbar extends Component {
+  state = {
+    search: "",
+  }
+
+  handleSearchInput = e => {
+    console.log(" evnt - "+ e.target.value);
+    this.setState({search: e.target.value});
+  }
   
   loginHandlers = () => {
     if (!this.props.isAuthenticated){
@@ -19,8 +27,25 @@ export default class Navbar extends Component {
       </React.Fragment>
       )
     }
+  };
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log(nextProps);
+    console.log(`prevState - ${prevState.search} - nextProps - ${nextProps.search}`);
+    if( nextProps.search !== prevState.search && nextProps.search !== "" )
+        return {
+          search: nextProps.search
+        }
+    else 
+      return null;
   }
+  
+
   render() {
+    const { foodCategory, timeSlot, handleTimeChange, handleFoodChange, handleSearchButtonClick } = this.props;
+    const { search } = this.state;
+
+    console.log(this.props.search );
     return (
       <header>
         <nav className="navbar navbar-expand-lg navbar-light bg-white">
@@ -33,40 +58,42 @@ export default class Navbar extends Component {
             <ul className="navbar-nav">
               <li className="filter-item">
                 <h4>Їжа</h4>
-                <select onChange={this.props.handleFoodChange}>
-                  <option defaultValue="null" >
+                <select onChange={handleFoodChange} value={foodCategory}>
+                  <option value="null" >
                     Обери смаколики
                   </option>
-                  <option value={"Фастфуд"}>Фастфуд</option>
-                  <option value={"Українська кухня"}>Українська кухня</option>
-                  <option value={"Кава"}>Кава</option>
+                  <option value="Фастфуд">Фастфуд</option>
+                  <option value="Українська кухня">Українська кухня</option>
+                  <option value="Кава">Кава</option>
                 </select>
               </li>
               <li className="filter-item">
                 <h5>Час доби</h5>
-                <select defaultValue={this.props.timeSlot} onChange={this.props.handleTimeChange}>
+                <select value={timeSlot} onChange={handleTimeChange}>
                   <option value="null">
                     
                     Обери час
                   </option>
-                  <option value={"Сніданок"}>Сніданок</option>
-                  <option value={"Обід"}>Обід</option>
-                  <option value={"Вечеря"}>Вечеря</option>
+                  <option value="Сніданок">Сніданок</option>
+                  <option value="Обід">Обід</option>
+                  <option value="Вечеря">Вечеря</option>
                 </select>
               </li>
             </ul>
             <div className="search-container">
-              <form >
+              
                 <input
                   className="search-input"
                   type="text"
                   placeholder="Нажми й шукай"
                   name="search"
+                  value={search}
+                  onChange={e => {this.handleSearchInput(e)}}
                 />
-                <button className="search-button" type="submit">
+                <button className="search-button" onClick={(event => {handleSearchButtonClick(search, foodCategory, timeSlot); event.preventDefault()})}>
                   <i className="fa fa-search" />
                 </button>
-              </form>
+              
             </div>
           </div>
           <div>
@@ -80,7 +107,9 @@ export default class Navbar extends Component {
                 )}>
                       <FilterMenu 
                         timeSlot={this.props.timeSlot} 
-                        handleSearchButtonClick={this.props.handleSearchButtonClick} />
+                        handleSearchButtonClick={handleSearchButtonClick}
+                        search={search}
+                        foodCategory={foodCategory} />
                 </LightBox1>
                   <UserProfile />
               </div>
@@ -91,3 +120,4 @@ export default class Navbar extends Component {
     );
   }
 }
+export default Navbar;

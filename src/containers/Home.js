@@ -32,23 +32,33 @@ class Home extends Component {
     }
   };
 
+  searchDiscounts = () => {
+    const { search, discounts } = this.props;
+    const searchToLower = search.toLowerCase();
+
+    return discounts.filter(
+      discount =>
+        discount.cafe.toLowerCase().indexOf(searchToLower) !== -1 ||
+        discount.title.toLowerCase().indexOf(searchToLower) !== -1
+    );
+  };
+
   filterDiscounts = () => {
-    const { discounts } = this.props;
     const { foodCategory, timeSlot } = this.props;
-    let discountCopy = [...discounts];
+    let discounts = [...this.searchDiscounts()];
 
     if (foodCategory && foodCategory !== "null")
-      discountCopy = discountCopy.filter(
+    discounts = discounts.filter(
         discount => discount.category === foodCategory
       );
     if (timeSlot && timeSlot !== "null")
-      discountCopy = discountCopy.filter(
+    discounts = discounts.filter(
         discount => discount.time === timeSlot
       );
-
-      
-    return discountCopy.map(discount => (
+    
+    return discounts.map(discount => (
       <LightBox1 
+        key={discount.id}
         button={
           <Discount
             key={discount.id}
@@ -78,7 +88,8 @@ class Home extends Component {
           handleFoodChange={this.props.handleFoodChange}
           handleTimeChange={this.props.handleTimeChange}
           handleSearchButtonClick={this.props.handleSearchButtonClick}
-          
+          foodCategory={this.props.foodCategory}
+          search={this.props.search}
         />
         
         <div className="main-container">
@@ -97,14 +108,15 @@ const mapStateToProps = state => ({
   timeSlot: state.discounts.timeSlot,
   isAuthenticated: state.auth.token !==null,
   likes: state.discounts.favorites,
+  search: state.discounts.search,
 });
 
 const mapDispatchToProps = dispatch => ({
   handleFoodChange: event => dispatch(addFoodCategory(event)),
   handleTimeChange: event => dispatch(addTimeSlot(event)),
   fetchDiscounts: () => dispatch(fetchDiscounts()),
-  handleSearchButtonClick: (food, time) =>
-  dispatch(handleSearchButtonClick(food, time)),
+  handleSearchButtonClick: (search, food, time) =>
+  dispatch(handleSearchButtonClick(search, food, time)),
   fetchTimeSlot: time => dispatch(fetchTimeSlot(time)),
   onAddedToLikes: (id) => dispatch(addedToFavorites(id)),
   onTryAutoSignup: () => dispatch(authActions.authCheckState()),

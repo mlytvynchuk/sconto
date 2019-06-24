@@ -73,12 +73,13 @@ export function fetchTimeSlot(time) {
   };
 }
 
-export function handleSearchButtonClick(foodCategory, timeSlot) {
+export function handleSearchButtonClick( search= "", foodCategory = "", timeSlot = "") {
   return {
     type: HANDLE_SEARCH_BUTTON_CLICK,
     payload: {
       timeSlot,
-      foodCategory
+      foodCategory,
+      search,
     }
   };
 }
