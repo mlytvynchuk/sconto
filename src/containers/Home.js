@@ -4,6 +4,8 @@ import Discount from "../components/Discount";
 import DiscountDetails from '../components/DiscountDetails';
 import LightBox from '../components/LightBox';
 import { connect } from "react-redux";
+import * as authActions from '../actions/authActions'
+
 import {
   fetchDiscounts,
   addFoodCategory,
@@ -13,7 +15,9 @@ import {
   addedToFavorites
 } from "../actions/discountActions";
 class Home extends Component {
-
+  componentDidMount(){
+    this.props.onTryAutoSignup();
+  }
   state = {
     isOpenModal: false,
   };
@@ -79,7 +83,7 @@ handleModalToggle = () => {
   render() {
     return (
       <div>
-        <Navbar
+        <Navbar {...this.props}
           timeSlot={this.props.timeSlot}
           handleFoodChange={this.props.handleFoodChange}
           handleTimeChange={this.props.handleTimeChange}
@@ -101,6 +105,7 @@ const mapStateToProps = state => ({
   error: state.discounts.error,
   foodCategory: state.discounts.foodCategory,
   timeSlot: state.discounts.timeSlot,
+  isAuthenticated: state.auth.token !==null
   likes: state.discounts.favorites,
 });
 
@@ -111,8 +116,9 @@ const mapDispatchToProps = dispatch => ({
   handleSearchButtonClick: (food, time) =>
     dispatch(handleSearchButtonClick(food, time)),
   fetchTimeSlot: time => dispatch(fetchTimeSlot(time)),
-  onAddedToLikes: (id) => dispatch(addedToFavorites(id))
-
+  onAddedToLikes: (id) => dispatch(addedToFavorites(id)),
+  onTryAutoSignup: () => dispatch(authActions.authCheckState()),
+  logout: () => dispatch(authActions.logout())
 });
 
 export default connect(
