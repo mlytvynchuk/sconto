@@ -20,7 +20,7 @@ class Login extends Component {
         console.log(email,password);
         this.props.onAuth(email, password);
         if(!this.props.error){
-            //this.props.history.push('/');
+            this.props.history.push('/login/');
         }
     
     
