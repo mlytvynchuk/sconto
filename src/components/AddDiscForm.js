@@ -18,7 +18,6 @@ const AddDisc = () => {
                     <label for="add-location"><b>Розташування</b></label><br/>
                     <input type="text" placeholder="Введіть назву вулиці" name="add-location" required />
                     <br/>
-                    <br/>
                     <label for="add-photo"><b>Додати зображення</b></label><br/>
                     <input type="file" name="photo" multiple accept="image/*,image/jpeg" />
                 </div>
