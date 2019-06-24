@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Navbar from "../components/Navbar";
 import Discount from "../components/Discount";
 import DiscountDetails from '../components/DiscountDetails';
-import LightBox from '../components/LightBox';
+import LightBox1 from '../components/LightBox1';
 import { connect } from "react-redux";
 import {
   fetchDiscounts,
@@ -13,15 +13,6 @@ import {
   addedToFavorites
 } from "../actions/discountActions";
 class Home extends Component {
-
-  state = {
-    isOpenModal: false,
-  };
-  
-handleModalToggle = () => {
-    this.setState( prevState => ({isOpenModal: !prevState.isOpenModal}));
-  };
-
   componentDidMount() {
     this.props.fetchDiscounts();
     this.getTime();
@@ -55,7 +46,7 @@ handleModalToggle = () => {
 
       
     return discountCopy.map(discount => (
-      <LightBox isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle}
+      <LightBox1 
         button={
           <Discount
             key={discount.id}
@@ -74,7 +65,7 @@ handleModalToggle = () => {
             image={discount.image}
             location={discount.location}
             overlay={discount.overlay} />
-      </LightBox>
+      </LightBox1>
     ));
   };
 

@@ -4,7 +4,6 @@ import '../assets/css/indent.css';
 const FilterMenu = ({
   handleSearchButtonClick,
   timeSlot,
-  handleModalToggle
 }) => {
   const foodRef = React.createRef();
   const timeRef = React.createRef();
@@ -49,7 +48,6 @@ const FilterMenu = ({
               foodRef.current.value,
               timeRef.current.value
             );
-            handleModalToggle();
           }}
         >
           Шукати
