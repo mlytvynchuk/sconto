@@ -14,6 +14,7 @@ import {
   fetchTimeSlot,
   addedToFavorites
 } from "../actions/discountActions";
+import { getUser } from "../actions/userActions";
 class Home extends Component {
   componentDidMount(){
     this.props.onTryAutoSignup();
@@ -29,6 +30,7 @@ handleModalToggle = () => {
   componentDidMount() {
     this.props.fetchDiscounts();
     this.getTime();
+    this.props.getUser();
   }
 
   getTime = () => {
@@ -118,7 +120,8 @@ const mapDispatchToProps = dispatch => ({
   fetchTimeSlot: time => dispatch(fetchTimeSlot(time)),
   onAddedToLikes: (id) => dispatch(addedToFavorites(id)),
   onTryAutoSignup: () => dispatch(authActions.authCheckState()),
-  logout: () => dispatch(authActions.logout())
+  logout: () => dispatch(authActions.logout()),
+  getUser: () => dispatch(getUser),
 });
 
 export default connect(

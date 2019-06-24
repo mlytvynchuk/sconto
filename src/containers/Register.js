@@ -22,8 +22,6 @@ class Login extends Component {
         if(!this.props.error){
             this.props.history.push('/login/');
         }
-    
-    
     }
     render() {
         let errorMessage = null;

@@ -27,12 +27,12 @@ class UserViewSet(viewsets.ViewSet):
         serializer = UserSerializer(queryset, many=True)
         return Response(serializer.data)
 
-    def retrieve(self, request, pk=None):
-        authentication_classes = (TokenAuthentication,)
-        queryset = get_user_model().objects.all()
-        user = get_object_or_404(queryset, pk=request.user.pk)
-        serializer = UserSerializer(user)
-        return Response(serializer.data)
+    # def retrieve(self, request):
+    #     authentication_classes = (TokenAuthentication,)
+    #     queryset = get_user_model().objects.all()
+    #     user = get_object_or_404(queryset, pk=request.user.pk)
+    #     serializer = UserSerializer(user)
+    #     return Response(serializer.data)
 
     def create(self, request):
         serializer = UserSerializer(data=request.data)
@@ -44,3 +44,11 @@ class UserViewSet(viewsets.ViewSet):
                 json['token'] = token.key
                 return Response(json, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ProfileView(viewsets.ViewSet):
+    def get(self,request):
+        authentication_classes = (TokenAuthentication,)
+        queryset = get_user_model().objects.all()
+        user = get_object_or_404(queryset, pk=request.user.pk)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
