@@ -70,7 +70,7 @@ handleModalToggle = () => {
             image={discount.image}
             height={discount.height}
           />}>
-        <DiscountDetails 
+        <DiscountDetails onAddedToLikes={() => this.props.onAddedToLikes(discount.id)}
             id={discount.id} 
             title={discount.title} 
             details={discount.details} 
@@ -88,8 +88,9 @@ handleModalToggle = () => {
           handleFoodChange={this.props.handleFoodChange}
           handleTimeChange={this.props.handleTimeChange}
           handleSearchButtonClick={this.props.handleSearchButtonClick}
-          addedToFavorites={this.props.onAddedToLikes}
+          
         />
+        
         <div className="main-container">
           <div className="grid">{this.filterDiscounts()}</div>
         </div>
@@ -105,6 +106,7 @@ const mapStateToProps = state => ({
   foodCategory: state.discounts.foodCategory,
   timeSlot: state.discounts.timeSlot,
   isAuthenticated: state.auth.token !==null
+  likes: state.discounts.favorites,
 });
 
 const mapDispatchToProps = dispatch => ({

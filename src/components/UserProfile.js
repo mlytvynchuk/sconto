@@ -6,7 +6,7 @@ import manPhoto from '../assets/img/man.png';
 import userPhoto from '../assets/img/user.png';
 import '../assets/css/modal.css';
 import '../assets/css/menu.css';
- 
+
 export default class Navbar extends Component {
     state = {
       isOpenModal: false,

@@ -9,7 +9,8 @@ const DiscountDetails = (props) => {
             </div>
             <div className="cafe">
                 <h2>{props.cafe}</h2>
-                <button> Like </button>
+                
+                <button onClick={props.onAddedToLikes}> Like </button>
             </div>
             <div className="title">
                 <h2>{props.title}</h2>

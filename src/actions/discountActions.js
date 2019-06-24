@@ -83,16 +83,16 @@ export function handleSearchButtonClick(foodCategory, timeSlot) {
   };
 }
 
-export function addedToFavorites(cafeId) {
+export function addedToFavorites(discountId) {
   return {
     type: ADDED_TO_LIKES,
-    payload: cafeId
+    payload: discountId
   };
 }
 
-export function deleteFromLikes(cafeId) {
+export function deleteFromLikes(discountId) {
   return {
   type: DELETE_FROM_LIKES,
-  payload: cafeId 
+  payload: discountId 
   };
 }
