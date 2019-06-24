@@ -1,31 +1,44 @@
 import React from 'react'
+import '../assets/css/discount-details.css'
+import coupon from '../assets/img/voucher.png'
 
-const DiscountDetails = (props) => {
-    
-    return (
-        <div>
-            <div className="image-container">
-                <img style = {{width:"100%"}} src={props.image} alt=""/>
-            </div>
-            <div className="cafe">
-                <h2>{props.cafe}</h2>
-                
-                <button onClick={props.onAddedToLikes}> Like </button>
-            </div>
-            <div className="title">
-                <h2>{props.title}</h2>
-            </div>
-            <div>
-                <h3>Детальна інформація</h3>
-                <div className="details">
-                    {props.details}
+class DiscountDetails extends React.Component {
+
+    raiseInvoiceClicked(){
+        const url = 'http://localhost:3000/map';
+        window.open(url, '_blank');
+    }
+
+    render(){
+        return (
+            <div className="discount">
+                <div className="image-container">
+                    <img className="img1" src={this.props.image} alt=""/>
                 </div>
-                <div className="map-container">
-                    Here will be map
+
+                <div className="cafe">
+                    <h2>{this.props.cafe}</h2>
                 </div>
+                <div className="description">
+                    <div className="title">
+                        <img src={coupon} alt="coupon"/>
+                    <h3>{this.props.title}</h3>
+                    </div>
+
+                    <div className="details">
+                        <p>Lorem ipsum bibendum porta donec metus sit risus nulla nec orci sagittis nibh adipiscing nam. Lectus non, rutrum ut leo urna enim proin sem nibh, urna.
+                        </p>
+                    </div>
+
+                    <div className="map-container">
+                        <button className="btn" onClick={this.raiseInvoiceClicked}> </button>
+                        <p>{this.props.location}</p>
+                    </div>
+                </div>
+                    <button className="btn-like" onClick={this.props.onAddedToLikes}> Like </button>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default DiscountDetails;

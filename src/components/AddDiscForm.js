@@ -1,7 +1,9 @@
 import React from 'react';
+import '../assets/css/indent.css';
+
 const AddDisc = () => {
     return (
-        <div>
+        <div className="indent">
             <h2>Додайте свою пропозицію</h2>
             <form action=''>
                 <div className='search-container'>
@@ -20,7 +22,6 @@ const AddDisc = () => {
                     <label for="add-photo"><b>Додати зображення</b></label><br/>
                     <input type="file" name="photo" multiple accept="image/*,image/jpeg" />
                 </div>
-                <br/>
                 <br/>
                 <button className="btn btn-primary" type='submit'>Додати</button>
                            
