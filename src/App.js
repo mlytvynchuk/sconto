@@ -1,5 +1,5 @@
 import React from "react";
-
+//import { connect } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./containers/Home";
 import Login from "./containers/Login";
@@ -17,6 +17,8 @@ function App() {
     </Router>
   );
 }
+export default App;
+/*
 const mapStateToProps = state => ({
   discounts: state.discounts.discounts,
   loading: state.discounts.loading,
@@ -37,5 +39,5 @@ const mapDispatchToProps = dispatch => ({
   onTryAutoSignup: () => dispatch(authActions.authCheckState())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);*/
 

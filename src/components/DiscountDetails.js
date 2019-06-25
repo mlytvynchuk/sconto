@@ -1,7 +1,8 @@
 import React from 'react'
 import '../assets/css/discount-details.css'
 import coupon from '../assets/img/voucher.png'
-
+import {Link} from 'react-router-dom'
+import { MapContainer } from './MapContainer';
 class DiscountDetails extends React.Component {
 
     raiseInvoiceClicked(){
@@ -31,7 +32,13 @@ class DiscountDetails extends React.Component {
                     </div>
 
                     <div className="map-container">
-                        <button className="btn" onClick={this.raiseInvoiceClicked}> </button>
+                        <Link to={{pathname: '/map/',
+                            state: {
+                                location: this.props.location,
+                                cafe: this.props.cafe
+                            }
+                        }}>
+                        <button className="btn"> </button></Link>   
                         <p>{this.props.location}</p>
                     </div>
                 </div>

@@ -1,7 +1,8 @@
-/* npm install --save google-maps-react */
-
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
+import Geocode from 'react-geocode';
+Geocode.setApiKey("AIzaSyBQFvSM_nZ5O6uD59Sa1rDZURuWgUSa2D0");
+Geocode.enableDebug();
 
 const mapStyles = {
     width: '100%',
@@ -9,21 +10,28 @@ const mapStyles = {
   };
   
   export class MapContainer extends Component {
-/* main block */
+
     state = {
       showingInfoWindow: false,  
       activeMarker: {},          
-      selectedPlace: {},         
+      selectedPlace: {},
+      loc: null,          
     };
 
-    onMarkerClick = (props, marker, e) =>
+    componentDidMount() {
+      this.getCoordinates().then(loc => {
+        this.setState({ loc });
+      });
+    }
+
+    onMarkerClick = (props, marker ) =>
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true
     });
 
-    onClose = props => {
+    onClose = () => {
       if (this.state.showingInfoWindow) {
         this.setState({
           showingInfoWindow: false,
@@ -32,17 +40,33 @@ const mapStyles = {
       }
     };
 
+    getCoordinates() {
+      return Geocode.fromAddress(this.props.location.state.location).then(
+        response => {
+          const loc = response.results[0].geometry.location;
+          console.log(loc.lat, loc.lng);
+          return loc;
+        },
+        error => {
+          console.error(error);
+        }
+      ); 
+    }
+
     render() {
+      if (!this.state.loc) {
+        return <span>Loading...</span>
+      }
       return (
         <Map
           google={this.props.google}
           zoom={17}
           style={mapStyles}
-          initialCenter={{ lat: 49.808906, lng: 24.017221 }}
+          initialCenter={this.state.loc}
         >
           <Marker
           onClick={this.onMarkerClick}
-          name={'Here is our cafe'}
+          name={this.props.location.state.cafe}
         />
         <InfoWindow
           marker={this.state.activeMarker}
@@ -53,6 +77,7 @@ const mapStyles = {
             <h4>{this.state.selectedPlace.name}</h4>
           </div>
         </InfoWindow>
+        
         </Map>
 
       );
