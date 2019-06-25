@@ -19,12 +19,7 @@ class Login extends Component {
         const {email, password} = this.state;
         console.log(email,password);
         this.props.onAuth(email, password);
-        if(this.props.isAuthenticated){ 
-            this.props.history.push('/');
-        }
-        else{
-            alert("error")
-        }
+        this.props.history.push('/');
     }
     render() {
         let errorMessage = null;

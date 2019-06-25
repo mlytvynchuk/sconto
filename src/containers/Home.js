@@ -16,9 +16,6 @@ import {
 } from "../actions/discountActions";
 import { getUser } from "../actions/userActions";
 class Home extends Component {
-  componentDidMount(){
-    this.props.onTryAutoSignup();
-  }
   state = {
     isOpenModal: false,
   };
@@ -28,9 +25,12 @@ handleModalToggle = () => {
   };
 
   componentDidMount() {
+    this.props.onTryAutoSignup();
     this.props.fetchDiscounts();
     this.getTime();
-    this.props.getUser();
+    if (this.props.isAuthenticated){
+      this.props.getUser();
+    }
   }
 
   getTime = () => {
