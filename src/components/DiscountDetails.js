@@ -2,7 +2,6 @@ import React from 'react'
 import '../assets/css/discount-details.css'
 import coupon from '../assets/img/voucher.png'
 import {Link} from 'react-router-dom'
-import { MapContainer } from './MapContainer';
 class DiscountDetails extends React.Component {
 
     raiseInvoiceClicked(){

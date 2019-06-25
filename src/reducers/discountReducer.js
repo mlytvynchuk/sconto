@@ -11,8 +11,9 @@ import {
 
 const initialState = {
   discounts: [],
-  foodCategory: null,
+  foodCategory: "",
   timeSlot: "",
+  search: "",
   loading: false,
   error: null,
   favorites: []
@@ -61,12 +62,13 @@ export default function discountReducer(state = initialState, action) {
       };
     }
     case HANDLE_SEARCH_BUTTON_CLICK: {
-      const { foodCategory, timeSlot } = action.payload;
+      const { foodCategory, timeSlot, search } = action.payload;
 
       return {
         ...state,
         foodCategory,
-        timeSlot
+        timeSlot,
+        search
       };
     }
 
