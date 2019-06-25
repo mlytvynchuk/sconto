@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Navbar from "../components/Navbar";
 import Discount from "../components/Discount";
 import DiscountDetails from '../components/DiscountDetails';
-import LightBox from '../components/LightBox';
+import LightBox1 from '../components/LightBox1';
 import { connect } from "react-redux";
 import * as authActions from '../actions/authActions'
 
@@ -16,14 +16,13 @@ import {
 } from "../actions/discountActions";
 import { getUser } from "../actions/userActions";
 class Home extends Component {
-
-
   componentDidMount() {
     this.props.onTryAutoSignup();
     this.props.fetchDiscounts();
     this.getTime();
     if (this.props.isAuthenticated){
       this.props.getUser();
+      console.log("lol");
     }
   }
 
@@ -55,7 +54,8 @@ class Home extends Component {
 
       
     return discountCopy.map(discount => (
-      <LightBox
+
+      <LightBox1 
         button={
           <Discount
             key={discount.id}
@@ -71,8 +71,9 @@ class Home extends Component {
             title={discount.title} 
             details={discount.details} 
             cafe={discount.cafe} 
-            image={discount.image} />
-      </LightBox>
+            image={discount.image}
+            location={discount.location} />
+      </LightBox1>
     ));
   };
 
@@ -110,7 +111,7 @@ const mapDispatchToProps = dispatch => ({
   handleTimeChange: event => dispatch(addTimeSlot(event)),
   fetchDiscounts: () => dispatch(fetchDiscounts()),
   handleSearchButtonClick: (food, time) =>
-    dispatch(handleSearchButtonClick(food, time)),
+  dispatch(handleSearchButtonClick(food, time)),
   fetchTimeSlot: time => dispatch(fetchTimeSlot(time)),
   onAddedToLikes: (id) => dispatch(addedToFavorites(id)),
   onTryAutoSignup: () => dispatch(authActions.authCheckState()),

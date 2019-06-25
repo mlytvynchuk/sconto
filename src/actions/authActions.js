@@ -54,11 +54,36 @@ export const authLogin = (email, password) => {
         });
     }
 }
-
+export const getUserSuccess = (user) => {
+    return{
+        type: actionTypes.GET_USER,
+        payload: user
+    }
+}
+export const getUser = () => {
+    axios.defaults.headers = {
+        "Content-Type": "application/json",
+        Authorization: 'Token ' + localStorage.getItem('token')
+    }
+    return dispatch => {
+        return axios.get('http://localhost:8000/users/profile/')
+        .then(
+            res => {
+                localStorage.setItem('user', res.data[0].fields)
+                let user = res.data[0].fields;
+                dispatch(getUserSuccess(user));
+                
+            }
+        );
+    }
+    
+    
+    
+}
 export const authSignup = (email, password) => {
     return dispatch => {
         dispatch(authStart());
-        return axios.post('http://localhost:8000/users/',{
+        return axios.post('http://localhost:8000/usercreate/',{
             email: email,
             password: password,
         })

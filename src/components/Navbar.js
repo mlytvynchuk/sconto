@@ -1,17 +1,11 @@
 import React, { Component } from "react";
-import LightBox from './LightBox';
+import LightBox1 from './LightBox1';
 import FilterMenu from './FilterMenu';
 import UserProfile from './UserProfile';
 import '../assets/css/modal.css';
 import {Link} from 'react-router-dom'
 export default class Navbar extends Component {
-  state = {
-    isOpenModal: false,
-  };
   
-  handleModalToggle = () => {
-    this.setState( prevState => ({isOpenModal: !prevState.isOpenModal}));
-  };
   loginHandlers = () => {
     if (!this.props.isAuthenticated){
       return(
@@ -20,7 +14,7 @@ export default class Navbar extends Component {
     }else{
       return(
         <React.Fragment>
-        <UserProfile {...this.props} isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle} />
+        <UserProfile {...this.props} />
         
       </React.Fragment>
       )
@@ -76,8 +70,8 @@ export default class Navbar extends Component {
             </div>
           </div>
           <div>
-            <div className="d-flex align-items-center">
-              <LightBox isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle}
+            <div className="d-flex">
+              <LightBox1 
                 button={(
                     <div className="navbar-toggler" >
                       <span className="navbar-toggler-text">Фільтри</span>
@@ -86,11 +80,9 @@ export default class Navbar extends Component {
                 )}>
                       <FilterMenu 
                         timeSlot={this.props.timeSlot} 
-                        handleSearchButtonClick={this.props.handleSearchButtonClick} 
-                        handleModalToggle={this.handleModalToggle} />
-                </LightBox>
+                        handleSearchButtonClick={this.props.handleSearchButtonClick} />
+                </LightBox1>
                 {this.loginHandlers()}
-                
               </div>
           </div>
         </nav>

@@ -14,12 +14,21 @@ class Login extends Component {
             [e.target.name]: String([e.target.value])
         })
     }
+    componentWillReceiveProps(newProps){
+        if(newProps.isAuthenticated){
+            newProps.history.push('/');
+        }
+    }
     handleSubmit(e){
         e.preventDefault();
         const {email, password} = this.state;
         console.log(email,password);
         this.props.onAuth(email, password);
-        this.props.history.push('/');
+        if(this.props.isAuthenticated){
+            this.props.history.push('/');
+        }
+    
+    
     }
     render() {
         let errorMessage = null;
@@ -69,7 +78,7 @@ class Login extends Component {
     }
 }
 const mapStateToProps = (state) => ({
-    isAuthenticated: state.auth.token !==null,
+    isAuthenticated: state.auth.token != null,
     error: state.auth.error,
     loading: state.auth.loading,
 })
