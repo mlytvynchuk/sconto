@@ -66,7 +66,7 @@ class Home extends Component {
             image={discount.image}
             height={discount.height}
           />}>
-        <DiscountDetails onAddedToLikes={() => this.props.onAddedToLikes(discount.id)}
+        <DiscountDetails {...this.props} onAddedToLikes={() => this.props.onAddedToLikes(discount.id)}
             id={discount.id} 
             title={discount.title} 
             details={discount.details} 
