@@ -5,7 +5,8 @@ const FilterMenu = ({
   handleSearchButtonClick,
   timeSlot,
   foodCategory,
-  search
+  search,
+  handleSearchInput
 }) => {
   const foodRef = React.createRef();
   const timeRef = React.createRef();
@@ -16,7 +17,7 @@ const FilterMenu = ({
       <h4>Пошук</h4>
       <div className="search-container">
         <form action="#">
-          <input type="text" placeholder="Нажми й шукай" name="search" ref={searchRef} defaultValue={search} />
+          <input type="text" placeholder="Нажми й шукай" name="search" ref={searchRef} defaultValue={search}  onChange={(e) => handleSearchInput(e)}/>
         </form>
       </div>
       <br />

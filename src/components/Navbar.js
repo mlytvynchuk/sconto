@@ -10,7 +10,7 @@ class Navbar extends Component {
   }
 
   handleSearchInput = e => {
-    console.log(" evnt - "+ e.target.value);
+    console.log("evnt - "+ e.target.value);
     this.setState({search: e.target.value});
   }
   
@@ -29,16 +29,16 @@ class Navbar extends Component {
     }
   };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    console.log(nextProps);
-    console.log(`prevState - ${prevState.search} - nextProps - ${nextProps.search}`);
-    if( nextProps.search !== prevState.search && nextProps.search !== "" )
-        return {
-          search: nextProps.search
-        }
-    else 
-      return null;
-  }
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   console.log(nextProps);
+  //   console.log(`prevState - ${prevState.search} - nextProps - ${nextProps.search}`);
+  //   if( nextProps.search !== prevState.search && nextProps.search !== "" )
+  //       return {
+  //         search: nextProps.search
+  //       }
+  //   else 
+  //     return null;
+  // }
   
 
   render() {
@@ -81,7 +81,7 @@ class Navbar extends Component {
               </li>
             </ul>
             <div className="search-container">
-              
+
                 <input
                   className="search-input"
                   type="text"
@@ -107,6 +107,7 @@ class Navbar extends Component {
                 )}>
                       <FilterMenu 
                         timeSlot={this.props.timeSlot} 
+                        handleSearchInput = {this.handleSearchInput}
                         handleSearchButtonClick={handleSearchButtonClick}
                         search={search}
                         foodCategory={foodCategory} />
