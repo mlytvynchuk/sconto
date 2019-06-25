@@ -14,7 +14,7 @@ export default class Navbar extends Component {
     }else{
       return(
         <React.Fragment>
-        <UserProfile {...this.props} isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle} />
+        <UserProfile {...this.props} />
         
       </React.Fragment>
       )
@@ -82,7 +82,7 @@ export default class Navbar extends Component {
                         timeSlot={this.props.timeSlot} 
                         handleSearchButtonClick={this.props.handleSearchButtonClick} />
                 </LightBox1>
-                  <UserProfile />
+                {this.loginHandlers()}
               </div>
           </div>
         </nav>

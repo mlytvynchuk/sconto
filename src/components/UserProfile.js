@@ -42,6 +42,7 @@ export default class Navbar extends Component {
                         </LightBox1> </div>
                       </li>
                       <li>
+                        
                       <div onClick={() => this.props.logout()} className="navbar-brand" >
                             <span className="navbar-toggler-text c-pointer">Вийти</span>
                         </div>

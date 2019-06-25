@@ -14,10 +14,16 @@ import {
   fetchTimeSlot,
   addedToFavorites
 } from "../actions/discountActions";
+import { getUser } from "../actions/userActions";
 class Home extends Component {
   componentDidMount() {
+    this.props.onTryAutoSignup();
     this.props.fetchDiscounts();
     this.getTime();
+    if (this.props.isAuthenticated){
+      this.props.getUser();
+      console.log("lol");
+    }
   }
 
   getTime = () => {
@@ -48,6 +54,7 @@ class Home extends Component {
 
       
     return discountCopy.map(discount => (
+
       <LightBox1 
         button={
           <Discount
@@ -108,7 +115,8 @@ const mapDispatchToProps = dispatch => ({
   fetchTimeSlot: time => dispatch(fetchTimeSlot(time)),
   onAddedToLikes: (id) => dispatch(addedToFavorites(id)),
   onTryAutoSignup: () => dispatch(authActions.authCheckState()),
-  logout: () => dispatch(authActions.logout())
+  logout: () => dispatch(authActions.logout()),
+  getUser: () => dispatch(getUser),
 });
 
 export default connect(
