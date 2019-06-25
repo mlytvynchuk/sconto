@@ -16,13 +16,7 @@ import {
 } from "../actions/discountActions";
 import { getUser } from "../actions/userActions";
 class Home extends Component {
-  state = {
-    isOpenModal: false,
-  };
-  
-handleModalToggle = () => {
-    this.setState( prevState => ({isOpenModal: !prevState.isOpenModal}));
-  };
+
 
   componentDidMount() {
     this.props.onTryAutoSignup();
@@ -61,7 +55,7 @@ handleModalToggle = () => {
 
       
     return discountCopy.map(discount => (
-      <LightBox  isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle}
+      <LightBox
         button={
           <Discount
             key={discount.id}
