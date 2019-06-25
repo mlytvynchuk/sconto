@@ -6,8 +6,11 @@ import {
   SELECT_TIME_SLOT,
   HANDLE_SEARCH_BUTTON_CLICK,
   ADDED_TO_LIKES,
-  DELETE_FROM_LIKES
+  DELETE_FROM_LIKES,
+  FETCH_LIKES_SUCCESS
 } from "./index";
+import store from '../store/index'
+import Axios from "axios";
 
 export function fetchDiscountsBegin() {
   return {
@@ -83,6 +86,16 @@ export function handleSearchButtonClick( search= "", foodCategory = "", timeSlot
 }
 
 export function addedToFavorites(discountId) {
+    Axios.defaults.headers = {
+      'Content-Type': 'application/json',
+      Authorization: 'Token ' + localStorage.getItem('token'),
+      
+  }
+  Axios.post('http://localhost:8000/likes/', {
+    discount: discountId
+  }).then(res => {
+      console.log(res.data);
+  })
   return {
     type: ADDED_TO_LIKES,
     payload: discountId
@@ -94,4 +107,27 @@ export function deleteFromLikes(discountId) {
   type: DELETE_FROM_LIKES,
   payload: discountId 
   };
+}
+export function fetchFavoritesSuccess(favorites){
+  return {
+    type: FETCH_LIKES_SUCCESS,
+    payload: favorites
+  }
+}
+export function fetchFavorites(){
+  return dispatch => {
+    let user = store.getState().auth.user;
+    console.log(user);
+    Axios.defaults.headers = {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json'
+    }
+    return Axios.get(`http://localhost:8000/likes/${user.id}/`)
+      .then(result => {
+        dispatch(fetchFavoritesSuccess(result));
+       
+      })
+      .catch(error => console.log(error));
+  }
+      
 }

@@ -12,20 +12,26 @@ import {
   addTimeSlot,
   handleSearchButtonClick,
   fetchTimeSlot,
-  addedToFavorites
+  addedToFavorites,
+  fetchFavorites
 } from "../actions/discountActions";
 import { getUser } from "../actions/userActions";
+import { setTimeout } from "timers";
 class Home extends Component {
+  
   componentDidMount() {
     this.props.onTryAutoSignup();
+    this.props.getUser();
+      setTimeout(() => this.props.getLikes(),1000)
+      console.log('user_id ' + this.props.user);
+      
+    
+    
+    
     this.props.fetchDiscounts();
     this.getTime();
-    if (this.props.isAuthenticated){
-      this.props.getUser();
-      console.log("lol");
-    }
+    
   }
-
   getTime = () => {
     var today = new Date();
     var hours = today.getHours();
@@ -113,11 +119,14 @@ const mapStateToProps = state => ({
   foodCategory: state.discounts.foodCategory,
   timeSlot: state.discounts.timeSlot,
   isAuthenticated: state.auth.token !==null,
+  user: state.auth.user,
   likes: state.discounts.favorites,
   search: state.discounts.search,
+  
 });
 
 const mapDispatchToProps = dispatch => ({
+  getUser: () => dispatch(getUser()),
   handleFoodChange: event => dispatch(addFoodCategory(event)),
   handleTimeChange: event => dispatch(addTimeSlot(event)),
   fetchDiscounts: () => dispatch(fetchDiscounts()),
@@ -127,7 +136,7 @@ const mapDispatchToProps = dispatch => ({
   onAddedToLikes: (id) => dispatch(addedToFavorites(id)),
   onTryAutoSignup: () => dispatch(authActions.authCheckState()),
   logout: () => dispatch(authActions.logout()),
-  getUser: () => dispatch(getUser),
+  getLikes: () => dispatch(fetchFavorites())
 });
 
 export default connect(

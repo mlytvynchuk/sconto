@@ -25,7 +25,7 @@ SECRET_KEY = '85#^(isr)22c9o@^ja_jkv=9phj*qirp-^g$kv3lazp!1hzfhl'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -153,3 +153,10 @@ CORS_ALLOW_METHODS = (
     'POST',
     'PUT',
 )
+
+CORS_ORIGIN_WHITELIST = [
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:3000",
+    "http://127.0.0.1:9000"
+]

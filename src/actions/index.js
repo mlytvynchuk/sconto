@@ -6,7 +6,7 @@ export const SELECT_TIME_SLOT = "ADD_TIME_SLOT";
 export const HANDLE_SEARCH_BUTTON_CLICK = "HANDLE_SEARCH_BUTTON_CLICK";
 export const ADDED_TO_LIKES ="ADDED_TO_LIKES";
 export const DELETE_FROM_LIKES="DELETE_FROM_LIKES";
-
+export const FETCH_LIKES_SUCCESS = "FETCH_LIKES_SUCCESS";
 
 // users
 
@@ -16,3 +16,4 @@ export const AUTH_FAIL = "AUTH_FAIL";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
 export const GET_USER = "GET_USER";
+
