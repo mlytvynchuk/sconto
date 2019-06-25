@@ -28,3 +28,6 @@ venv/
 *.pot
 *.pyc
 __pycache__/
+
+# settings files
+settings.js

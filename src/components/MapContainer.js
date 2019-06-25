@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import Geocode from 'react-geocode';
-Geocode.setApiKey("AIzaSyBQFvSM_nZ5O6uD59Sa1rDZURuWgUSa2D0");
+import * as local_settings from '../settings';
+Geocode.setApiKey(local_settings.GOOGLE_KEY);
 Geocode.enableDebug();
 
 const mapStyles = {
@@ -85,5 +86,5 @@ const mapStyles = {
   }
   
   export default GoogleApiWrapper({
-    apiKey: 'AIzaSyBQFvSM_nZ5O6uD59Sa1rDZURuWgUSa2D0'
+    apiKey: local_settings.GOOGLE_KEY
   })(MapContainer);
