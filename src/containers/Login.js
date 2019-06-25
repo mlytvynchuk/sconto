@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import '../assets/css/login.css';
-import { authLogin } from '../actions/authActions';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
 import * as actions from "../actions/authActions"
@@ -14,24 +13,29 @@ class Login extends Component {
             [e.target.name]: String([e.target.value])
         })
     }
+    componentWillReceiveProps(newProps){
+        if(newProps.isAuthenticated){
+            newProps.history.push('/');
+        }
+    }
     handleSubmit(e){
         e.preventDefault();
         const {email, password} = this.state;
         console.log(email,password);
         this.props.onAuth(email, password);
-        if(!this.props.error){
+        if(this.props.isAuthenticated){
             this.props.history.push('/');
         }
     
     
     }
     render() {
-        let errorMessage = null;
-        if(this.props.error){
-            errorMessage = (
-                <p>{this.props.error.message}</p>
-            )
-        }
+        // let errorMessage = null;
+        // if(this.props.error){
+        //     errorMessage = (
+        //         <p>{this.props.error.message}</p>
+        //     )
+        // }
         return (
             <div className="login-body">
                
@@ -73,7 +77,7 @@ class Login extends Component {
     }
 }
 const mapStateToProps = (state) => ({
-    isAuthenticated: state.auth.token !==null,
+    isAuthenticated: state.auth.token != null,
     error: state.auth.error,
     loading: state.auth.loading,
 })

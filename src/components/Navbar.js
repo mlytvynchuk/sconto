@@ -10,7 +10,6 @@ class Navbar extends Component {
   }
 
   handleSearchInput = e => {
-    console.log("evnt - "+ e.target.value);
     this.setState({search: e.target.value});
   }
   
@@ -22,30 +21,17 @@ class Navbar extends Component {
     }else{
       return(
         <React.Fragment>
-        <UserProfile {...this.props} isOpen={this.state.isOpenModal} handleModalToggle={this.handleModalToggle} />
+        <UserProfile {...this.props} />
         
       </React.Fragment>
       )
     }
   };
 
-  // static getDerivedStateFromProps(nextProps, prevState) {
-  //   console.log(nextProps);
-  //   console.log(`prevState - ${prevState.search} - nextProps - ${nextProps.search}`);
-  //   if( nextProps.search !== prevState.search && nextProps.search !== "" )
-  //       return {
-  //         search: nextProps.search
-  //       }
-  //   else 
-  //     return null;
-  // }
-  
-
   render() {
     const { foodCategory, timeSlot, handleTimeChange, handleFoodChange, handleSearchButtonClick } = this.props;
     const { search } = this.state;
 
-    console.log(this.props.search );
     return (
       <header>
         <nav className="navbar navbar-expand-lg navbar-light bg-white">
@@ -112,7 +98,7 @@ class Navbar extends Component {
                         search={search}
                         foodCategory={foodCategory} />
                 </LightBox1>
-                  <UserProfile />
+                {this.loginHandlers()}
               </div>
           </div>
         </nav>

@@ -32,12 +32,10 @@ export function fetchDiscountsFail(error) {
 export function fetchDiscounts() {
   return dispatch => {
     dispatch(fetchDiscountsBegin());
-    console.log("begin");
     return fetch("http://localhost:8000/discounts/")
       .then(handleErrors)
       .then(response => response.json())
       .then(result => {
-        console.log(result);
         dispatch(fetchDiscountsSuccess(result));
         return result;
       })

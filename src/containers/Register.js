@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import '../assets/css/login.css';
-import { authLogin } from '../actions/authActions';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
 import * as actions from "../actions/authActions"
@@ -22,16 +21,14 @@ class Login extends Component {
         if(!this.props.error){
             this.props.history.push('/login/');
         }
-    
-    
     }
     render() {
-        let errorMessage = null;
-        if(this.props.error){
-            errorMessage = (
-                <p>{this.props.error.message}</p>
-            )
-        }
+        // let errorMessage = null;
+        // if(this.props.error){
+        //     errorMessage = (
+        //         <p>{this.props.error.message}</p>
+        //     )
+        // }
         return (
             <div className="login-body">
                

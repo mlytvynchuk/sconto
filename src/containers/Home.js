@@ -14,10 +14,16 @@ import {
   fetchTimeSlot,
   addedToFavorites
 } from "../actions/discountActions";
+import { getUser } from "../actions/userActions";
 class Home extends Component {
   componentDidMount() {
+    this.props.onTryAutoSignup();
     this.props.fetchDiscounts();
     this.getTime();
+    if (this.props.isAuthenticated){
+      this.props.getUser();
+      console.log("lol");
+    }
   }
 
   getTime = () => {
@@ -55,8 +61,8 @@ class Home extends Component {
     discounts = discounts.filter(
         discount => discount.time === timeSlot
       );
-    
     return discounts.map(discount => (
+
       <LightBox1 
         key={discount.id}
         button={
@@ -69,7 +75,7 @@ class Home extends Component {
             image={discount.image}
             height={discount.height}
           />}>
-        <DiscountDetails onAddedToLikes={() => this.props.onAddedToLikes(discount.id)}
+        <DiscountDetails {...this.props} onAddedToLikes={() => this.props.onAddedToLikes(discount.id)}
             id={discount.id} 
             title={discount.title} 
             details={discount.details} 
@@ -120,7 +126,8 @@ const mapDispatchToProps = dispatch => ({
   fetchTimeSlot: time => dispatch(fetchTimeSlot(time)),
   onAddedToLikes: (id) => dispatch(addedToFavorites(id)),
   onTryAutoSignup: () => dispatch(authActions.authCheckState()),
-  logout: () => dispatch(authActions.logout())
+  logout: () => dispatch(authActions.logout()),
+  getUser: () => dispatch(getUser),
 });
 
 export default connect(

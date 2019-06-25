@@ -2,7 +2,6 @@ import React from 'react'
 import '../assets/css/discount-details.css'
 import coupon from '../assets/img/voucher.png'
 import {Link} from 'react-router-dom'
-import { MapContainer } from './MapContainer';
 class DiscountDetails extends React.Component {
 
     raiseInvoiceClicked(){
@@ -11,6 +10,13 @@ class DiscountDetails extends React.Component {
     }
 
     render(){
+        const LikeButton = () => {
+            if(this.props.isAuthenticated){
+                return(
+                    <button className="btn-like" onClick={this.props.onAddedToLikes}> Like </button>
+                )
+            }
+        }
         return (
             <div className="discount">
                 <div className="image-container">
@@ -42,7 +48,7 @@ class DiscountDetails extends React.Component {
                         <p>{this.props.location}</p>
                     </div>
                 </div>
-                    <button className="btn-like" onClick={this.props.onAddedToLikes}> Like </button>
+                {LikeButton()}
             </div>
         )
     }
