@@ -26,7 +26,7 @@ urlpatterns = [
     path('api/', include('discounts.urls')),
     path('api/users/', include('accounts.urls')),
     path('rest-auth/', include('rest_auth.urls')),
-    re_path('', index, name='index')
+    path(r'^', index, name='index')
 ]\
     +static(settings.STATIC_URL, document_root = settings.STATIC_URL)\
     +static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
