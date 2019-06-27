@@ -12,11 +12,16 @@ class DiscountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Discount
         fields = '__all__'
-
+class DiscountCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Discount
+        fields = '__all__'
+        
 class LikeCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Like
         fields = '__all__'
+        
     def create(self,validated_data):
         like = Like.objects.filter(**validated_data)
         if not like:

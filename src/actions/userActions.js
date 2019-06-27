@@ -14,7 +14,7 @@ export const getUser = () => {
         Authorization: 'Token ' + localStorage.getItem('token'),
         
     }
-    return Axios.get('http://localhost:8000/users/profile/').then(res => {
+    return Axios.get('http://localhost:8000/api/users/profile/').then(res => {
         
         dispatch(getUserSuccess(res.data))
         

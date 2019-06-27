@@ -1,30 +1,36 @@
 from django.shortcuts import render
-from rest_framework import viewsets, routers
+from rest_framework import viewsets, routers, permissions
 from rest_framework.response import Response
 from discounts.models import Discount, Like
-from .serializers import DiscountSerializer, LikeSerializer, LikeCreateSerializer
-# Create your views here.
+from .serializers import DiscountSerializer, LikeSerializer, LikeCreateSerializer, DiscountCreateSerializer
+from rest_framework.authentication import TokenAuthentication
 class DiscountsViewSet(viewsets.ModelViewSet):
     queryset = Discount.objects.all()
-    serializer_class = DiscountSerializer
-
+    serializer_class = DiscountCreateSerializer
+    def list(self,request):
+        serializer = DiscountSerializer(self.queryset, many=True)
+        return Response(serializer.data)
 
 
 class LikesViewSet(viewsets.ModelViewSet):
     serializer_class = LikeCreateSerializer
     queryset = Like.objects.all()
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly)
     def list(self, request):
-        queryset = Like.objects.all()
-        serializer = LikeSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response(data=None)
+    #     queryset = Like.objects.all()
+    #     serializer = LikeSerializer(queryset, many=True)
+    #     return Response(serializer.data)
     def retrieve(self,request, pk=None):
-        queryset = Like.objects.all()
-        if pk:
+       
+        pk = int(pk)
+        if pk == request.user.id:
+            print("yes")
+            queryset = Like.objects.all()
             queryset = queryset.filter(owner=pk)
             serializer = LikeSerializer(queryset, many=True)
             return Response(serializer.data)
-        serializer = LikeSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response(data=None)
                 
     # def create(self, request):
     #     serializer = LikeSerializer(data=request.data)

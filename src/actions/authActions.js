@@ -69,7 +69,7 @@ export const getUser = () => {
         Authorization: 'Token ' + localStorage.getItem('token')
     }
     return dispatch => {
-        return axios.get('http://localhost:8000/users/profile/')
+        return axios.get('http://localhost:8000/api/users/profile/')
         .then(
             res => {
                 localStorage.setItem('user', res.data[0].fields)
@@ -86,7 +86,7 @@ export const getUser = () => {
 export const authSignup = (email, password) => {
     return dispatch => {
         dispatch(authStart());
-        return axios.post('http://localhost:8000/usercreate/',{
+        return axios.post('http://localhost:8000/api/users/',{
             email: email,
             password: password,
         })

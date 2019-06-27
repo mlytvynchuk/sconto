@@ -36,7 +36,7 @@ export function fetchDiscounts() {
   
   return dispatch => {
     dispatch(fetchDiscountsBegin());
-    return fetch("http://localhost:8000/discounts/")
+    return fetch("http://localhost:8000/api/discounts/")
       .then(handleErrors)
       .then(response => response.json())
       .then(result => {
@@ -97,10 +97,10 @@ export function addedToFavorites(discountId) {
     
     Axios.defaults.headers = {
       'Content-Type': 'application/json',
-      Authorization: 'Token ' + localStorage.getItem('token'),
+      Authorization: 'Token ' + store.getState().auth.token,
       
   }
-  var like = Axios.post('http://localhost:8000/likes/', {
+  var like = Axios.post('http://localhost:8000/api/likes/', {
     discount: discountId
   }).then(res => {
      dispatch(addToFavorite(res.data))
@@ -126,12 +126,13 @@ export function fetchFavoritesSuccess(favorites){
 }
 export function fetchFavorites(){
   return dispatch => {
-    let user = store.getState().auth.user;
    
+    let user = store.getState().auth.user;
     Axios.defaults.headers = {
-      'Content-Type': 'application/json; charset=UTF-8'
-    }
-    return Axios.get(`http://localhost:8000/likes/${user.id}/`)
+      'Content-Type': 'application/json; charset=UTF-8',
+      Authorization: 'Token ' + store.getState().auth.token
+  }
+    return Axios.get(`http://localhost:8000/api/likes/${user.id}/`)
       .then(result => {
         dispatch(fetchFavoritesSuccess(result.data));
        
