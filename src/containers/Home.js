@@ -5,7 +5,7 @@ import DiscountDetails from '../components/DiscountDetails';
 import LightBox1 from '../components/LightBox1';
 import { connect } from "react-redux";
 import * as authActions from '../actions/authActions'
-
+import * as settings from '../settings'
 import {
   fetchDiscounts,
   addFoodCategory,
@@ -81,7 +81,7 @@ class Home extends Component {
             details={discount.details}
             overlay={discount.overlay}
             cafe={discount.cafe}
-            image={discount.image}
+            image={settings.DOMAIN + discount.image}
             height={discount.height}
           />}>
         <DiscountDetails {...this.props} onAddedToLikes={() => this.props.onAddedToLikes(discount.id)}
@@ -89,7 +89,7 @@ class Home extends Component {
             title={discount.title} 
             details={discount.details} 
             cafe={discount.cafe} 
-            image={discount.image}
+            image={settings.DOMAIN + discount.image}
             location={discount.location} />
       </LightBox1>
     ));
