@@ -7,14 +7,13 @@ import '../assets/css/likeList.css';
 import '../assets/css/indent.css';
 import * as settings from '../settings'
 class LikesList extends React.Component{
-    
     render(){
         return(
             
             <div className="like-list">
                 <h1>Вподобання</h1>
                 <div className="list-edit">
-                {this.props.likes && this.props.likes.map((item) => 
+                {(this.props.likes.length > 0) ? this.props.likes.map((item) => 
                 <li className="ticket" key={item.id}>
                     <div className="d-flex">
                         <div className="display-left">
@@ -32,7 +31,7 @@ class LikesList extends React.Component{
                         <div className="display-right"><img src={settings.DOMAIN + item.discount.image} alt=""/>
                         <button className="btn" onClick={()=>this.props.deleteFromLikes(item.id)}> </button> </div>
                     </div>
-                </li>)}
+                </li>) : (<div className="text-center">Ви нічого ще не вподобали</div>)}
                 </div>
             </div>
         )

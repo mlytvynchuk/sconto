@@ -4,6 +4,9 @@ from rest_framework.response import Response
 from discounts.models import Discount, Like
 from .serializers import DiscountSerializer, LikeSerializer, LikeCreateSerializer, DiscountCreateSerializer
 from rest_framework.authentication import TokenAuthentication
+from django.views.decorators.csrf import csrf_exempt
+
+
 class DiscountsViewSet(viewsets.ModelViewSet):
     queryset = Discount.objects.all()
     serializer_class = DiscountCreateSerializer
@@ -22,7 +25,6 @@ class LikesViewSet(viewsets.ModelViewSet):
     #     serializer = LikeSerializer(queryset, many=True)
     #     return Response(serializer.data)
     def retrieve(self,request, pk=None):
-       
         pk = int(pk)
         if pk == request.user.id:
             print("yes")
@@ -31,7 +33,15 @@ class LikesViewSet(viewsets.ModelViewSet):
             serializer = LikeSerializer(queryset, many=True)
             return Response(serializer.data)
         return Response(data=None)
-                
+    
+    @csrf_exempt
+    def destroy(self, request, pk=None):
+        if request.method == "DELETE":
+            like = Like.objects.get(id=pk)
+            print(like.owner.id, request.user.id)
+            if like.owner.id == request.user.id:
+                like.delete()
+        return Response(data=None)       
     # def create(self, request):
     #     serializer = LikeSerializer(data=request.data)
     #     if serializer.is_valid():

@@ -20,7 +20,9 @@ import { setTimeout } from "timers";
 class Home extends Component {
   componentDidUpdate(prevProps){
       if (JSON.stringify(this.props.likes) != JSON.stringify(prevProps.likes)){
-          this.props.getLikes();
+          setTimeout(() => {
+            this.props.getLikes();
+          }, 500);
       }
   }
   componentDidMount() {

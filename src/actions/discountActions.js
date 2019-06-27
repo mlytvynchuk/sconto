@@ -98,8 +98,7 @@ export function addedToFavorites(discountId) {
     Axios.defaults.headers = {
       'Content-Type': 'application/json',
       Authorization: 'Token ' + store.getState().auth.token,
-      
-  }
+    }
   const likedElem = store.getState().discounts.discounts.find(discount =>  discount.id === discountId);
   const checkId = store.getState().discounts.favorites.find(like => like.discount.id === likedElem.id);
   if (!checkId){
@@ -118,6 +117,15 @@ export function addedToFavorites(discountId) {
 }
 
 export function deleteFromLikes(discountId) {
+  console.log(store.getState().auth.token)
+  Axios.defaults.headers = {
+    'Content-Type': 'application/json',
+    Authorization: 'Token ' + store.getState().auth.token,
+  }
+  Axios.delete(`http://localhost:8000/api/likes/${discountId}/`)
+    .then(res => {
+      console.log(res.data)
+    })
   return {
   type: DELETE_FROM_LIKES,
   payload: discountId 

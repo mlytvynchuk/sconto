@@ -27,6 +27,7 @@ class LikeCreateSerializer(serializers.ModelSerializer):
         if not like:
             return Like.objects.create(**validated_data, owner=self.context['request'].user)
         return Response(status=status.HTTP_302_FOUND)
+    
 class LikeSerializer(serializers.ModelSerializer):
     discount = DiscountSerializer()
     class Meta:
