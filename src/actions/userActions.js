@@ -8,14 +8,14 @@ export const getUserSuccess = (user) => {
 }
 export const getUser = () => {
     return dispatch => {
-    console.log(localStorage.getItem('token'));
+    
     Axios.defaults.headers = {
         'Content-Type': 'application/json',
         Authorization: 'Token ' + localStorage.getItem('token'),
         
     }
     return Axios.get('http://localhost:8000/users/profile/').then(res => {
-        console.log(res.data)
+        
         dispatch(getUserSuccess(res.data))
         
     })

@@ -33,6 +33,7 @@ export function fetchDiscountsFail(error) {
 }
 
 export function fetchDiscounts() {
+  
   return dispatch => {
     dispatch(fetchDiscountsBegin());
     return fetch("http://localhost:8000/discounts/")
@@ -84,22 +85,31 @@ export function handleSearchButtonClick( search= "", foodCategory = "", timeSlot
     }
   };
 }
-
+export function addToFavorite(like){
+  
+  return {
+    type: ADDED_TO_LIKES,
+    payload: like
+  };
+}
 export function addedToFavorites(discountId) {
+  return dispatch => {
+    
     Axios.defaults.headers = {
       'Content-Type': 'application/json',
       Authorization: 'Token ' + localStorage.getItem('token'),
       
   }
-  Axios.post('http://localhost:8000/likes/', {
+  var like = Axios.post('http://localhost:8000/likes/', {
     discount: discountId
   }).then(res => {
-      console.log(res.data);
-  })
-  return {
-    type: ADDED_TO_LIKES,
-    payload: discountId
-  };
+     dispatch(addToFavorite(res.data))
+     dispatch(fetchFavorites());
+  }).catch(err => console.log(err))
+  
+  
+  }
+  
 }
 
 export function deleteFromLikes(discountId) {
@@ -117,14 +127,13 @@ export function fetchFavoritesSuccess(favorites){
 export function fetchFavorites(){
   return dispatch => {
     let user = store.getState().auth.user;
-    console.log(user);
+   
     Axios.defaults.headers = {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json; charset=UTF-8'
     }
     return Axios.get(`http://localhost:8000/likes/${user.id}/`)
       .then(result => {
-        dispatch(fetchFavoritesSuccess(result));
+        dispatch(fetchFavoritesSuccess(result.data));
        
       })
       .catch(error => console.log(error));

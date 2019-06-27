@@ -37,6 +37,9 @@ export const checkAuthTimeout = (expirationTime) => {
 export const authLogin = (email, password) => {
     return dispatch => {
         dispatch(authStart());
+        axios.defaults.headers = {
+            'Content-Type': 'application/json; charset=UTF-8'
+        }
         return axios.post('http://localhost:8000/rest-auth/login/',{
             email: email,
             password: password

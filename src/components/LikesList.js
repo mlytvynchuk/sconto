@@ -1,34 +1,35 @@
 import React from 'react';
-import { deleteFromLikes } from '../actions/discountActions'
+import { deleteFromLikes, fetchFavorites } from '../actions/discountActions'
 import { connect } from "react-redux";
 import LightBox1 from './LightBox1';
 import DiscountDetails from './DiscountDetails';
 import '../assets/css/likeList.css';
 import '../assets/css/indent.css';
-
+import * as settings from '../settings'
 class LikesList extends React.Component{
-
+    
     render(){
         return(
+            
             <div className="like-list">
                 <h1>Вподобання</h1>
                 <div className="list-edit">
-                {this.props.likes.map((item) => 
+                {this.props.likes && this.props.likes.map((item) => 
                 <li className="ticket" key={item.id}>
                     <div className="d-flex">
                         <div className="display-left">
                         <LightBox1 
-                            button={ <h4>{item.cafe}</h4> }>
+                            button={ <h4>{item.discount.cafe}</h4> }>
                             <DiscountDetails 
-                                id={item.id} 
-                                title={item.title} 
-                                details={item.details} 
-                                cafe={item.cafe} 
-                                image={item.image}
-                                location={item.location} />
+                                id={item.discount.id} 
+                                title={item.discount.title} 
+                                details={item.discount.details} 
+                                cafe={item.discount.cafe} 
+                                image={settings.DOMAIN + item.discount.image}
+                                location={item.discount.location} />
                         </LightBox1> 
-                        <p>{item.location}</p> </div>
-                        <div className="display-right"><img src={item.image} alt=""/>
+                        <p>{item.discount.location}</p> </div>
+                        <div className="display-right"><img src={settings.DOMAIN + item.discount.image} alt=""/>
                         <button className="btn" onClick={()=>this.props.deleteFromLikes(item.id)}> </button> </div>
                     </div>
                 </li>)}
@@ -41,7 +42,8 @@ const mapStateToProps = state => ({
     likes: state.discounts.favorites
   });
 
- const mapDispatchToProps = {
-     deleteFromLikes
- }
+ const mapDispatchToProps = dispatch => ({
+     deleteFromLikes:(id) => dispatch(deleteFromLikes(id)),
+     getLikes: () => dispatch(fetchFavorites())
+ })
 export default connect(mapStateToProps, mapDispatchToProps)(LikesList);

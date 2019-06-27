@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import viewsets, routers
 from rest_framework.response import Response
 from discounts.models import Discount, Like
-from .serializers import DiscountSerializer, LikeSerializer
+from .serializers import DiscountSerializer, LikeSerializer, LikeCreateSerializer
 # Create your views here.
 class DiscountsViewSet(viewsets.ModelViewSet):
     queryset = Discount.objects.all()
@@ -11,7 +11,7 @@ class DiscountsViewSet(viewsets.ModelViewSet):
 
 
 class LikesViewSet(viewsets.ModelViewSet):
-    serializer_class = LikeSerializer
+    serializer_class = LikeCreateSerializer
     queryset = Like.objects.all()
     def list(self, request):
         queryset = Like.objects.all()
@@ -25,7 +25,7 @@ class LikesViewSet(viewsets.ModelViewSet):
             return Response(serializer.data)
         serializer = LikeSerializer(queryset, many=True)
         return Response(serializer.data)
-
+                
     # def create(self, request):
     #     serializer = LikeSerializer(data=request.data)
     #     if serializer.is_valid():

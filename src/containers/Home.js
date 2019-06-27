@@ -18,14 +18,17 @@ import {
 import { getUser } from "../actions/userActions";
 import { setTimeout } from "timers";
 class Home extends Component {
-  
+  componentDidUpdate(prevProps){
+      if (JSON.stringify(this.props.likes) != JSON.stringify(prevProps.likes)){
+          this.props.getLikes();
+      }
+  }
   componentDidMount() {
     this.props.onTryAutoSignup();
     this.props.getUser();
       setTimeout(() => this.props.getLikes(),1000)
-      console.log('user_id ' + this.props.user);
       
-    
+ 
     
     
     this.props.fetchDiscounts();
