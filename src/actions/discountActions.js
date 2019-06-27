@@ -100,16 +100,21 @@ export function addedToFavorites(discountId) {
       Authorization: 'Token ' + store.getState().auth.token,
       
   }
-  var like = Axios.post('http://localhost:8000/api/likes/', {
+  const likedElem = store.getState().discounts.discounts.find(discount =>  discount.id === discountId);
+  const checkId = store.getState().discounts.favorites.find(like => like.discount.id === likedElem.id);
+  if (!checkId){
+    Axios.post('http://localhost:8000/api/likes/', {
     discount: discountId
-  }).then(res => {
-     dispatch(addToFavorite(res.data))
-     dispatch(fetchFavorites());
-  }).catch(err => console.log(err))
-  
-  
-  }
-  
+      }).then(res => {
+          dispatch(addToFavorite(res.data))
+          dispatch(fetchFavorites());
+        }).catch(err => console.log(err));
+  }else{
+    console.log(
+      "You`ve already liked this"
+    )
+  } 
+ }  
 }
 
 export function deleteFromLikes(discountId) {
