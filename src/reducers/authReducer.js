@@ -5,6 +5,7 @@ const initialState = {
     token: null,
     error: null,
     loading: false,
+    user: 0
 }
 
 const authStart = (state, action) => {
@@ -26,7 +27,8 @@ const authFail = (state, action) => {
     return updObj(state, {
         error: action.error,
         loading: false,
-        token: null
+        token: null,
+        
     })
 }
 
@@ -48,6 +50,12 @@ const authReducer = (state=initialState, action) => {
                 return authFail(state, action);
         case actionTypes.AUTH_LOGOUT:
             return authLogout(state, action);
+        
+        case actionTypes.GET_USER:
+            return {
+                ...state,
+                user: action.payload
+            };
         default:
            return state;
     }

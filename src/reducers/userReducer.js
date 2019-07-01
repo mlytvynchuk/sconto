@@ -1,10 +1,12 @@
-import  * as actionTypes from ".";
+import * as actionTypes from "../actions/index";
+const initialState = {
 
-export const userReducer = (state, action) => {
-    switch (action.type) {
-        case actionTypes.GET_USER:
-            return action.payload;
-        default:
-            return state;
-    }
 }
+// export default function userReducer(state = initialState, action){
+//     switch (action.type) {
+//         case actionTypes.GET_USER:
+//             return action.payload;
+//         default:
+//             return state;
+//     }
+// }

@@ -37,6 +37,9 @@ export const checkAuthTimeout = (expirationTime) => {
 export const authLogin = (email, password) => {
     return dispatch => {
         dispatch(authStart());
+        axios.defaults.headers = {
+            'Content-Type': 'application/json; charset=UTF-8'
+        }
         return axios.post('http://localhost:8000/rest-auth/login/',{
             email: email,
             password: password
@@ -66,7 +69,7 @@ export const getUser = () => {
         Authorization: 'Token ' + localStorage.getItem('token')
     }
     return dispatch => {
-        return axios.get('http://localhost:8000/users/profile/')
+        return axios.get('http://localhost:8000/api/users/profile/')
         .then(
             res => {
                 localStorage.setItem('user', res.data[0].fields)
@@ -83,7 +86,7 @@ export const getUser = () => {
 export const authSignup = (email, password) => {
     return dispatch => {
         dispatch(authStart());
-        return axios.post('http://localhost:8000/usercreate/',{
+        return axios.post('http://localhost:8000/api/users/',{
             email: email,
             password: password,
         })
