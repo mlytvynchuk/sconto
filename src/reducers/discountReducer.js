@@ -6,7 +6,8 @@ import {
   SELECT_TIME_SLOT,
   HANDLE_SEARCH_BUTTON_CLICK,
   ADDED_TO_LIKES,
-  DELETE_FROM_LIKES
+  DELETE_FROM_LIKES,
+  FETCH_LIKES_SUCCESS
 } from "../actions/index";
 
 const initialState = {
@@ -71,27 +72,19 @@ export default function discountReducer(state = initialState, action) {
         search
       };
     }
-
-    case ADDED_TO_LIKES: {
-      const discountId = action.payload;
-      const likedElem = state.discounts.find(discount =>  discount.id === discountId);
-      const checkId = state.favorites.find(discount => discount.id === likedElem.id);
-      if (!checkId){
-        return {
-          ...state,
-          favorites: [...state.favorites, likedElem]
-        }
-      }
-      return state;
-    }
     
-       case DELETE_FROM_LIKES: {
-         const discountId = action.payload;
-         const idx = state.favorites.findIndex((like) => like.id === discountId);
-         const newFavs = [...state.favorites.slice(0, idx), ...state.favorites.slice(idx+1)];
-         return { ...state, favorites: newFavs };
-       }
-
+    case DELETE_FROM_LIKES: {
+      const discountId = action.payload;
+      const idx = state.favorites.findIndex((like) => like.id === discountId);
+      const newFavs = [...state.favorites.slice(0, idx), ...state.favorites.slice(idx+1)];
+      return { ...state, favorites: newFavs };
+    }
+    case FETCH_LIKES_SUCCESS: {
+    return {
+      ...state,
+      favorites: action.payload
+    }
+    }
     default: {
       return state;
     }

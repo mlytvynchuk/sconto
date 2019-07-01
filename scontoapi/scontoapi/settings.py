@@ -14,7 +14,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+MYROOT_DIR = '../'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -25,7 +25,7 @@ SECRET_KEY = '85#^(isr)22c9o@^ja_jkv=9phj*qirp-^g$kv3lazp!1hzfhl'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -61,7 +61,7 @@ ROOT_URLCONF = 'scontoapi.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(MYROOT_DIR)],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,7 +126,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-  os.path.join(BASE_DIR, "static",),
+  os.path.join(MYROOT_DIR,'build','static'),
 )
 MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media")
 MEDIA_URL = '/media/'
@@ -153,3 +153,11 @@ CORS_ALLOW_METHODS = (
     'POST',
     'PUT',
 )
+
+CORS_ORIGIN_WHITELIST = [
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:3000",
+    "http://127.0.0.1:9000"
+]
+

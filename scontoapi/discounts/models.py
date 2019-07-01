@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth import get_user_model
 # Create your models here.
 
 class Category(models.Model):
@@ -42,3 +42,13 @@ class Discount(models.Model):
         verbose_name_plural = ("Discounts")
     def __str__(self):
         return self.title
+
+
+class Like(models.Model):
+    owner = models.ForeignKey(get_user_model(),blank=True, null=True, on_delete=models.CASCADE)
+    discount = models.ForeignKey("Discount", on_delete=models.CASCADE)
+    def __str__(self):
+        if self.owner:
+            return self.owner.email
+        else:
+            return "Owner not found"

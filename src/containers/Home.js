@@ -5,27 +5,38 @@ import DiscountDetails from '../components/DiscountDetails';
 import LightBox1 from '../components/LightBox1';
 import { connect } from "react-redux";
 import * as authActions from '../actions/authActions'
-
+import * as settings from '../settings'
 import {
   fetchDiscounts,
   addFoodCategory,
   addTimeSlot,
   handleSearchButtonClick,
   fetchTimeSlot,
-  addedToFavorites
+  addedToFavorites,
+  fetchFavorites
 } from "../actions/discountActions";
 import { getUser } from "../actions/userActions";
+import { setTimeout } from "timers";
 class Home extends Component {
+  componentDidUpdate(prevProps){
+      if (JSON.stringify(this.props.likes) != JSON.stringify(prevProps.likes)){
+          setTimeout(() => {
+            this.props.getLikes();
+          }, 500);
+      }
+  }
   componentDidMount() {
     this.props.onTryAutoSignup();
+    this.props.getUser();
+      setTimeout(() => this.props.getLikes(),1000)
+      
+ 
+    
+    
     this.props.fetchDiscounts();
     this.getTime();
-    if (this.props.isAuthenticated){
-      this.props.getUser();
-      console.log("lol");
-    }
+    
   }
-
   getTime = () => {
     var today = new Date();
     var hours = today.getHours();
@@ -72,7 +83,7 @@ class Home extends Component {
             details={discount.details}
             overlay={discount.overlay}
             cafe={discount.cafe}
-            image={discount.image}
+            image={settings.DOMAIN + discount.image}
             height={discount.height}
           />}>
         <DiscountDetails {...this.props} onAddedToLikes={() => this.props.onAddedToLikes(discount.id)}
@@ -80,7 +91,7 @@ class Home extends Component {
             title={discount.title} 
             details={discount.details} 
             cafe={discount.cafe} 
-            image={discount.image}
+            image={settings.DOMAIN + discount.image}
             location={discount.location} />
       </LightBox1>
     ));
@@ -113,11 +124,14 @@ const mapStateToProps = state => ({
   foodCategory: state.discounts.foodCategory,
   timeSlot: state.discounts.timeSlot,
   isAuthenticated: state.auth.token !==null,
+  user: state.auth.user,
   likes: state.discounts.favorites,
   search: state.discounts.search,
+  
 });
 
 const mapDispatchToProps = dispatch => ({
+  getUser: () => dispatch(getUser()),
   handleFoodChange: event => dispatch(addFoodCategory(event)),
   handleTimeChange: event => dispatch(addTimeSlot(event)),
   fetchDiscounts: () => dispatch(fetchDiscounts()),
@@ -127,7 +141,7 @@ const mapDispatchToProps = dispatch => ({
   onAddedToLikes: (id) => dispatch(addedToFavorites(id)),
   onTryAutoSignup: () => dispatch(authActions.authCheckState()),
   logout: () => dispatch(authActions.logout()),
-  getUser: () => dispatch(getUser),
+  getLikes: () => dispatch(fetchFavorites())
 });
 
 export default connect(
