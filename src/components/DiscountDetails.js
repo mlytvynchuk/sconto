@@ -12,6 +12,13 @@ class DiscountDetails extends React.Component {
     render(){
         const LikeButton = () => {
             if(this.props.isAuthenticated){
+                var like = this.props.likes.filter(l => l.discount.title == this.props.title)[0];
+                
+                if(like){
+                   return(
+                    <button className="btn-like bg-grey" onClick={() => this.props.onDeleteLike(like.id)} >Unlike</button>
+                   )
+                }
                 return(
                     <button className="btn-like" onClick={this.props.onAddedToLikes}> Like </button>
                 )

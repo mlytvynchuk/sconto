@@ -13,7 +13,8 @@ import {
   handleSearchButtonClick,
   fetchTimeSlot,
   addedToFavorites,
-  fetchFavorites
+  fetchFavorites,
+  deleteFromLikes
 } from "../actions/discountActions";
 import { getUser } from "../actions/userActions";
 import { setTimeout } from "timers";
@@ -27,11 +28,14 @@ class Home extends Component {
   }
   componentDidMount() {
     this.props.onTryAutoSignup();
-    this.props.getUser();
-      setTimeout(() => this.props.getLikes(),1000)
-      
- 
+
     
+      this.props.getUser()
+      .then(() =>{
+        if(this.props.isAuthenticated){
+          this.props.getLikes();
+        }
+      });
     
     this.props.fetchDiscounts();
     this.getTime();
@@ -139,6 +143,7 @@ const mapDispatchToProps = dispatch => ({
   dispatch(handleSearchButtonClick(search, food, time)),
   fetchTimeSlot: time => dispatch(fetchTimeSlot(time)),
   onAddedToLikes: (id) => dispatch(addedToFavorites(id)),
+  onDeleteLike: (id) => dispatch(deleteFromLikes(id)),
   onTryAutoSignup: () => dispatch(authActions.authCheckState()),
   logout: () => dispatch(authActions.logout()),
   getLikes: () => dispatch(fetchFavorites())

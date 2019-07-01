@@ -19,6 +19,8 @@ from django.conf.urls.static import static
 from django.conf import settings
 from accounts.views import UserCreate
 from .views import index
+from django.conf.urls import url
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
@@ -26,7 +28,8 @@ urlpatterns = [
     path('api/', include('discounts.urls')),
     path('api/users/', include('accounts.urls')),
     path('rest-auth/', include('rest_auth.urls')),
-    path(r'^', index, name='index')
+    path('', index, name='index'),
+    # url(r'(?:.*)/?$', index),
 ]\
     +static(settings.STATIC_URL, document_root = settings.STATIC_URL)\
     +static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
