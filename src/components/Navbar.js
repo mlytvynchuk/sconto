@@ -76,7 +76,7 @@ class Navbar extends Component {
                   value={search}
                   onChange={e => {this.handleSearchInput(e)}}
                 />
-                <button className="search-button" onClick={(event => {handleSearchButtonClick(search, foodCategory, timeSlot); event.preventDefault()})}>
+                <button className="search-button" onClick={ () => handleSearchButtonClick(search, foodCategory, timeSlot)}>
                   <i className="fa fa-search" />
                 </button>
               
