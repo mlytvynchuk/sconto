@@ -35,7 +35,7 @@ class DiscountDetails extends React.Component {
                     </div>
 
                     <div className="details">
-                        <p>Lorem ipsum bibendum porta donec metus sit risus nulla nec orci sagittis nibh adipiscing nam. Lectus non, rutrum ut leo urna enim proin sem nibh, urna.
+                        <p>{this.props.details}
                         </p>
                     </div>
 

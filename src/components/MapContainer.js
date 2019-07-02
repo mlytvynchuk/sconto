@@ -31,9 +31,6 @@ const mapStyles = {
       });
     }
 
-
-
-
     onMarkerClick = (props, marker ) =>
     this.setState({
       selectedPlace: props,
