@@ -12,7 +12,7 @@ class DiscountDetails extends React.Component {
     render(){
         const LikeButton = () => {
             if(this.props.isAuthenticated){
-                var like = this.props.likes.filter(l => l.discount.title == this.props.title)[0];
+                var like = this.props.likes.filter(l => l.discount.title === this.props.title)[0];
                 
                 if(like){
                    return(

@@ -20,7 +20,7 @@ import { getUser } from "../actions/userActions";
 import { setTimeout } from "timers";
 class Home extends Component {
   componentDidUpdate(prevProps){
-      if (JSON.stringify(this.props.likes) != JSON.stringify(prevProps.likes)){
+      if (JSON.stringify(this.props.likes) !== JSON.stringify(prevProps.likes)){
           setTimeout(() => {
             this.props.getLikes();
           }, 500);
@@ -29,14 +29,14 @@ class Home extends Component {
   componentDidMount() {
     this.props.onTryAutoSignup();
 
-    
-      this.props.getUser()
-      .then(() =>{
-        if(this.props.isAuthenticated){
-          this.props.getLikes();
-        }
-      });
-    
+      if(this.props.isAuthenticated){
+        this.props.getUser()
+        .then(() =>{
+          if(this.props.isAuthenticated){
+            this.props.getLikes();
+          }
+        });
+      }  
     this.props.fetchDiscounts();
     this.getTime();
     
