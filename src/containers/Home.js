@@ -25,12 +25,14 @@ class Home extends Component {
   componentDidMount() {
     this.props.onTryAutoSignup();
 
-      this.props.getUser()
-      .then(() =>{
-        if(this.props.isAuthenticated){
-          this.props.getLikes();
-        }
-      });
+      if(this.props.isAuthenticated){
+        this.props.getUser()
+        .then(() =>{
+          if(this.props.isAuthenticated){
+            this.props.getLikes();
+          }
+        });
+      }  
     this.props.fetchDiscounts();
     this.getTime();
   }
