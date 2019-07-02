@@ -4,6 +4,12 @@ import FilterMenu from './FilterMenu';
 import UserProfile from './UserProfile';
 import '../assets/css/modal.css';
 import {Link} from 'react-router-dom';
+import { connect } from "react-redux";
+import {
+  addFoodCategory,
+  addTimeSlot,
+  handleSearchButtonClick,
+} from "../actions/discountActions";
 class Navbar extends Component {
   state = {
     search: "",
@@ -20,10 +26,9 @@ class Navbar extends Component {
       )
     }else{
       return(
-        <React.Fragment>
+      <>
         <UserProfile />
-        
-      </React.Fragment>
+      </>
       )
     }
   };
@@ -67,7 +72,6 @@ class Navbar extends Component {
               </li>
             </ul>
             <div className="search-container">
-
                 <input
                   className="search-input"
                   type="text"
@@ -104,4 +108,18 @@ class Navbar extends Component {
     );
   }
 }
-export default Navbar;
+
+const mapStateToProps = state => ({
+  foodCategory: state.discounts.foodCategory,
+  timeSlot: state.discounts.timeSlot,
+  isAuthenticated: state.auth.token !== null,
+  
+});
+
+const mapDispatchToProps = dispatch => ({
+  handleFoodChange: event => dispatch(addFoodCategory(event)),
+  handleTimeChange: event => dispatch(addTimeSlot(event)),
+  handleSearchButtonClick: (search, food, time) =>
+    dispatch(handleSearchButtonClick(search, food, time)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
