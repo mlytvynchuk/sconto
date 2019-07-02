@@ -2,13 +2,9 @@ import React, { Component } from "react";
 import Navbar from "../components/Navbar";
 import { connect } from "react-redux";
 import * as authActions from '../actions/authActions'
-
 import Discounts from "../components/Discounts";
 import {
   fetchDiscounts,
-  addFoodCategory,
-  addTimeSlot,
-  handleSearchButtonClick,
   fetchTimeSlot,
   fetchFavorites,
 } from "../actions/discountActions";
@@ -22,6 +18,7 @@ class Home extends Component {
           }, 500);
       }
   }
+  
   componentDidMount() {
     this.props.onTryAutoSignup();
 
@@ -52,16 +49,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Navbar 
-          // {...this.props}
-          // timeSlot={this.props.timeSlot}
-          // handleFoodChange={this.props.handleFoodChange}
-          // handleTimeChange={this.props.handleTimeChange}
-          // handleSearchButtonClick={this.props.handleSearchButtonClick}
-          // foodCategory={this.props.foodCategory}
-          // search={this.props.search}
-        />
-        
+        <Navbar />
         <div className="main-container">
           <div className="grid"><Discounts /></div>
         </div>
@@ -71,28 +59,14 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  discounts: state.discounts.discounts,
-  loading: state.discounts.loading,
-  error: state.discounts.error,
-  foodCategory: state.discounts.foodCategory,
-  timeSlot: state.discounts.timeSlot,
-  isAuthenticated: state.auth.token !==null,
-  user: state.auth.user,
-  likes: state.discounts.favorites,
-  search: state.discounts.search,
-  
+  isAuthenticated: state.auth.token !== null,
 });
 
 const mapDispatchToProps = dispatch => ({
   getUser: () => dispatch(getUser()),
-  handleFoodChange: event => dispatch(addFoodCategory(event)),
-  handleTimeChange: event => dispatch(addTimeSlot(event)),
   fetchDiscounts: () => dispatch(fetchDiscounts()),
-  handleSearchButtonClick: (search, food, time) =>
-  dispatch(handleSearchButtonClick(search, food, time)),
   fetchTimeSlot: time => dispatch(fetchTimeSlot(time)),
   onTryAutoSignup: () => dispatch(authActions.authCheckState()),
-  logout: () => dispatch(authActions.logout()),
   getLikes: () => dispatch(fetchFavorites())
 });
 
