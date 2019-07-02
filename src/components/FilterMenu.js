@@ -1,5 +1,7 @@
 import React from "react";
 import '../assets/css/indent.css';
+import { connect } from "react-redux";
+import { handleSearchButtonClick } from "../actions/discountActions";
 
 const FilterMenu = ({
   handleSearchButtonClick,
@@ -58,4 +60,16 @@ const FilterMenu = ({
     </div>
   );
 };
-export default FilterMenu;
+
+const mapStateToProps = state => ({
+  foodCategory: state.discounts.foodCategory,
+  timeSlot: state.discounts.timeSlot,
+  search: state.discounts.search,
+});
+
+const mapDispatchToProps = dispatch => ({
+  handleSearchButtonClick: (search, food, time) =>
+    dispatch(handleSearchButtonClick(search, food, time)),
+  
+});
+export default  connect(mapStateToProps, mapDispatchToProps)(FilterMenu);
