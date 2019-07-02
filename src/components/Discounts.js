@@ -46,9 +46,6 @@ const Discounts = (props) => {
                 height={discount.height}
               />}>
             <DiscountDetails 
-                isAuthenticated={props.isAuthenticated}
-                likes={props.likes}
-                onDeleteLike={props.onDeleteLike}
                 onAddedToLikes={() => props.onAddedToLikes(discount.id)}
                 id={discount.id} 
                 title={discount.title} 
@@ -71,15 +68,10 @@ const mapStateToProps = state => ({
     foodCategory: state.discounts.foodCategory,
     timeSlot: state.discounts.timeSlot,
     search: state.discounts.search,
-    isAuthenticated: state.auth.token !== null,
-    likes: state.discounts.favorites,
-
   });
   
   const mapDispatchToProps = dispatch => ({   
     onAddedToLikes: (id) => dispatch(addedToFavorites(id)),
-    onDeleteLike: (id) => dispatch(deleteFromLikes(id)),
-
   });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Discounts);
