@@ -96,7 +96,7 @@ class Home extends Component {
             details={discount.details} 
             cafe={discount.cafe} 
             image={settings.DOMAIN + discount.image}
-            location={discount.location} />
+            address={discount.location} />
       </LightBox1>
     ));
   };
