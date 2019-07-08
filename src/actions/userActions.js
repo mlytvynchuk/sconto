@@ -1,5 +1,6 @@
 import Axios from "axios";
 import { GET_USER } from ".";
+import * as settings from '../settings'
 export const getUserSuccess = (user) => {
     return {
         type: GET_USER,
@@ -11,11 +12,11 @@ export const getUser = () => {
     
     Axios.defaults.headers = {
         'Content-Type': 'application/json',
-        Authorization: 'Token ' + localStorage.getItem('token'),
+        Authorization: `${settings.TOKEN} ` + localStorage.getItem('token'),
         
     }
-    return Axios.get('http://localhost:8000/api/users/profile/').then(res => {
-        
+    return Axios.get(`${settings.DOMAIN}/api/identity/`).then(res => {
+        console.log(res.data)
         dispatch(getUserSuccess(res.data))
         
     })

@@ -3,6 +3,7 @@ from rest_framework import serializers, status
 from rest_framework.response import Response
 from discounts.models import *
 from django.http import HttpResponse
+
 class DiscountSerializer(serializers.ModelSerializer):
     category = serializers.StringRelatedField(many=False)
     time = serializers.StringRelatedField(many=False)
@@ -12,6 +13,7 @@ class DiscountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Discount
         fields = '__all__'
+
 class DiscountCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Discount

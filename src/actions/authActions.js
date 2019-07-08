@@ -45,12 +45,13 @@ export const authLogin = (email, password) => {
         axios.defaults.headers = {
             'Content-Type': 'application/json; charset=UTF-8'
         }
-        return axios.post('http://localhost:8000/rest-auth/login/',{
+        return axios.post(`${settings.DOMAIN}/api/login/`,{
             email: email,
             password: password
         })
         .then(res => {
-            const token = res.data.key;
+            const token = res.data.access_token;
+            alert(token);
             const expirationDate = new Date(new Date().getTime() + 36000 * 1000);
             localStorage.setItem('token', token);
             localStorage.setItem('expirationDate', expirationDate);
@@ -72,10 +73,10 @@ export const getUserSuccess = (user) => {
 export const getUser = () => {
     axios.defaults.headers = {
         "Content-Type": "application/json",
-        Authorization: 'Token ' + localStorage.getItem('token')
+        Authorization: `${settings.TOKEN} ` + localStorage.getItem('token')
     }
     return dispatch => {
-        return axios.get('http://localhost:8000/api/users/profile/')
+        return axios.get(`${settings.DOMAIN}/api/identity/`)
         .then(
             res => {
                 localStorage.setItem('user', res.data[0].fields)
@@ -92,12 +93,13 @@ export const getUser = () => {
 export const authSignup = (email, password) => {
     return dispatch => {
         dispatch(authStart());
-        return axios.post('http://localhost:8000/api/users/',{
+        return axios.post(`${settings.DOMAIN}/api/users/`,{
             email: email,
             password: password,
         })
         .then(res => {
-            const token = res.data.key;
+            const token = res.data.access_token;
+            alert(token);
             const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
             localStorage.setItem('token', token);
             localStorage.setItem('expirationDate', expirationDate);

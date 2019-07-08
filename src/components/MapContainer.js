@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import Geocode from 'react-geocode';
 import * as local_settings from '../settings';
+import qs from 'querystring';
+
 Geocode.setApiKey(local_settings.GOOGLE_KEY);
 Geocode.enableDebug();
 
@@ -16,10 +18,14 @@ const mapStyles = {
       showingInfoWindow: false,  
       activeMarker: {},          
       selectedPlace: {},
-      loc: null,          
+      loc: null,   
     };
 
     componentDidMount() {
+      const value = qs.parse(this.props.location.search)
+      this.address = value['?address']
+      this.cafe = value['cafe']
+
       this.getCoordinates().then(loc => {
         this.setState({ loc });
       });
@@ -42,7 +48,7 @@ const mapStyles = {
     };
 
     getCoordinates() {
-      return Geocode.fromAddress(this.props.location.state.location).then(
+      return Geocode.fromAddress(this.address).then(
         response => {
           const loc = response.results[0].geometry.location;
           console.log(loc.lat, loc.lng);
@@ -67,7 +73,7 @@ const mapStyles = {
         >
           <Marker
           onClick={this.onMarkerClick}
-          name={this.props.location.state.cafe}
+          name = {this.cafe}
         />
         <InfoWindow
           marker={this.state.activeMarker}
