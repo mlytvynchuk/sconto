@@ -93,7 +93,7 @@ export const getUser = () => {
 export const authSignup = (email, password) => {
     return dispatch => {
         dispatch(authStart());
-        return axios.post(`${settings.DOMAIN}/api/users/`,{
+        return axios.post(`${settings.DOMAIN}/api/register/`,{
             email: email,
             password: password,
         })
