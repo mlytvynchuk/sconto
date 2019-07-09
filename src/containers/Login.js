@@ -44,7 +44,6 @@ class Login extends Component {
     e.preventDefault();
 
     const { email, password } = this.state;
-    console.log(email, password);
     this.props.onAuth(email, password).then(() => {
       if (!this.props.error) {
         this.setState({

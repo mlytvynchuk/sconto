@@ -80,7 +80,6 @@
 }
 .invalid-data {
   background-color: #ffd6d6;
-  border-color: #fb3f4c;
 }
 .login-error-message {
   color: red;
