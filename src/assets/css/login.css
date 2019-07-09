@@ -78,3 +78,15 @@
     min-width: 310px;
   }
 }
+.invalid-data {
+  background-color: #ffd6d6;
+  border-color: #fb3f4c;
+}
+.login-error-message {
+  color: red;
+}
+.error-message {
+  width: 300px;
+  margin-bottom: 10px;
+ 
+}
