@@ -1,9 +1,10 @@
 import { combineReducers } from "redux";
 import discountReducer from "./discountReducer";
 import authReducer from './authReducer';
-// import userReducer  from "./userReducer";
+import filterReducer from './filterReducer'
+
 export default combineReducers({
   discounts: discountReducer,
   auth: authReducer,
-  // user: userReducer,
+  filtesrs: filterReducer
 });
