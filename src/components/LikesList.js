@@ -7,7 +7,7 @@ import '../assets/css/likeList.css';
 import '../assets/css/indent.css';
 import * as settings from '../settings'
 class LikesList extends React.Component{
-    componentDidMount(){
+    componentDidUpdate(){
         this.props.getLikes();
     }
     render(){

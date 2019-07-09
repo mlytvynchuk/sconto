@@ -35,6 +35,7 @@ export function fetchDiscountsFail(error) {
 export function fetchDiscounts() {
   
   return dispatch => {
+    
     dispatch(fetchDiscountsBegin());
     return fetch(`${settings.DOMAIN}/api/discounts/`)
       .then(handleErrors)
@@ -139,8 +140,6 @@ export function fetchFavoritesSuccess(favorites){
 }
 export function fetchFavorites(){
   return dispatch => {
-   
-    let user = store.getState().auth.user;
     Axios.defaults.headers = {
       'Content-Type': 'application/json; charset=UTF-8',
       Authorization: `${settings.TOKEN} ` + store.getState().auth.token

@@ -1,6 +1,7 @@
 import * as actionTypes from './index'
 import axios from 'axios'
 import * as settings from '../settings'
+import { compose } from 'redux';
 export const authStart = () => {
     return{
         type: actionTypes.AUTH_START
@@ -79,9 +80,10 @@ export const getUser = () => {
         return axios.get(`${settings.DOMAIN}/api/identity/`)
         .then(
             res => {
-                localStorage.setItem('user', res.data[0].fields)
-                let user = res.data[0].fields;
-                dispatch(getUserSuccess(user));
+                // let user = res.data.access_token;
+                console.log(res.data.id);
+                // localStorage.setItem('user', res.data.access_token)
+                // dispatch(getUserSuccess(user));
                 
             }
         );
@@ -115,23 +117,23 @@ export const authSignup = (email, password) => {
 export const authCheckState = () =>{
     return dispatch => {
         const token = localStorage.getItem('token');
-        
         if (token === null){
+            console.log('token is null')
             dispatch(logout());
+            return false;
         }
         else{
-            
             const expirationDate = new Date(localStorage.getItem('expirationDate'))
-            if (expirationDate <= new Date()){
-                
+            if (expirationDate <= new Date()){   
                 dispatch(logout());
             }
             else{
                 
                 dispatch(authSuccess(token));
                 dispatch(checkAuthTimeout(3600));
-                
+                return true;
             }
         }
+        console.log(token)
     }
 }

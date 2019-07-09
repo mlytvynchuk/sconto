@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import '../assets/css/indent.css';
+import { DOMAIN } from '../settings';
 
 
 class AddDisc extends React.Component{
@@ -50,7 +51,7 @@ class AddDisc extends React.Component{
     form_data.append('overlay', this.state.overlay);
     form_data.append('height', this.state.height);
     
-    let url = 'http://localhost:8000/api/discounts/';
+    let url = `${DOMAIN}/api/discounts/`;
      axios.post(url, form_data)
          .then(res => {
            console.log(res.data);
