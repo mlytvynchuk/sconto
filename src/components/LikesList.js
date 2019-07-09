@@ -7,6 +7,9 @@ import '../assets/css/likeList.css';
 import '../assets/css/indent.css';
 import * as settings from '../settings'
 class LikesList extends React.Component{
+    componentDidUpdate(){
+        this.props.getLikes();
+    }
     render(){
         return(
             
@@ -25,7 +28,7 @@ class LikesList extends React.Component{
                                 details={item.discount.details} 
                                 cafe={item.discount.cafe} 
                                 image={settings.DOMAIN + item.discount.image}
-                                location={item.discount.location} />
+                                address={item.discount.location} />
                         </LightBox1> 
                         <p>{item.discount.location}</p> </div>
                         <div className="display-right"><img src={settings.DOMAIN + item.discount.image} alt=""/>

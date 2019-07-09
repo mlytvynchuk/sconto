@@ -16,7 +16,6 @@ import {
   fetchFavorites,
   deleteFromLikes
 } from "../actions/discountActions";
-import { getUser } from "../actions/userActions";
 import { setTimeout } from "timers";
 class Home extends Component {
   componentDidUpdate(prevProps){
@@ -25,21 +24,25 @@ class Home extends Component {
             this.props.getLikes();
           }, 500);
       }
+      // if(JSON.stringify(this.props.discounts != JSON.stringify(prevProps.discounts))){
+      //   setTimeout(() => {
+      //     this.props.fetchDiscounts();
+      //   }, 500);
+      // }
   }
-  componentDidMount() {
-    this.props.onTryAutoSignup();
+  componentWillReceiveProps(nextProps){
+    if (JSON.stringify(this.props.discounts) !== JSON.stringify(nextProps.discounts)){
+      nextProps.fetchDiscounts();
+    }
+  }
 
-      if(this.props.isAuthenticated){
-        this.props.getUser()
-        .then(() =>{
-          if(this.props.isAuthenticated){
-            this.props.getLikes();
-          }
-        });
-      }  
+  componentDidMount() {
+    var is_authenticated = this.props.onTryAutoSignup();
+    if (is_authenticated){
+      this.props.getLikes();
+    }
     this.props.fetchDiscounts();
     this.getTime();
-    
   }
   getTime = () => {
     var today = new Date();
@@ -96,7 +99,7 @@ class Home extends Component {
             details={discount.details} 
             cafe={discount.cafe} 
             image={settings.DOMAIN + discount.image}
-            location={discount.location} />
+            address={discount.location} />
       </LightBox1>
     ));
   };
@@ -135,7 +138,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getUser: () => dispatch(getUser()),
+  // getUser: () => dispatch(getUser()),
   handleFoodChange: event => dispatch(addFoodCategory(event)),
   handleTimeChange: event => dispatch(addTimeSlot(event)),
   fetchDiscounts: () => dispatch(fetchDiscounts()),

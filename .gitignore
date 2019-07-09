@@ -33,3 +33,4 @@ __pycache__/
 
 settings.js
 *.sqlite3
+scontoapi/db.sqlite3

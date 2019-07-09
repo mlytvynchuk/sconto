@@ -10,9 +10,10 @@ from django.views.decorators.csrf import csrf_exempt
 class DiscountsViewSet(viewsets.ModelViewSet):
     queryset = Discount.objects.all()
     serializer_class = DiscountCreateSerializer
+
     def list(self,request):
         queryset = Discount.objects.all()
-        serializer = DiscountSerializer(self.queryset, many=True)
+        serializer = DiscountSerializer(queryset, many=True)
         return Response(serializer.data)
 
 

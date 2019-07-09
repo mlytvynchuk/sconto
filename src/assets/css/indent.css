@@ -1,3 +1,6 @@
 .indent {
     padding: 2rem;
 }
+label {
+    width: 100%;
+}

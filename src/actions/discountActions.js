@@ -11,7 +11,7 @@ import {
 } from "./index";
 import store from '../store/index'
 import Axios from "axios";
-
+import * as settings from '../settings'
 export function fetchDiscountsBegin() {
   return {
     type: FETCH_DISCOUNTS_BEGIN
@@ -35,8 +35,9 @@ export function fetchDiscountsFail(error) {
 export function fetchDiscounts() {
   
   return dispatch => {
+    
     dispatch(fetchDiscountsBegin());
-    return fetch("http://localhost:8000/api/discounts/")
+    return fetch(`${settings.DOMAIN}/api/discounts/`)
       .then(handleErrors)
       .then(response => response.json())
       .then(result => {
@@ -97,12 +98,12 @@ export function addedToFavorites(discountId) {
     
     Axios.defaults.headers = {
       'Content-Type': 'application/json',
-      Authorization: 'Token ' + store.getState().auth.token,
+      Authorization: `${settings.TOKEN} ` + store.getState().auth.token,
     }
   const likedElem = store.getState().discounts.discounts.find(discount =>  discount.id === discountId);
   const checkId = store.getState().discounts.favorites.find(like => like.discount.id === likedElem.id);
   if (!checkId){
-    Axios.post('http://localhost:8000/api/likes/', {
+    Axios.post(`${settings.DOMAIN}/api/likes/`, {
     discount: discountId
       }).then(res => {
           dispatch(addToFavorite(res.data))
@@ -120,9 +121,9 @@ export function deleteFromLikes(discountId) {
   console.log(store.getState().auth.token)
   Axios.defaults.headers = {
     'Content-Type': 'application/json',
-    Authorization: 'Token ' + store.getState().auth.token,
+    Authorization: `${settings.TOKEN} ` + store.getState().auth.token,
   }
-  Axios.delete(`http://localhost:8000/api/likes/${discountId}/`)
+  Axios.delete(`${settings.DOMAIN}/api/likes/${discountId}/`)
     .then(res => {
       console.log(res.data)
     })
@@ -139,13 +140,12 @@ export function fetchFavoritesSuccess(favorites){
 }
 export function fetchFavorites(){
   return dispatch => {
-   
-    let user = store.getState().auth.user;
     Axios.defaults.headers = {
       'Content-Type': 'application/json; charset=UTF-8',
-      Authorization: 'Token ' + store.getState().auth.token
+      Authorization: `${settings.TOKEN} ` + store.getState().auth.token
   }
-    return Axios.get(`http://localhost:8000/api/likes/${user.id}/`)
+  // return Axios.get(`${settings.DOMAIN}/api/likes/${user.id}/`)
+    return Axios.get(`${settings.DOMAIN}/api/likes/`)
       .then(result => {
         dispatch(fetchFavoritesSuccess(result.data));
        

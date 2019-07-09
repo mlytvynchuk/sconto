@@ -1,31 +1,36 @@
 import React, { Component } from 'react'
 import '../assets/css/login.css';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import * as actions from "../actions/authActions"
 class Login extends Component {
     state = {
         email: "",
-        password: ""
+        password: "",
+        redirect: false,
     }
     handleInput(e){
         this.setState({
             [e.target.name]: String([e.target.value])
         })
     }
-    componentWillReceiveProps(newProps){
-        if(newProps.isAuthenticated){
-            newProps.history.push('/');
-        }
-    }
+    // componentWillReceiveProps(newProps){
+    //     if(newProps.isAuthenticated){
+    //         newProps.history.push('/');
+    //     }
+    // }
     handleSubmit(e){
         e.preventDefault();
         const {email, password} = this.state;
         console.log(email,password);
-        this.props.onAuth(email, password);
-        if(this.props.isAuthenticated){
-            this.props.history.push('/');
-        }
+        this.props.onAuth(email, password).then(() => {
+            if(!this.props.error){
+               this.setState({
+                   redirect: true
+               })
+            }
+        });
+        
     
     
     }
@@ -36,11 +41,17 @@ class Login extends Component {
         //         <p>{this.props.error.message}</p>
         //     )
         // }
+        const RedirectToMain = () => {
+            if(this.state.redirect){
+                return <Redirect to='/'/>
+            }
+            return null;
+        }
         return (
             <div className="login-body">
-               
                     <div className="login-container">
         <div className="login-wrapper">
+                <RedirectToMain/>
             <form className="login-form" onSubmit={(e) => this.handleSubmit(e)}>
 
                 <div className="title-container">

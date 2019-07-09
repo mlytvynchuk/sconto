@@ -4,16 +4,10 @@ import coupon from '../assets/img/voucher.png'
 import {Link} from 'react-router-dom'
 class DiscountDetails extends React.Component {
 
-    raiseInvoiceClicked(){
-        const url = 'http://localhost:3000/map';
-        window.open(url, '_blank');
-    }
-
     render(){
         const LikeButton = () => {
             if(this.props.isAuthenticated){
-                var like = this.props.likes.filter(l => l.discount.title === this.props.title)[0];
-                
+                var like = this.props.likes.filter(l => l.discount.title === this.props.title)[0];        
                 if(like){
                    return(
                     <button className="btn-like bg-grey" onClick={() => this.props.onDeleteLike(like.id)} >Unlike</button>
@@ -40,19 +34,13 @@ class DiscountDetails extends React.Component {
                     </div>
 
                     <div className="details">
-                        <p>Lorem ipsum bibendum porta donec metus sit risus nulla nec orci sagittis nibh adipiscing nam. Lectus non, rutrum ut leo urna enim proin sem nibh, urna.
+                        <p>{this.props.details}
                         </p>
                     </div>
 
                     <div className="map-container">
-                        <Link to={{pathname: '/map/',
-                            state: {
-                                location: this.props.location,
-                                cafe: this.props.cafe
-                            }
-                        }}>
-                        <button className="btn"> </button></Link>   
-                        <p>{this.props.location}</p>
+                        <Link className="btn" to={`/map?address=${this.props.address}&cafe=${this.props.cafe}`} target="_blank" />
+                        <p>{this.props.address}</p>
                     </div>
                 </div>
                 {LikeButton()}
