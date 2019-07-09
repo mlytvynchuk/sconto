@@ -79,6 +79,7 @@ export default function discountReducer(state = initialState, action) {
       return { ...state, favorites: newFavs };
     }
     case FETCH_LIKES_SUCCESS: {
+      console.log(action.payload)
     return {
       ...state,
       favorites: action.payload

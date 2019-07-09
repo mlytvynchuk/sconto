@@ -148,7 +148,6 @@ export function fetchFavorites(){
     return Axios.get(`${settings.DOMAIN}/api/likes/`)
       .then(result => {
         dispatch(fetchFavoritesSuccess(result.data));
-       
       })
       .catch(error => console.log(error));
   }

@@ -48,13 +48,13 @@ class Navbar extends Component {
                   <option value="null" >
                     Обери смаколики
                   </option>
-                  <option value="Фастфуд">Фастфуд</option>
+                  <option value="ФастФуд">ФастФуд</option>
                   <option value="Українська кухня">Українська кухня</option>
                   <option value="Кава">Кава</option>
                 </select>
               </li>
               <li className="filter-item">
-                <h5>Час доби</h5>
+                <h4>Час доби</h4>
                 <select value={timeSlot} onChange={handleTimeChange}>
                   <option value="null">
                     

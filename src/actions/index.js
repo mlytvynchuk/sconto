@@ -17,3 +17,5 @@ export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
 export const GET_USER = "GET_USER";
 
+export const GET_TIME = "GET_TIME";
+export const GET_CATEGORY = "GET_CATEGORY";

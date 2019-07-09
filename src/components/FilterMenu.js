@@ -25,7 +25,7 @@ const FilterMenu = ({
         <h4>Їжа</h4>
         <select ref={foodRef} defaultValue={foodCategory}>
           <option value="null">Обери смаколики</option>
-          <option value="Фастфуд">Фастфуд</option>
+          <option value="ФастФуд">ФастФуд</option>
           <option value="Українська кухня">Українська кухня</option>
           <option value="Кава">Кава</option>
         </select>
