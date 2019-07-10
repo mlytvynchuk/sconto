@@ -21,7 +21,7 @@ class Navbar extends Component {
     }else{
       return(
         <React.Fragment>
-        <UserProfile {...this.props} />
+        <UserProfile />
         
       </React.Fragment>
       )
