@@ -98,11 +98,7 @@ class Navbar extends Component {
                 }
               >
                 <FilterMenu
-                  timeSlot={this.props.timeSlot}
                   handleSearchInput={this.handleSearchInput}
-                  handleSearchButtonClick={handleSearchButtonClick}
-                  search={search}
-                  foodCategory={foodCategory}
                 />
               </LightBox1>
               {this.loginHandlers()}

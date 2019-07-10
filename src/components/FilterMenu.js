@@ -1,13 +1,9 @@
 import React from "react";
-import '../assets/css/indent.css';
+import "../assets/css/indent.css";
+import { connect } from "react-redux";
+import { handleSearchButtonClick } from "../actions/discountActions";
 
-const FilterMenu = ({
-  handleSearchButtonClick,
-  timeSlot,
-  foodCategory,
-  search,
-  handleSearchInput
-}) => {
+const FilterMenu = ({ handleSearchButtonClick, timeSlot, foodCategory, search, handleSearchInput }) => {
   const foodRef = React.createRef();
   const timeRef = React.createRef();
   const searchRef = React.createRef();
@@ -17,7 +13,14 @@ const FilterMenu = ({
       <h4>Пошук</h4>
       <div className="search-container">
         <form action="#">
-          <input type="text" placeholder="Нажми й шукай" name="search" ref={searchRef} defaultValue={search}  onChange={(e) => handleSearchInput(e)}/>
+          <input
+            type="text"
+            placeholder="Нажми й шукай"
+            name="search"
+            ref={searchRef}
+            defaultValue={search}
+            onChange={e => handleSearchInput(e)}
+          />
         </form>
       </div>
       <br />
@@ -58,4 +61,15 @@ const FilterMenu = ({
     </div>
   );
 };
-export default FilterMenu;
+
+const mapStateToProps = state => ({
+  foodCategory: state.discounts.foodCategory,
+  timeSlot: state.discounts.timeSlot,
+  search: state.discounts.search
+});
+
+const mapDispatchToProps = dispatch => ({
+  handleSearchButtonClick: (search, food, time) =>
+    dispatch(handleSearchButtonClick(search, food, time))
+});
+export default connect(mapStateToProps, mapDispatchToProps)(FilterMenu);
