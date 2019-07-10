@@ -72,14 +72,6 @@ class Login extends Component {
     return "";
   }
 
-  createClassNameForPassword() {
-    const defaultClassName = "input focus";
-
-    if (!this.state.isValidPassword) 
-        return defaultClassName + " invalid-data";
-    return defaultClassName;
-  }
-
   render() {
     const { error } = this.props;
 
