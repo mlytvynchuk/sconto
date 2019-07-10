@@ -124,7 +124,7 @@ class Login extends Component {
               <div className="button-container">
                 <input
                   type="submit"
-                  className="button-submit "
+                  className="button-submit hover "
                   value="Увійти"
                   onClick={e => this.handleSubmit(e)}
                 />
