@@ -4,3 +4,6 @@
 label {
     width: 100%;
 }
+.invalid-data {
+    background-color: #ffd6d6 !important;
+  }
