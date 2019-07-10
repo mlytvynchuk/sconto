@@ -70,13 +70,13 @@ class AddDisc extends React.Component {
     form_data.append("height", this.state.height);
     console.log(this.state);
 
-    // let url = `${DOMAIN}/api/discounts/`;
-    // axios
-    //   .post(url, form_data)
-    //   .then(res => {
-    //     console.log(res.data);
-    //   })
-    //   .catch(err => console.log(err));
+    let url = `${DOMAIN}/api/discounts/`;
+    axios
+      .post(url, form_data)
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => console.log(err));
   };
 
   render() {
@@ -164,11 +164,11 @@ class AddDisc extends React.Component {
               required
             >
               <option value="">Виберіть категорію</option>
-              <option value="4">Азійська кухня</option>
-              <option value="3">Українська кухня</option>
+              <option value="3">Азійська кухня</option>
+              <option value="4">Українська кухня</option>
               <option value="1">ФастФуд</option>
-              <option value="6">Десерти</option>
-              <option value="5">Алкоголь</option>
+              <option value="5">Десерти</option>
+              <option value="6">Алкоголь</option>
               <option value="2">Кава</option>
             </select>
             <br />
