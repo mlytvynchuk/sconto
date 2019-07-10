@@ -107,14 +107,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Navbar {...this.props}
-          timeSlot={this.props.timeSlot}
-          handleFoodChange={this.props.handleFoodChange}
-          handleTimeChange={this.props.handleTimeChange}
-          handleSearchButtonClick={this.props.handleSearchButtonClick}
-          foodCategory={this.props.foodCategory}
-          search={this.props.search}
-        />
+        <Navbar />
         
         <div className="main-container">
           <div className="grid">{this.filterDiscounts()}</div>
