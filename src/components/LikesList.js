@@ -7,9 +7,6 @@ import '../assets/css/likeList.css';
 import '../assets/css/indent.css';
 import * as settings from '../settings'
 class LikesList extends React.Component{
-    componentDidUpdate(){
-        this.props.getLikes();
-    }
     render(){
         return(
             
@@ -22,6 +19,7 @@ class LikesList extends React.Component{
                         <div className="display-left">
                         <LightBox1 
                             button={ <h4>{item.discount.cafe}</h4> }>
+                                {console.log(item)}
                             <DiscountDetails 
                                 id={item.discount.id} 
                                 title={item.discount.title} 

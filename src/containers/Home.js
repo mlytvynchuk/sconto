@@ -30,11 +30,11 @@ class Home extends Component {
       //   }, 500);
       // }
   }
-  componentWillReceiveProps(nextProps){
-    if (JSON.stringify(this.props.discounts) !== JSON.stringify(nextProps.discounts)){
-      nextProps.fetchDiscounts();
-    }
-  }
+  // componentWillReceiveProps(nextProps){
+  //   if (JSON.stringify(this.props.discounts) !== JSON.stringify(nextProps.discounts)){
+  //     nextProps.fetchDiscounts();
+  //   }
+  // }
 
   componentDidMount() {
     var is_authenticated = this.props.onTryAutoSignup();

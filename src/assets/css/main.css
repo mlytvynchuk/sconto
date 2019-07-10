@@ -136,3 +136,6 @@ header {
 .pizza {
   background-image: url(../img/pizza.jpeg);
 }
+input{
+  outline: none;
+}

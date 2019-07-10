@@ -75,6 +75,11 @@ header .filter-item {
   justify-content: center;
   margin-right: 20px;
 }
+header .filter-item h4{
+  font-size: 16px;
+  margin-right: 5px
+}
+
 header h4,
 header h5 {
   font-size: 14px;
@@ -224,3 +229,7 @@ ul {
 a{
   color: black;
 }
+input{
+  outline: none;
+}
+select:focus{outline: none;}
