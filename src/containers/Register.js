@@ -9,6 +9,7 @@ class Login extends Component {
     password: "",
     isValidLogin: true,
     isValidPassword: true,
+    isDisabledRegisterButton: false,
     touched: {
         email: false,
         password: false,
@@ -44,8 +45,10 @@ class Login extends Component {
   isValidPassword() {
       if (this.state.password.length > 0) 
         this.setState({ isValidPassword: true });
-    else 
+    else {
         this.setState({ isValidPassword: false });
+        this.setState({isDisabledRegisterButton: true})
+    }
   }
 
   handleBlur(field) {
@@ -67,6 +70,7 @@ class Login extends Component {
   }
 
   render() {
+    const { isDisabledRegisterButton } = this.state;
    
     return (
       <div className="login-body">
@@ -103,9 +107,10 @@ class Login extends Component {
               <div className="button-container">
                 <input
                   type="submit"
-                  className="button-submit "
+                  className="button-submit hover "
                   value="Зареєструватись"
                   onClick={e => this.handleSubmit(e)}
+                  disabled={isDisabledRegisterButton}
                 />
               </div>
 
