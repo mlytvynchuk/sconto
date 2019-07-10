@@ -57,20 +57,13 @@ class Login extends Component {
     this.setState({ touched: {...this.state.touched, [field]: true} })
   }
 
-  createClassNameForEmail() {
-    const defaultClassName = "input focus";
+  addClassNameToField(field) {
+    if (field === "email" && !this.state.isValidLogin) 
+        return  " invalid-data";
+    else if(field === "password" && !this.state.isValidPassword)
+        return  " invalid-data";
 
-    if (!this.state.isValidLogin) 
-        return defaultClassName + " invalid-data";
-    return defaultClassName;
-  }
-
-  createClassNameForPassword() {
-    const defaultClassName = "input focus";
-
-    if (!this.state.isValidPassword) 
-        return defaultClassName + " invalid-data";
-    return defaultClassName;
+    return "";
   }
 
   render() {
@@ -87,7 +80,7 @@ class Login extends Component {
               <div className="input-container">
                 <input
                   type="email"
-                  className={this.createClassNameForEmail()}
+                  className={`input focus ${this.addClassNameToField("email")}`}
                   placeholder="Ваш email"
                   name="email"
                   required
@@ -98,7 +91,7 @@ class Login extends Component {
               <div className="input-container">
                 <input
                   type="password"
-                  className={this.createClassNameForPassword()}
+                  className={`input focus ${this.addClassNameToField("password")}`}
                   placeholder="Ваш пароль"
                   name="password"
                   required
