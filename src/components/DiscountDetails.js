@@ -2,7 +2,7 @@ import React from 'react'
 import '../assets/css/discount-details.css'
 import coupon from '../assets/img/voucher.png'
 import {Link} from 'react-router-dom'
-import { addedToFavorites, deleteFromLikes } from "../actions/discountActions";
+import { deleteFromLikes } from "../actions/discountActions";
 import { connect } from "react-redux";
 
 class DiscountDetails extends React.Component {
@@ -64,7 +64,6 @@ const mapStateToProps = state => ({
   });
   
   const mapDispatchToProps = dispatch => ({
-    // onAddedToLikes: (id) => dispatch(addedToFavorites(id)),
     onDeleteLike: id => dispatch(deleteFromLikes(id))
   });
   
