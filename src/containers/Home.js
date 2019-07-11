@@ -9,6 +9,7 @@ import {
 } from "../actions/discountActions";
 import { setTimeout } from "timers";
 import Discounts from "../components/DIscounts";
+import ErrorMessage from "../components/ErrorMessage";
 class Home extends Component {
   componentDidUpdate(prevProps){
       if (JSON.stringify(this.props.likes) !== JSON.stringify(prevProps.likes)){
@@ -50,6 +51,10 @@ class Home extends Component {
   };
 
   render() {
+    const { error } = this.props;
+    const errorMessage = "Виникла помилка при завантаженні даних. Вибачте за незручності."
+    if(error)
+      return <ErrorMessage message={errorMessage} />
     return (
       <div>
         <Navbar />
@@ -64,6 +69,7 @@ class Home extends Component {
 const mapStateToProps = state => ({
   timeSlot: state.discounts.timeSlot,
   likes: state.discounts.favorites,
+  error: state.discounts.error,
 });
 
 const mapDispatchToProps = dispatch => ({
