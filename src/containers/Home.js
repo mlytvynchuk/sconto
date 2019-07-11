@@ -10,6 +10,7 @@ import {
 import { setTimeout } from "timers";
 import Discounts from "../components/DIscounts";
 import ErrorMessage from "../components/ErrorMessage";
+
 class Home extends Component {
   componentDidUpdate(prevProps){
       if (JSON.stringify(this.props.likes) !== JSON.stringify(prevProps.likes)){
@@ -76,7 +77,7 @@ const mapDispatchToProps = dispatch => ({
   fetchDiscounts: () => dispatch(fetchDiscounts()),
   fetchTimeSlot: time => dispatch(fetchTimeSlot(time)),
   onTryAutoSignup: () => dispatch(authActions.authCheckState()),
-  getLikes: () => dispatch(fetchFavorites())
+  getLikes: () => dispatch(fetchFavorites()),
 });
 
 export default connect(

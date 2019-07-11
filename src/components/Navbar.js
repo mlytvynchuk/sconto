@@ -10,15 +10,30 @@ import {
   addTimeSlot,
   handleSearchButtonClick
 } from "../actions/discountActions";
+import { fetchTime, fetchCategory } from "../actions/filtersActions";
 
 class Navbar extends Component {
   state = {
     search: ""
   };
+  
+  componentDidMount() {
+    this.props.fetchTime()
+    this.props.fetchCategory();
+  }
 
   handleSearchInput = e => {
     this.setState({ search: e.target.value });
   };
+
+  renderOptions = (initialValueForOption, firstStatement, optionsList )=> {
+    return (
+      <>
+        <option value={initialValueForOption}>{ firstStatement }</option>
+        {optionsList.map(el => <option key={el.id} value={el.name}>{el.name}</option>)}
+      </>
+    );
+  }
 
   loginHandlers = () => {
     if (!this.props.isAuthenticated) {
@@ -26,14 +41,14 @@ class Navbar extends Component {
     } else {
       return (
         <>
-          <UserProfile />
+          <UserProfile renderOptions={this.renderOptions}/>
         </>
       );
     }
   };
 
   render() {
-    const { foodCategory, timeSlot, handleTimeChange, handleFoodChange, handleSearchButtonClick } = this.props;
+    const { foodCategory, timeSlot, handleTimeChange, handleFoodChange, handleSearchButtonClick, categories } = this.props;
     const { search } = this.state;
 
     return (
@@ -49,19 +64,17 @@ class Navbar extends Component {
               <li className="filter-item">
                 <h4>Їжа</h4>
                 <select onChange={handleFoodChange} value={foodCategory}>
-                  <option value="null">Обери смаколики</option>
-                  <option value="ФастФуд">ФастФуд</option>
-                  <option value="Українська кухня">Українська кухня</option>
-                  <option value="Кава">Кава</option>
+                  {
+                    this.renderOptions("null", "Обери смаколики", categories)
+                  }
                 </select>
               </li>
               <li className="filter-item">
                 <h4>Час доби</h4>
                 <select value={timeSlot} onChange={handleTimeChange}>
-                  <option value="null">Обери час</option>
-                  <option value="Сніданок">Сніданок</option>
-                  <option value="Обід">Обід</option>
-                  <option value="Вечеря">Вечеря</option>
+                  {
+                    this.renderOptions("null", "Обери час", this.props.times)
+                  }
                 </select>
               </li>
             </ul>
@@ -99,6 +112,7 @@ class Navbar extends Component {
               >
                 <FilterMenu
                   handleSearchInput={this.handleSearchInput}
+                  renderOptions={this.renderOptions}
                 />
               </LightBox1>
               {this.loginHandlers()}
@@ -114,7 +128,8 @@ const mapStateToProps = state => ({
   foodCategory: state.discounts.foodCategory,
   timeSlot: state.discounts.timeSlot,
   isAuthenticated: state.auth.token !== null,
-  
+  times: state.filters.times,
+  categories: state.filters.categories,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -122,6 +137,8 @@ const mapDispatchToProps = dispatch => ({
   handleTimeChange: event => dispatch(addTimeSlot(event)),
   handleSearchButtonClick: (search, food, time) =>
     dispatch(handleSearchButtonClick(search, food, time)),
+  fetchTime: () => dispatch(fetchTime()),
+  fetchCategory: () => dispatch(fetchCategory()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
 

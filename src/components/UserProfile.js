@@ -9,7 +9,7 @@ import "../assets/css/menu.css";
 import { connect } from "react-redux";
 import * as authActions from "../actions/authActions";
 
- const UserProfile = ({logout}) => {
+ const UserProfile = ({logout, renderOptions}) => {
     return (
       <div className="profile">
         <ul id="menu">
@@ -42,7 +42,7 @@ import * as authActions from "../actions/authActions";
                       </div>
                     }
                   >
-                    <AddDiscForm />
+                    <AddDiscForm renderOptions={renderOptions}/>
                   </LightBox1>
                 </div>
               </li>

@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import "../assets/css/indent.css";
 import { DOMAIN } from "../settings";
+import { connect } from "react-redux";
+import { fetchTime, fetchCategory, fetchHeight, fetchOverlay } from "../actions/filtersActions";
 
 class AddDisc extends React.Component {
   state = {
@@ -26,16 +28,20 @@ class AddDisc extends React.Component {
       image: false
     }
   };
+  componentDidMount() {
+    this.props.fetchCategory();
+    this.props.fetchTime();
+    this.props.fetchHeight();
+    this.props.fetchOverlay();
+  }
 
   handleChange = e => {
-    console.log(e.target.id + "-" + e.target.value);
     this.setState({
       [e.target.id]: e.target.value
     });
   };
 
   handleImageChange = e => {
-    console.log(e.target.toString());
     this.setState({
       image: e.target.files[0]
     });
@@ -68,7 +74,6 @@ class AddDisc extends React.Component {
     form_data.append("time", this.state.time);
     form_data.append("overlay", this.state.overlay);
     form_data.append("height", this.state.height);
-    console.log(this.state);
 
     let url = `${DOMAIN}/api/discounts/`;
     axios
@@ -81,7 +86,7 @@ class AddDisc extends React.Component {
 
   render() {
     const { cafe, title, details, location, category, time, overlay, height} = this.state;
-
+    const { renderOptions, categories, times, heights, overlays } = this.props;
     return (
       <div className="indent">
         <h2>Додайте свою пропозицію</h2>
@@ -163,13 +168,9 @@ class AddDisc extends React.Component {
               onBlur={() =>this.handleBlur("category")}
               required
             >
-              <option value="">Виберіть категорію</option>
-              <option value="3">Азійська кухня</option>
-              <option value="4">Українська кухня</option>
-              <option value="1">ФастФуд</option>
-              <option value="5">Десерти</option>
-              <option value="6">Алкоголь</option>
-              <option value="2">Кава</option>
+              {
+                renderOptions("", "Виберіть категорію", categories)
+              }
             </select>
             <br />
             <br />
@@ -185,11 +186,9 @@ class AddDisc extends React.Component {
               onBlur={() =>this.handleBlur("time")}
               required
             >
-              <option value="">Виберіть час</option>
-              <option value="1">Сніданок</option>
-              <option value="2">Ланч</option>
-              <option value="3">Обід</option>
-              <option value="4">Вечеря</option>
+              {
+                renderOptions("", "Виберіть час", times)
+              }
             </select>
             <br />
             <br />
@@ -205,9 +204,7 @@ class AddDisc extends React.Component {
               onBlur={() =>this.handleBlur("overlay")}
               required
             >
-              <option value="">Виберіть фон</option>
-              <option value="1">dark</option>
-              <option value="2">light</option>
+              {renderOptions("", "Виберіть фон", overlays)}
             </select>
             <br />
             <br />
@@ -223,8 +220,9 @@ class AddDisc extends React.Component {
               onBlur={() =>this.handleBlur("height")}
               required
             >
-              <option value="">Виберіть розмір</option>
-              <option value="1">360</option>
+              {
+                renderOptions("", "Виберіть розмір", heights)
+              }
             </select>
             <br />
             <br />
@@ -252,4 +250,17 @@ class AddDisc extends React.Component {
   }
 }
 
-export default AddDisc;
+const mapStateToProps = state => ({
+  times: state.filters.times,
+  categories: state.filters.categories,
+  overlays: state.filters.overlays,
+  heights: state.filters.heights
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchTime: () => dispatch(fetchTime()),
+  fetchCategory: () => dispatch(fetchCategory()),
+  fetchOverlay: () => dispatch(fetchOverlay()),
+  fetchHeight: () => dispatch(fetchHeight()),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(AddDisc);
