@@ -5,7 +5,7 @@ import DiscountDetails from './DiscountDetails';
 import LightBox1 from './LightBox1';
 import { addedToFavorites } from "../actions/discountActions";
 import * as settings from '../settings'
-
+import LoadingSpinner from "./LoadingSpinner";
 class Discounts extends Component {
     searchDiscounts = () => {
         const { search, discounts } = this.props;
@@ -56,6 +56,10 @@ class Discounts extends Component {
         ));
       };
       render() {
+        const { loading } = this.props;
+        if(loading)
+          return <LoadingSpinner loading={loading} />
+          
         return (
             <>
                 { this.filterDiscounts() }
@@ -66,7 +70,6 @@ class Discounts extends Component {
 
 const mapStateToProps = state => ({
     loading: state.discounts.loading,
-    error: state.discounts.error,
     discounts: state.discounts.discounts,
     foodCategory: state.discounts.foodCategory,
     timeSlot: state.discounts.timeSlot,

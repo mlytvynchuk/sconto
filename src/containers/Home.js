@@ -8,7 +8,7 @@ import {
   fetchFavorites,
 } from "../actions/discountActions";
 import { setTimeout } from "timers";
-import Discounts from "../components/DIscounts";
+import Discounts from "../components/Discounts";
 class Home extends Component {
   componentDidUpdate(prevProps){
       if (JSON.stringify(this.props.likes) !== JSON.stringify(prevProps.likes)){
