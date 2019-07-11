@@ -28,6 +28,9 @@ class AddDisc extends React.Component {
       image: false
     }
   };
+  componentDidMount() {
+    this.props.fetchCategory();
+  }
 
   handleChange = e => {
     console.log(e.target.id + "-" + e.target.value);
@@ -83,7 +86,7 @@ class AddDisc extends React.Component {
 
   render() {
     const { cafe, title, details, location, category, time, overlay, height} = this.state;
-    const { renderOptions } = this.props;
+    const { renderOptions, categories } = this.props;
     return (
       <div className="indent">
         <h2>Додайте свою пропозицію</h2>
@@ -165,13 +168,16 @@ class AddDisc extends React.Component {
               onBlur={() =>this.handleBlur("category")}
               required
             >
-              <option value="">Виберіть категорію</option>
+              {
+                renderOptions("", "Виберіть категорію", categories)
+              }
+              {/* <option value="">Виберіть категорію</option>
               <option value="3">Азійська кухня</option>
               <option value="4">Українська кухня</option>
               <option value="1">ФастФуд</option>
               <option value="5">Десерти</option>
               <option value="6">Алкоголь</option>
-              <option value="2">Кава</option>
+              <option value="2">Кава</option> */}
             </select>
             <br />
             <br />

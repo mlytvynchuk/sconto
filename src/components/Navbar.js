@@ -26,18 +26,6 @@ class Navbar extends Component {
     this.setState({ search: e.target.value });
   };
 
-  loginHandlers = () => {
-    if (!this.props.isAuthenticated) {
-      return <Link to="/login/">Увійти</Link>;
-    } else {
-      return (
-        <>
-          <UserProfile renderOptions={this.props.renderOptions}/>
-        </>
-      );
-    }
-  };
-
   renderOptions = (initialValueForOption, firstStatement, optionsList )=> {
     return (
       <>
@@ -46,6 +34,18 @@ class Navbar extends Component {
       </>
     );
   }
+
+  loginHandlers = () => {
+    if (!this.props.isAuthenticated) {
+      return <Link to="/login/">Увійти</Link>;
+    } else {
+      return (
+        <>
+          <UserProfile renderOptions={this.renderOptions}/>
+        </>
+      );
+    }
+  };
 
   render() {
     const { foodCategory, timeSlot, handleTimeChange, handleFoodChange, handleSearchButtonClick, categories } = this.props;
