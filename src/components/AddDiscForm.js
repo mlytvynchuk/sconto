@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import "../assets/css/indent.css";
 import { DOMAIN } from "../settings";
+import { connect } from "react-redux";
+import { fetchTime, fetchCategory } from "../actions/filtersActions";
 
 class AddDisc extends React.Component {
   state = {
@@ -81,7 +83,7 @@ class AddDisc extends React.Component {
 
   render() {
     const { cafe, title, details, location, category, time, overlay, height} = this.state;
-
+    const {  } = this.props;
     return (
       <div className="indent">
         <h2>Додайте свою пропозицію</h2>
@@ -252,4 +254,13 @@ class AddDisc extends React.Component {
   }
 }
 
-export default AddDisc;
+const mapStateToProps = state => ({
+  times: state.filters.times,
+  categories: state.filters.categories,
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchTime: () => dispatch(fetchTime()),
+  fetchCategory: () => dispatch(fetchCategory()),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(AddDisc);

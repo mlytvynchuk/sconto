@@ -32,7 +32,7 @@ class Navbar extends Component {
     } else {
       return (
         <>
-          <UserProfile />
+          <UserProfile renderOptions={this.props.renderOptions}/>
         </>
       );
     }
