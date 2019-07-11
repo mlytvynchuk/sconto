@@ -25,6 +25,11 @@ const filterReducer = (state= initialState, action) => {
                 ...state,
                 heights: action.payload
             }
+        case GET_OVERLAY: 
+            return {
+                ...state,
+                overlays: action.payload
+            }
         default:
             return state;
     }
