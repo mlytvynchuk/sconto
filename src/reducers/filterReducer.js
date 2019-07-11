@@ -1,4 +1,4 @@
-import { GET_CATEGORY, GET_TIME } from "../actions";
+import { GET_CATEGORY, GET_TIME, GET_HEIGHT, GET_OVERLAY } from "../actions";
 
 
 const initialState = {
@@ -8,7 +8,7 @@ const initialState = {
     heights: [],
 }
 
-const filterReducer = (state= initialState,action) => {
+const filterReducer = (state= initialState, action) => {
     switch (action.type) {
         case GET_CATEGORY:
             return {
@@ -19,6 +19,11 @@ const filterReducer = (state= initialState,action) => {
             return {
                 ...state,
                 times: action.payload
+            }
+        case GET_HEIGHT: 
+            return {
+                ...state,
+                heights: action.payload
             }
         default:
             return state;
