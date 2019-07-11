@@ -37,10 +37,20 @@ class Navbar extends Component {
     }
   };
 
+  renderOptions = (firstStatement, optionsList )=> {
+    return (
+      <>
+        <option value="null">{ firstStatement }</option>
+        {optionsList.map(el => <option key={el.id} value={el.name}>{el.name}</option>)}
+      </>
+    );
+  }
+
   render() {
     const { foodCategory, timeSlot, handleTimeChange, handleFoodChange, handleSearchButtonClick } = this.props;
     const { search } = this.state;
-    console.log(this.props.times);
+    if(this.props.times.length > 0)
+      console.log(typeof this.props.times[0].id);
 
     return (
       <header>
@@ -64,10 +74,9 @@ class Navbar extends Component {
               <li className="filter-item">
                 <h4>Час доби</h4>
                 <select value={timeSlot} onChange={handleTimeChange}>
-                  <option value="null">Обери час</option>
-                  <option value="Сніданок">Сніданок</option>
-                  <option value="Обід">Обід</option>
-                  <option value="Вечеря">Вечеря</option>
+                  {
+                    this.renderOptions("Обери час", this.props.times)
+                  }
                 </select>
               </li>
             </ul>
@@ -105,6 +114,7 @@ class Navbar extends Component {
               >
                 <FilterMenu
                   handleSearchInput={this.handleSearchInput}
+                  renderOptions={this.renderOptions}
                 />
               </LightBox1>
               {this.loginHandlers()}
