@@ -66,10 +66,10 @@ export const fetchCategory = () => {
 }
 
 // overlay fetching
-const fetchOverlaySuccess = (listOfCategory) => {
+const fetchOverlaySuccess = (listOfOverlay) => {
     return {
         type: GET_OVERLAY,
-        payload: listOfCategory
+        payload: listOfOverlay
     }
 }
 
