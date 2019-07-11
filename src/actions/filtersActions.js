@@ -91,3 +91,30 @@ export const fetchOverlay = () => {
             })
     }
 }
+
+// height fetching
+const fetchHeightSuccess = (listOfHeight) => {
+    return {
+        type: GET_HEIGHT,
+        payload: listOfHeight
+    }
+}
+
+const fetchHeightFailure = (error) => {
+    return {
+        type: GET_HEIGHT_FAILURE,
+        payload: error
+    }
+}
+
+export const fetchHeight = () => {
+    return dispatch => {
+        Axios.get(`${DOMAIN}/api/height/`)
+            .then((res) => {
+                dispatch(fetchHeightSuccess(res.data));
+            })
+            .catch(e => {
+                dispatch(fetchHeightFailure(e))
+            })
+    }
+}
