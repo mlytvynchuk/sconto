@@ -1,0 +1,7 @@
+.error-message-container {
+    display: flex;
+    justify-content: center;
+    color: grey;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+
+}

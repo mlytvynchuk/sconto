@@ -6,6 +6,7 @@ import LightBox1 from './LightBox1';
 import { addedToFavorites } from "../actions/discountActions";
 import * as settings from '../settings'
 import LoadingSpinner from "./LoadingSpinner";
+
 class Discounts extends Component {
     searchDiscounts = () => {
         const { search, discounts } = this.props;
