@@ -1,16 +1,27 @@
-import { GET_TIME, GET_TIME_FAILURE, GET_CATEGORY, GET_CATEGORY_FAILURE } from ".";
+import {
+    GET_TIME,
+    GET_TIME_FAILURE,
+    GET_CATEGORY,
+    GET_CATEGORY_FAILURE,
+    GET_OVERLAY,
+    GET_OVERLAY_FAILURE,
+    GET_HEIGHT,
+    GET_HEIGHT_FAILURE
+} from ".";
 import Axios from "axios";
-import { DOMAIN } from "../settings";
+import {
+    DOMAIN
+} from '../settings';
 
 // Time fetching
 const fetchTimeSuccess = (listOfTime) => {
-    return{
+    return {
         type: GET_TIME,
         payload: listOfTime
     }
 }
 const fetchTimeFailure = (error) => {
-    return{
+    return {
         type: GET_TIME_FAILURE,
         payload: error
     }
@@ -29,14 +40,14 @@ export const fetchTime = () => {
 
 // Category fetching
 const fetchCategorySuccess = (listOfCategory) => {
-    return{
+    return {
         type: GET_CATEGORY,
         payload: listOfCategory
     }
 }
 
 const fetchCategoryFailure = (error) => {
-    return{
+    return {
         type: GET_CATEGORY_FAILURE,
         payload: error
     }
@@ -50,6 +61,33 @@ export const fetchCategory = () => {
             })
             .catch(e => {
                 dispatch(fetchCategoryFailure(e))
+            })
+    }
+}
+
+// overlay fetching
+const fetchOverlaySuccess = (listOfCategory) => {
+    return {
+        type: GET_OVERLAY,
+        payload: listOfCategory
+    }
+}
+
+const fetchOverlayFailure = (error) => {
+    return {
+        type: GET_OVERLAY_FAILURE,
+        payload: error
+    }
+}
+
+export const fetchOverlay = () => {
+    return dispatch => {
+        Axios.get(`${DOMAIN}/api/overlay/`)
+            .then((res) => {
+                dispatch(fetchOverlaySuccess(res.data));
+            })
+            .catch(e => {
+                dispatch(fetchOverlayFailure(e))
             })
     }
 }
