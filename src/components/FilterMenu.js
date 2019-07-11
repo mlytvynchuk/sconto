@@ -29,7 +29,7 @@ const FilterMenu = ({ handleSearchButtonClick, timeSlot, foodCategory, search, h
         <h4>Їжа</h4>
         <select ref={foodRef} defaultValue={foodCategory}>
         {
-          renderOptions("Обери смаколики", categories)
+          renderOptions("null", "Обери смаколики", categories)
         }
         </select>
       </div>
@@ -38,7 +38,7 @@ const FilterMenu = ({ handleSearchButtonClick, timeSlot, foodCategory, search, h
         <h4>Час доби</h4>
         <select ref={timeRef} defaultValue={timeSlot} readOnly>
           {
-            renderOptions("Обери смаколики", times)
+            renderOptions("null", "Обери смаколики", times)
           }
         </select>
       </div>

@@ -83,7 +83,7 @@ class AddDisc extends React.Component {
 
   render() {
     const { cafe, title, details, location, category, time, overlay, height} = this.state;
-    const {  } = this.props;
+    const { renderOptions } = this.props;
     return (
       <div className="indent">
         <h2>Додайте свою пропозицію</h2>

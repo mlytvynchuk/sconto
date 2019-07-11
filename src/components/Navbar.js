@@ -38,10 +38,10 @@ class Navbar extends Component {
     }
   };
 
-  renderOptions = (firstStatement, optionsList )=> {
+  renderOptions = (initialValueForOption, firstStatement, optionsList )=> {
     return (
       <>
-        <option value="null">{ firstStatement }</option>
+        <option value={initialValueForOption}>{ firstStatement }</option>
         {optionsList.map(el => <option key={el.id} value={el.name}>{el.name}</option>)}
       </>
     );
@@ -65,7 +65,7 @@ class Navbar extends Component {
                 <h4>Їжа</h4>
                 <select onChange={handleFoodChange} value={foodCategory}>
                   {
-                    this.renderOptions("Обери смаколики", categories)
+                    this.renderOptions("null", "Обери смаколики", categories)
                   }
                 </select>
               </li>
@@ -73,7 +73,7 @@ class Navbar extends Component {
                 <h4>Час доби</h4>
                 <select value={timeSlot} onChange={handleTimeChange}>
                   {
-                    this.renderOptions("Обери час", this.props.times)
+                    this.renderOptions("null", "Обери час", this.props.times)
                   }
                 </select>
               </li>
