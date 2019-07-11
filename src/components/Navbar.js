@@ -10,11 +10,16 @@ import {
   addTimeSlot,
   handleSearchButtonClick
 } from "../actions/discountActions";
+import { fetchTime, } from "../actions/filtersActions";
 
 class Navbar extends Component {
   state = {
     search: ""
   };
+  
+  componentDidMount() {
+    this.props.fetchTime()
+  }
 
   handleSearchInput = e => {
     this.setState({ search: e.target.value });
@@ -35,6 +40,7 @@ class Navbar extends Component {
   render() {
     const { foodCategory, timeSlot, handleTimeChange, handleFoodChange, handleSearchButtonClick } = this.props;
     const { search } = this.state;
+    console.log(this.props.times);
 
     return (
       <header>
@@ -114,7 +120,7 @@ const mapStateToProps = state => ({
   foodCategory: state.discounts.foodCategory,
   timeSlot: state.discounts.timeSlot,
   isAuthenticated: state.auth.token !== null,
-  
+  times: state.filters.times,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -122,6 +128,7 @@ const mapDispatchToProps = dispatch => ({
   handleTimeChange: event => dispatch(addTimeSlot(event)),
   handleSearchButtonClick: (search, food, time) =>
     dispatch(handleSearchButtonClick(search, food, time)),
+  fetchTime: () => dispatch(fetchTime()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
 

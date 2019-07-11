@@ -34,12 +34,14 @@ const fetchCategorySuccess = (listOfCategory) => {
         payload: listOfCategory
     }
 }
-const fetchTimeFailure = (error) => {
+
+const fetchCategoryFailure = (error) => {
     return{
         type: GET_CATEGORY_FAILURE,
         payload: error
     }
 }
+
 export const fetchCategory = () => {
     return dispatch => {
         Axios.get(`${DOMAIN}/api/category/`)

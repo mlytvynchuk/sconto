@@ -6,5 +6,5 @@ import filterReducer from './filterReducer'
 export default combineReducers({
   discounts: discountReducer,
   auth: authReducer,
-  filtesrs: filterReducer
+  filters: filterReducer
 });

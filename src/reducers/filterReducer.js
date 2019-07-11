@@ -4,7 +4,10 @@ import { GET_CATEGORY, GET_TIME } from "../actions";
 const initialState = {
     categories: [],
     times: [],
+    overlays: [],
+    heights: [],
 }
+
 const filterReducer = (state= initialState,action) => {
     switch (action.type) {
         case GET_CATEGORY:
