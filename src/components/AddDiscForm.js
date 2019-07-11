@@ -33,14 +33,12 @@ class AddDisc extends React.Component {
   }
 
   handleChange = e => {
-    console.log(e.target.id + "-" + e.target.value);
     this.setState({
       [e.target.id]: e.target.value
     });
   };
 
   handleImageChange = e => {
-    console.log(e.target.toString());
     this.setState({
       image: e.target.files[0]
     });
@@ -73,7 +71,6 @@ class AddDisc extends React.Component {
     form_data.append("time", this.state.time);
     form_data.append("overlay", this.state.overlay);
     form_data.append("height", this.state.height);
-    console.log(this.state);
 
     let url = `${DOMAIN}/api/discounts/`;
     axios
@@ -171,13 +168,6 @@ class AddDisc extends React.Component {
               {
                 renderOptions("", "Виберіть категорію", categories)
               }
-              {/* <option value="">Виберіть категорію</option>
-              <option value="3">Азійська кухня</option>
-              <option value="4">Українська кухня</option>
-              <option value="1">ФастФуд</option>
-              <option value="5">Десерти</option>
-              <option value="6">Алкоголь</option>
-              <option value="2">Кава</option> */}
             </select>
             <br />
             <br />
@@ -196,11 +186,6 @@ class AddDisc extends React.Component {
               {
                 renderOptions("", "Виберіть час", times)
               }
-              {/* <option value="">Виберіть час</option>
-              <option value="1">Сніданок</option>
-              <option value="2">Ланч</option>
-              <option value="3">Обід</option>
-              <option value="4">Вечеря</option> */}
             </select>
             <br />
             <br />
