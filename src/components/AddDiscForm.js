@@ -3,7 +3,7 @@ import axios from "axios";
 import "../assets/css/indent.css";
 import { DOMAIN } from "../settings";
 import { connect } from "react-redux";
-import { fetchTime, fetchCategory } from "../actions/filtersActions";
+import { fetchTime, fetchCategory, fetchHeight, fetchOverlay } from "../actions/filtersActions";
 
 class AddDisc extends React.Component {
   state = {
@@ -30,6 +30,8 @@ class AddDisc extends React.Component {
   };
   componentDidMount() {
     this.props.fetchCategory();
+    this.props.fetchTime();
+    this.props.fetchHeight();
   }
 
   handleChange = e => {
@@ -83,7 +85,7 @@ class AddDisc extends React.Component {
 
   render() {
     const { cafe, title, details, location, category, time, overlay, height} = this.state;
-    const { renderOptions, categories, times } = this.props;
+    const { renderOptions, categories, times, heights } = this.props;
     return (
       <div className="indent">
         <h2>Додайте свою пропозицію</h2>
@@ -219,8 +221,9 @@ class AddDisc extends React.Component {
               onBlur={() =>this.handleBlur("height")}
               required
             >
-              <option value="">Виберіть розмір</option>
-              <option value="1">360</option>
+              {
+                renderOptions("", "Виберіть розмір", heights)
+              }
             </select>
             <br />
             <br />
@@ -251,10 +254,14 @@ class AddDisc extends React.Component {
 const mapStateToProps = state => ({
   times: state.filters.times,
   categories: state.filters.categories,
+  overlays: state.filters.overlays,
+  heights: state.filters.heights
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchTime: () => dispatch(fetchTime()),
   fetchCategory: () => dispatch(fetchCategory()),
+  fetchOverlay: () => dispatch(fetchOverlay()),
+  fetchHeight: () => dispatch(fetchHeight()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(AddDisc);
