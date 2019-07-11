@@ -2,8 +2,9 @@ import React from "react";
 import "../assets/css/indent.css";
 import { connect } from "react-redux";
 import { handleSearchButtonClick } from "../actions/discountActions";
+import { fetchTime, fetchCategory } from "../actions/filtersActions";
 
-const FilterMenu = ({ handleSearchButtonClick, timeSlot, foodCategory, search, handleSearchInput }) => {
+const FilterMenu = ({ handleSearchButtonClick, timeSlot, foodCategory, search, handleSearchInput, renderOptions, categories, times }) => {
   const foodRef = React.createRef();
   const timeRef = React.createRef();
   const searchRef = React.createRef();
@@ -27,20 +28,18 @@ const FilterMenu = ({ handleSearchButtonClick, timeSlot, foodCategory, search, h
       <div>
         <h4>Їжа</h4>
         <select ref={foodRef} defaultValue={foodCategory}>
-          <option value="null">Обери смаколики</option>
-          <option value="ФастФуд">ФастФуд</option>
-          <option value="Українська кухня">Українська кухня</option>
-          <option value="Кава">Кава</option>
+        {
+          renderOptions("Обери смаколики", categories)
+        }
         </select>
       </div>
       <br />
       <div>
         <h4>Час доби</h4>
         <select ref={timeRef} defaultValue={timeSlot} readOnly>
-          <option value="null">Обери час</option>
-          <option value="Сніданок">Сніданок</option>
-          <option value="Обід">Обід</option>
-          <option value="Вечеря">Вечеря</option>
+          {
+            renderOptions("Обери смаколики", times)
+          }
         </select>
       </div>
       <br />
@@ -65,11 +64,15 @@ const FilterMenu = ({ handleSearchButtonClick, timeSlot, foodCategory, search, h
 const mapStateToProps = state => ({
   foodCategory: state.discounts.foodCategory,
   timeSlot: state.discounts.timeSlot,
-  search: state.discounts.search
+  search: state.discounts.search,
+  times: state.filters.times,
+  categories: state.filters.categories,
 });
 
 const mapDispatchToProps = dispatch => ({
   handleSearchButtonClick: (search, food, time) =>
-    dispatch(handleSearchButtonClick(search, food, time))
+    dispatch(handleSearchButtonClick(search, food, time)),
+  fetchTime: () => dispatch(fetchTime()),
+  fetchCategory: () => dispatch(fetchCategory()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(FilterMenu);
