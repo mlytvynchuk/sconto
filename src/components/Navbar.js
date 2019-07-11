@@ -10,7 +10,7 @@ import {
   addTimeSlot,
   handleSearchButtonClick
 } from "../actions/discountActions";
-import { fetchTime, } from "../actions/filtersActions";
+import { fetchTime, fetchCategory } from "../actions/filtersActions";
 
 class Navbar extends Component {
   state = {
@@ -19,6 +19,7 @@ class Navbar extends Component {
   
   componentDidMount() {
     this.props.fetchTime()
+    this.props.fetchCategory();
   }
 
   handleSearchInput = e => {
@@ -47,10 +48,8 @@ class Navbar extends Component {
   }
 
   render() {
-    const { foodCategory, timeSlot, handleTimeChange, handleFoodChange, handleSearchButtonClick } = this.props;
+    const { foodCategory, timeSlot, handleTimeChange, handleFoodChange, handleSearchButtonClick, categories } = this.props;
     const { search } = this.state;
-    if(this.props.times.length > 0)
-      console.log(typeof this.props.times[0].id);
 
     return (
       <header>
@@ -65,10 +64,9 @@ class Navbar extends Component {
               <li className="filter-item">
                 <h4>Їжа</h4>
                 <select onChange={handleFoodChange} value={foodCategory}>
-                  <option value="null">Обери смаколики</option>
-                  <option value="ФастФуд">ФастФуд</option>
-                  <option value="Українська кухня">Українська кухня</option>
-                  <option value="Кава">Кава</option>
+                  {
+                    this.renderOptions("Обери смаколики", categories)
+                  }
                 </select>
               </li>
               <li className="filter-item">
@@ -131,6 +129,7 @@ const mapStateToProps = state => ({
   timeSlot: state.discounts.timeSlot,
   isAuthenticated: state.auth.token !== null,
   times: state.filters.times,
+  categories: state.filters.categories,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -139,6 +138,7 @@ const mapDispatchToProps = dispatch => ({
   handleSearchButtonClick: (search, food, time) =>
     dispatch(handleSearchButtonClick(search, food, time)),
   fetchTime: () => dispatch(fetchTime()),
+  fetchCategory: () => dispatch(fetchCategory()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
 
