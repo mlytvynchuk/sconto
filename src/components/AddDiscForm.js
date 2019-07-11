@@ -86,7 +86,7 @@ class AddDisc extends React.Component {
 
   render() {
     const { cafe, title, details, location, category, time, overlay, height} = this.state;
-    const { renderOptions, categories } = this.props;
+    const { renderOptions, categories, times } = this.props;
     return (
       <div className="indent">
         <h2>Додайте свою пропозицію</h2>
@@ -193,11 +193,14 @@ class AddDisc extends React.Component {
               onBlur={() =>this.handleBlur("time")}
               required
             >
-              <option value="">Виберіть час</option>
+              {
+                renderOptions("", "Виберіть час", times)
+              }
+              {/* <option value="">Виберіть час</option>
               <option value="1">Сніданок</option>
               <option value="2">Ланч</option>
               <option value="3">Обід</option>
-              <option value="4">Вечеря</option>
+              <option value="4">Вечеря</option> */}
             </select>
             <br />
             <br />
