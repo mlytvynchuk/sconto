@@ -32,6 +32,7 @@ class AddDisc extends React.Component {
     this.props.fetchCategory();
     this.props.fetchTime();
     this.props.fetchHeight();
+    this.props.fetchOverlay();
   }
 
   handleChange = e => {
@@ -85,7 +86,7 @@ class AddDisc extends React.Component {
 
   render() {
     const { cafe, title, details, location, category, time, overlay, height} = this.state;
-    const { renderOptions, categories, times, heights } = this.props;
+    const { renderOptions, categories, times, heights, overlays } = this.props;
     return (
       <div className="indent">
         <h2>Додайте свою пропозицію</h2>
@@ -203,9 +204,7 @@ class AddDisc extends React.Component {
               onBlur={() =>this.handleBlur("overlay")}
               required
             >
-              <option value="">Виберіть фон</option>
-              <option value="1">dark</option>
-              <option value="2">light</option>
+              {renderOptions("", "Виберіть фон", overlays)}
             </select>
             <br />
             <br />
