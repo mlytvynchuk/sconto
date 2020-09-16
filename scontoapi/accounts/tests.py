@@ -5,10 +5,12 @@ from rest_framework import status
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
 
+
 class AccountsTest(APITestCase):
     def setUp(self):
-        # We want to go ahead and originally create a user. 
-        self.test_user = get_user_model().objects._create_user(email='test@example.com', password='testpassword')
+        # We want to go ahead and originally create a user.
+        self.test_user = get_user_model().objects._create_user(
+            email='test@example.com', password='testpassword')
 
         # URL for creating an account.
         self.create_url = reverse('account-create')
@@ -18,12 +20,12 @@ class AccountsTest(APITestCase):
         Ensure we can create a new user and a valid token is created with it.
         """
         data = {
-                'username': 'foobar',
-                'email': 'foobar@example.com',
-                'password': 'somepassword'
-                }
+            'username': 'foobar',
+            'email': 'foobar@example.com',
+            'password': 'somepassword'
+        }
 
-        response = self.client.post(self.create_url , data, format='json')
+        response = self.client.post(self.create_url, data, format='json')
         user = get_user_model().objects.latest('id')
         ...
         token = Token.objects.get(user=user)
@@ -34,9 +36,9 @@ class AccountsTest(APITestCase):
         Ensure user is not created for password lengths less than 8.
         """
         data = {
-                
-                'email': 'foobarbaz@example.com',
-                'password': 'foo'
+
+            'email': 'foobarbaz@example.com',
+            'password': 'foo'
         }
 
         response = self.client.post(self.create_url, data, format='json')
@@ -46,9 +48,9 @@ class AccountsTest(APITestCase):
 
     def test_create_user_with_no_password(self):
         data = {
-                
-                'email': 'foobarbaz@example.com',
-                'password': ''
+
+            'email': 'foobarbaz@example.com',
+            'password': ''
         }
 
         response = self.client.post(self.create_url, data, format='json')
@@ -58,7 +60,7 @@ class AccountsTest(APITestCase):
 
     def test_create_user_with_too_long_username(self):
         data = {
-            
+
             'email': 'foobarbaz@example.com',
             'password': 'foobar'
         }
