@@ -2,10 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./containers/Home";
 import Login from "./containers/Login";
-import Register from './containers/Register';
+import Register from "./containers/Register";
 import MapContainer from "./components/MapContainer";
 function App() {
-  
   return (
     <Router>
       <div>
@@ -18,5 +17,3 @@ function App() {
   );
 }
 export default App;
-
-

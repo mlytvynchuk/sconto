@@ -11,14 +11,14 @@ class Login extends Component {
     isValidPassword: true,
     isDisabledRegisterButton: false,
     touched: {
-        email: false,
-        password: false,
+      email: false,
+      password: false,
     },
   };
 
   handleInput(e) {
     this.setState({
-      [e.target.name]: String([e.target.value])
+      [e.target.name]: String([e.target.value]),
     });
   }
 
@@ -35,48 +35,43 @@ class Login extends Component {
   isValidEmail() {
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/gim;
     const isEmail = this.state.email.match(emailRegex);
-    
-    if (isEmail) 
-        this.setState({ isValidLogin: true });
-    else 
-        this.setState({ isValidLogin: false });
+
+    if (isEmail) this.setState({ isValidLogin: true });
+    else this.setState({ isValidLogin: false });
   }
 
   isValidPassword() {
-      if (this.state.password.length > 0) 
-        this.setState({ isValidPassword: true });
+    if (this.state.password.length > 0)
+      this.setState({ isValidPassword: true });
     else {
-        this.setState({ isValidPassword: false });
-        this.setState({isDisabledRegisterButton: true})
+      this.setState({ isValidPassword: false });
+      this.setState({ isDisabledRegisterButton: true });
     }
   }
 
   handleBlur(field) {
-    if(field === "email")
-        this.isValidEmail();
-    else if(field === "password")
-        this.isValidPassword();
-    
-    this.setState({ touched: {...this.state.touched, [field]: true} })
+    if (field === "email") this.isValidEmail();
+    else if (field === "password") this.isValidPassword();
+
+    this.setState({ touched: { ...this.state.touched, [field]: true } });
   }
 
   addClassNameToField(field) {
-    if (field === "email" && !this.state.isValidLogin) 
-        return  " invalid-data";
-    else if(field === "password" && !this.state.isValidPassword)
-        return  " invalid-data";
+    if (field === "email" && !this.state.isValidLogin) return " invalid-data";
+    else if (field === "password" && !this.state.isValidPassword)
+      return " invalid-data";
 
     return "";
   }
 
   render() {
     const { isDisabledRegisterButton } = this.state;
-   
+
     return (
       <div className="login-body">
         <div className="login-container">
           <div className="login-wrapper">
-            <form className="login-form" onSubmit={e => this.handleSubmit(e)}>
+            <form className="login-form" onSubmit={(e) => this.handleSubmit(e)}>
               <div className="title-container">
                 <h2 className="title-text">Реєстрація</h2>
               </div>
@@ -88,19 +83,21 @@ class Login extends Component {
                   placeholder="Ваш email"
                   name="email"
                   required
-                  onChange={e => this.handleInput(e)}
-                  onBlur={ () =>this.handleBlur("email")}
+                  onChange={(e) => this.handleInput(e)}
+                  onBlur={() => this.handleBlur("email")}
                 />
               </div>
               <div className="input-container">
                 <input
                   type="password"
-                  className={`input focus ${this.addClassNameToField("password")}`}
+                  className={`input focus ${this.addClassNameToField(
+                    "password"
+                  )}`}
                   placeholder="Ваш пароль"
                   name="password"
                   required
-                  onChange={e => this.handleInput(e)}
-                  onBlur={ () =>this.handleBlur("password")}
+                  onChange={(e) => this.handleInput(e)}
+                  onBlur={() => this.handleBlur("password")}
                 />
               </div>
 
@@ -109,7 +106,7 @@ class Login extends Component {
                   type="submit"
                   className="button-submit hover "
                   value="Зареєструватись"
-                  onClick={e => this.handleSubmit(e)}
+                  onClick={(e) => this.handleSubmit(e)}
                   disabled={isDisabledRegisterButton}
                 />
               </div>
@@ -127,16 +124,13 @@ class Login extends Component {
     );
   }
 }
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.token !== null,
   error: state.auth.error,
-  loading: state.auth.loading
+  loading: state.auth.loading,
 });
-const mapDispatchToProps = dispatch => ({
-  onAuth: (email, password) => dispatch(actions.authSignup(email, password))
+const mapDispatchToProps = (dispatch) => ({
+  onAuth: (email, password) => dispatch(actions.authSignup(email, password)),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

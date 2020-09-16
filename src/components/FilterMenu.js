@@ -4,7 +4,16 @@ import { connect } from "react-redux";
 import { handleSearchButtonClick } from "../actions/discountActions";
 import { fetchTime, fetchCategory } from "../actions/filtersActions";
 
-const FilterMenu = ({ handleSearchButtonClick, timeSlot, foodCategory, search, handleSearchInput, renderOptions, categories, times }) => {
+const FilterMenu = ({
+  handleSearchButtonClick,
+  timeSlot,
+  foodCategory,
+  search,
+  handleSearchInput,
+  renderOptions,
+  categories,
+  times,
+}) => {
   const foodRef = React.createRef();
   const timeRef = React.createRef();
   const searchRef = React.createRef();
@@ -20,7 +29,7 @@ const FilterMenu = ({ handleSearchButtonClick, timeSlot, foodCategory, search, h
             name="search"
             ref={searchRef}
             defaultValue={search}
-            onChange={e => handleSearchInput(e)}
+            onChange={(e) => handleSearchInput(e)}
           />
         </form>
       </div>
@@ -28,18 +37,14 @@ const FilterMenu = ({ handleSearchButtonClick, timeSlot, foodCategory, search, h
       <div>
         <h4>Їжа</h4>
         <select ref={foodRef} defaultValue={foodCategory}>
-        {
-          renderOptions("null", "Обери смаколики", categories)
-        }
+          {renderOptions("null", "Обери смаколики", categories)}
         </select>
       </div>
       <br />
       <div>
         <h4>Час доби</h4>
         <select ref={timeRef} defaultValue={timeSlot} readOnly>
-          {
-            renderOptions("null", "Обери смаколики", times)
-          }
+          {renderOptions("null", "Обери смаколики", times)}
         </select>
       </div>
       <br />
@@ -61,7 +66,7 @@ const FilterMenu = ({ handleSearchButtonClick, timeSlot, foodCategory, search, h
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   foodCategory: state.discounts.foodCategory,
   timeSlot: state.discounts.timeSlot,
   search: state.discounts.search,
@@ -69,7 +74,7 @@ const mapStateToProps = state => ({
   categories: state.filters.categories,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   handleSearchButtonClick: (search, food, time) =>
     dispatch(handleSearchButtonClick(search, food, time)),
   fetchTime: () => dispatch(fetchTime()),

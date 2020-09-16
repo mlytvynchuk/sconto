@@ -6,7 +6,7 @@ import {
   SELECT_TIME_SLOT,
   HANDLE_SEARCH_BUTTON_CLICK,
   DELETE_FROM_LIKES,
-  FETCH_LIKES_SUCCESS
+  FETCH_LIKES_SUCCESS,
 } from "../actions/index";
 
 const initialState = {
@@ -16,17 +16,16 @@ const initialState = {
   search: "",
   loading: false,
   error: null,
-  favorites: []
+  favorites: [],
 };
 
 export default function discountReducer(state = initialState, action) {
-
   switch (action.type) {
     case FETCH_DISCOUNTS_BEGIN: {
       return {
         ...state,
         loading: true,
-        error: null
+        error: null,
       };
     }
 
@@ -35,7 +34,7 @@ export default function discountReducer(state = initialState, action) {
         ...state,
         discounts: action.payload,
         error: null,
-        loading: null
+        loading: null,
       };
     }
 
@@ -44,21 +43,21 @@ export default function discountReducer(state = initialState, action) {
         ...state,
         loading: false,
         error: action.payload,
-        discounts: []
+        discounts: [],
       };
     }
 
     case SELECT_FOOD_CATEGORY: {
       return {
         ...state,
-        foodCategory: action.payload
+        foodCategory: action.payload,
       };
     }
 
     case SELECT_TIME_SLOT: {
       return {
         ...state,
-        timeSlot: action.payload
+        timeSlot: action.payload,
       };
     }
     case HANDLE_SEARCH_BUTTON_CLICK: {
@@ -68,22 +67,25 @@ export default function discountReducer(state = initialState, action) {
         ...state,
         foodCategory,
         timeSlot,
-        search
+        search,
       };
     }
-    
+
     case DELETE_FROM_LIKES: {
       const discountId = action.payload;
       const idx = state.favorites.findIndex((like) => like.id === discountId);
-      const newFavs = [...state.favorites.slice(0, idx), ...state.favorites.slice(idx+1)];
+      const newFavs = [
+        ...state.favorites.slice(0, idx),
+        ...state.favorites.slice(idx + 1),
+      ];
       return { ...state, favorites: newFavs };
     }
     case FETCH_LIKES_SUCCESS: {
-      console.log(action.payload)
-    return {
-      ...state,
-      favorites: action.payload
-    }
+      console.log(action.payload);
+      return {
+        ...state,
+        favorites: action.payload,
+      };
     }
     default: {
       return state;

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Discount = props => {
+const Discount = (props) => {
   const { title, image, cafe, overlay, height } = props;
 
   return (
@@ -8,7 +8,7 @@ const Discount = props => {
       <div
         style={{
           background: `url(${image}) center center no-repeat`,
-          backgroundSize: "cover"
+          backgroundSize: "cover",
         }}
         className={`grid-item white-color height${height}`}
       >

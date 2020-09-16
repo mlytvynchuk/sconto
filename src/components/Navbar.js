@@ -8,32 +8,36 @@ import { connect } from "react-redux";
 import {
   addFoodCategory,
   addTimeSlot,
-  handleSearchButtonClick
+  handleSearchButtonClick,
 } from "../actions/discountActions";
 import { fetchTime, fetchCategory } from "../actions/filtersActions";
 
 class Navbar extends Component {
   state = {
-    search: ""
+    search: "",
   };
-  
+
   componentDidMount() {
-    this.props.fetchTime()
+    this.props.fetchTime();
     this.props.fetchCategory();
   }
 
-  handleSearchInput = e => {
+  handleSearchInput = (e) => {
     this.setState({ search: e.target.value });
   };
 
-  renderOptions = (initialValueForOption, firstStatement, optionsList )=> {
+  renderOptions = (initialValueForOption, firstStatement, optionsList) => {
     return (
       <>
-        <option value={initialValueForOption}>{ firstStatement }</option>
-        {optionsList.map(el => <option key={el.id} value={el.name}>{el.name}</option>)}
+        <option value={initialValueForOption}>{firstStatement}</option>
+        {optionsList.map((el) => (
+          <option key={el.id} value={el.name}>
+            {el.name}
+          </option>
+        ))}
       </>
     );
-  }
+  };
 
   loginHandlers = () => {
     if (!this.props.isAuthenticated) {
@@ -41,14 +45,21 @@ class Navbar extends Component {
     } else {
       return (
         <>
-          <UserProfile renderOptions={this.renderOptions}/>
+          <UserProfile renderOptions={this.renderOptions} />
         </>
       );
     }
   };
 
   render() {
-    const { foodCategory, timeSlot, handleTimeChange, handleFoodChange, handleSearchButtonClick, categories } = this.props;
+    const {
+      foodCategory,
+      timeSlot,
+      handleTimeChange,
+      handleFoodChange,
+      handleSearchButtonClick,
+      categories,
+    } = this.props;
     const { search } = this.state;
 
     return (
@@ -64,17 +75,13 @@ class Navbar extends Component {
               <li className="filter-item">
                 <h4>Їжа</h4>
                 <select onChange={handleFoodChange} value={foodCategory}>
-                  {
-                    this.renderOptions("null", "Обери смаколики", categories)
-                  }
+                  {this.renderOptions("null", "Обери смаколики", categories)}
                 </select>
               </li>
               <li className="filter-item">
                 <h4>Час доби</h4>
                 <select value={timeSlot} onChange={handleTimeChange}>
-                  {
-                    this.renderOptions("null", "Обери час", this.props.times)
-                  }
+                  {this.renderOptions("null", "Обери час", this.props.times)}
                 </select>
               </li>
             </ul>
@@ -85,13 +92,13 @@ class Navbar extends Component {
                 placeholder="Нажми й шукай"
                 name="search"
                 value={search}
-                onChange={e => {
+                onChange={(e) => {
                   this.handleSearchInput(e);
                 }}
               />
               <button
                 className="search-button"
-                onClick={event => {
+                onClick={(event) => {
                   handleSearchButtonClick(search, foodCategory, timeSlot);
                   event.preventDefault();
                 }}
@@ -124,7 +131,7 @@ class Navbar extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   foodCategory: state.discounts.foodCategory,
   timeSlot: state.discounts.timeSlot,
   isAuthenticated: state.auth.token !== null,
@@ -132,13 +139,12 @@ const mapStateToProps = state => ({
   categories: state.filters.categories,
 });
 
-const mapDispatchToProps = dispatch => ({
-  handleFoodChange: event => dispatch(addFoodCategory(event)),
-  handleTimeChange: event => dispatch(addTimeSlot(event)),
+const mapDispatchToProps = (dispatch) => ({
+  handleFoodChange: (event) => dispatch(addFoodCategory(event)),
+  handleTimeChange: (event) => dispatch(addTimeSlot(event)),
   handleSearchButtonClick: (search, food, time) =>
     dispatch(handleSearchButtonClick(search, food, time)),
   fetchTime: () => dispatch(fetchTime()),
   fetchCategory: () => dispatch(fetchCategory()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
-

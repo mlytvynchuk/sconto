@@ -3,7 +3,12 @@ import axios from "axios";
 import "../assets/css/indent.css";
 import { DOMAIN } from "../settings";
 import { connect } from "react-redux";
-import { fetchTime, fetchCategory, fetchHeight, fetchOverlay } from "../actions/filtersActions";
+import {
+  fetchTime,
+  fetchCategory,
+  fetchHeight,
+  fetchOverlay,
+} from "../actions/filtersActions";
 
 class AddDisc extends React.Component {
   state = {
@@ -25,8 +30,8 @@ class AddDisc extends React.Component {
       time: false,
       overlay: false,
       height: false,
-      image: false
-    }
+      image: false,
+    },
   };
   componentDidMount() {
     this.props.fetchCategory();
@@ -35,23 +40,24 @@ class AddDisc extends React.Component {
     this.props.fetchOverlay();
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({
-      [e.target.id]: e.target.value
+      [e.target.id]: e.target.value,
     });
   };
 
-  handleImageChange = e => {
+  handleImageChange = (e) => {
     this.setState({
-      image: e.target.files[0]
+      image: e.target.files[0],
     });
   };
 
   isValidField(field) {
-    if(!this.state.touched[field])
-      return true;
-    else 
-      return this.state[field] && this.state[field].toString().length > 0 ? true : false;
+    if (!this.state.touched[field]) return true;
+    else
+      return this.state[field] && this.state[field].toString().length > 0
+        ? true
+        : false;
   }
 
   handleBlur(field) {
@@ -59,10 +65,10 @@ class AddDisc extends React.Component {
   }
 
   addClassNameToField(field) {
-    return this.isValidField(field) ? "" : " invalid-data"
+    return this.isValidField(field) ? "" : " invalid-data";
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     let form_data = new FormData();
     form_data.append("image", this.state.image, this.state.image.name);
@@ -78,14 +84,23 @@ class AddDisc extends React.Component {
     let url = `${DOMAIN}/api/discounts/`;
     axios
       .post(url, form_data)
-      .then(res => {
+      .then((res) => {
         console.log(res.data);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
 
   render() {
-    const { cafe, title, details, location, category, time, overlay, height} = this.state;
+    const {
+      cafe,
+      title,
+      details,
+      location,
+      category,
+      time,
+      overlay,
+      height,
+    } = this.state;
     const { renderOptions, categories, times, heights, overlays } = this.props;
     return (
       <div className="indent">
@@ -104,7 +119,7 @@ class AddDisc extends React.Component {
               value={cafe}
               onChange={this.handleChange}
               required
-              onBlur={() =>this.handleBlur("cafe")}
+              onBlur={() => this.handleBlur("cafe")}
             />
             <br />
             <br />
@@ -120,7 +135,7 @@ class AddDisc extends React.Component {
               value={title}
               onChange={this.handleChange}
               required
-              onBlur={() =>this.handleBlur("title")}
+              onBlur={() => this.handleBlur("title")}
             />
             <br />
             <br />
@@ -136,7 +151,7 @@ class AddDisc extends React.Component {
               value={details}
               onChange={this.handleChange}
               required
-              onBlur={() =>this.handleBlur("details")}
+              onBlur={() => this.handleBlur("details")}
             />
             <br />
             <br />
@@ -152,7 +167,7 @@ class AddDisc extends React.Component {
               value={location}
               onChange={this.handleChange}
               required
-              onBlur={() =>this.handleBlur("location")}
+              onBlur={() => this.handleBlur("location")}
             />
             <br />
             <br />
@@ -165,12 +180,10 @@ class AddDisc extends React.Component {
               className={this.addClassNameToField("category")}
               value={category}
               onChange={this.handleChange}
-              onBlur={() =>this.handleBlur("category")}
+              onBlur={() => this.handleBlur("category")}
               required
             >
-              {
-                renderOptions("", "Виберіть категорію", categories)
-              }
+              {renderOptions("", "Виберіть категорію", categories)}
             </select>
             <br />
             <br />
@@ -183,12 +196,10 @@ class AddDisc extends React.Component {
               className={this.addClassNameToField("time")}
               value={time}
               onChange={this.handleChange}
-              onBlur={() =>this.handleBlur("time")}
+              onBlur={() => this.handleBlur("time")}
               required
             >
-              {
-                renderOptions("", "Виберіть час", times)
-              }
+              {renderOptions("", "Виберіть час", times)}
             </select>
             <br />
             <br />
@@ -201,7 +212,7 @@ class AddDisc extends React.Component {
               className={this.addClassNameToField("overlay")}
               value={overlay}
               onChange={this.handleChange}
-              onBlur={() =>this.handleBlur("overlay")}
+              onBlur={() => this.handleBlur("overlay")}
               required
             >
               {renderOptions("", "Виберіть фон", overlays)}
@@ -217,12 +228,10 @@ class AddDisc extends React.Component {
               className={this.addClassNameToField("height")}
               value={height}
               onChange={this.handleChange}
-              onBlur={() =>this.handleBlur("height")}
+              onBlur={() => this.handleBlur("height")}
               required
             >
-              {
-                renderOptions("", "Виберіть розмір", heights)
-              }
+              {renderOptions("", "Виберіть розмір", heights)}
             </select>
             <br />
             <br />
@@ -236,7 +245,7 @@ class AddDisc extends React.Component {
               type="file"
               accept="image/png,image/jpeg"
               onChange={this.handleImageChange}
-              onBlurCapture={() =>this.handleBlur("image")}
+              onBlurCapture={() => this.handleBlur("image")}
               required
             />
           </div>
@@ -250,14 +259,14 @@ class AddDisc extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   times: state.filters.times,
   categories: state.filters.categories,
   overlays: state.filters.overlays,
-  heights: state.filters.heights
+  heights: state.filters.heights,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   fetchTime: () => dispatch(fetchTime()),
   fetchCategory: () => dispatch(fetchCategory()),
   fetchOverlay: () => dispatch(fetchOverlay()),

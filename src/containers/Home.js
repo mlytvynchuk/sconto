@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Navbar from "../components/Navbar";
 import { connect } from "react-redux";
-import * as authActions from '../actions/authActions'
+import * as authActions from "../actions/authActions";
 import {
   fetchDiscounts,
   fetchTimeSlot,
@@ -12,27 +12,17 @@ import Discounts from "../components/DIscounts";
 import ErrorMessage from "../components/ErrorMessage";
 
 class Home extends Component {
-  componentDidUpdate(prevProps){
-      if (JSON.stringify(this.props.likes) !== JSON.stringify(prevProps.likes)){
-          setTimeout(() => {
-            this.props.getLikes();
-          }, 500);
-      }
-      // if(JSON.stringify(this.props.discounts != JSON.stringify(prevProps.discounts))){
-      //   setTimeout(() => {
-      //     this.props.fetchDiscounts();
-      //   }, 500);
-      // }
+  componentDidUpdate(prevProps) {
+    if (JSON.stringify(this.props.likes) !== JSON.stringify(prevProps.likes)) {
+      setTimeout(() => {
+        this.props.getLikes();
+      }, 500);
+    }
   }
-  // componentWillReceiveProps(nextProps){
-  //   if (JSON.stringify(this.props.discounts) !== JSON.stringify(nextProps.discounts)){
-  //     nextProps.fetchDiscounts();
-  //   }
-  // }
 
   componentDidMount() {
     var is_authenticated = this.props.onTryAutoSignup();
-    if (is_authenticated){
+    if (is_authenticated) {
       this.props.getLikes();
     }
     this.props.fetchDiscounts();
@@ -53,9 +43,9 @@ class Home extends Component {
 
   render() {
     const { error } = this.props;
-    const errorMessage = "Виникла помилка при завантаженні даних. Вибачте за незручності."
-    if(error)
-      return <ErrorMessage message={errorMessage} />
+    const errorMessage =
+      "Виникла помилка при завантаженні даних. Вибачте за незручності.";
+    if (error) return <ErrorMessage message={errorMessage} />;
     return (
       <div>
         <Navbar />
@@ -67,20 +57,17 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   timeSlot: state.discounts.timeSlot,
   likes: state.discounts.favorites,
   error: state.discounts.error,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   fetchDiscounts: () => dispatch(fetchDiscounts()),
-  fetchTimeSlot: time => dispatch(fetchTimeSlot(time)),
+  fetchTimeSlot: (time) => dispatch(fetchTimeSlot(time)),
   onTryAutoSignup: () => dispatch(authActions.authCheckState()),
   getLikes: () => dispatch(fetchFavorites()),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
